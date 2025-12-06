@@ -7,7 +7,7 @@ const height = 600;
 // The value must match the capitalized file name (e.g., 'Italy' for Italy.html).
 const countryNameLookup = {
     'FRA': 'France',
-    'DEU': 'Germany',
+    'DEU': 'Berlin',
     'JPN': 'Japan',
     'KOR': 'Korea',
     'ITA': 'Italy',

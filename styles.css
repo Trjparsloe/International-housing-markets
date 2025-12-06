@@ -79,3 +79,73 @@
     height: 405px;
     background-position: center;
 }
+
+/* ======================================================================
+   BANNER STYLING (For all country pages like Japan.html)
+   ====================================================================== */
+
+/* 1. Container: Sets the fixed height and hides overflow/cropping */
+.banner-container {
+    position: relative; 
+    width: 100%;
+    margin-bottom: 2em;
+    max-width: 1000px; 
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* CRITICAL: FIXED HEIGHT and OVERFLOW HIDING */
+    height: 400px; /* Adjust this height as needed */
+    overflow: hidden; 
+}
+
+/* 2. Image: Scales the image to fill the container, cropping the excess */
+.banner-image {
+    width: 100%;
+    height: 100%; /* Image must match container height */
+    
+    /* CRITICAL: Scales image to cover the entire box and crops the rest */
+    object-fit: cover; 
+    
+    /* NEW CRITICAL FIX: Ensures the image is vertically and horizontally centered 
+       within the 400px fixed box, preventing shifting. */
+    object-position: center; 
+    
+    display: block;
+    
+    /* Optional: Filter to enhance contrast for text */
+    filter: brightness(0.7); 
+}
+
+/* 3. Title: Centers the text and applies the blend mode for the cutout */
+.banner-title {
+    /* Positioning */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 10;
+    
+    /* FINAL FIX: Set a fixed, stable size in pixels (px) for max width.
+       The font size will be 80px when the container is 1000px wide. 
+       We keep the fluid size for small screens (using a media query below). 
+    */
+    font-size: 80px; 
+    
+    font-weight: 900;
+    margin: 0;
+    
+    /* CRITICAL FIX: Ensure the text is pure white */
+    color: white !important; 
+    
+    /* The Solid White Cutout Effect */
+    mix-blend-mode: lighten; 
+    text-shadow: none; 
+}
+
+/* Add media query for responsiveness on small screens */
+@media (max-width: 600px) {
+    .banner-title {
+        /* Use VW only when the screen is small */
+        font-size: 8vw; 
+    }
+}
