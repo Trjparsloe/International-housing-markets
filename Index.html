@@ -40,25 +40,35 @@
         
         /* Styling for all country paths drawn by D3 (general styles) */
         .country {
-            transition: fill 0.2s; 
+            transition: fill 0.2s; /* Smooth transition for fill color changes on hover */
+            
+            /* UPDATED: Define a light, subtle border for all countries */
+            stroke: #eeeeee;        /* Set to a very light gray/almost white */
+            stroke-width: 0.5px; 
+            stroke-linejoin: round;
         }
-        
-        /* NOTE: The hover styles (stroke, fill) were moved to map-logic.js! */
+        /* NOTE: The hover styles (stroke, fill) are controlled by map-logic.js! */
     </style>
 </head>
 <body>
     <h1>Around the World in 80 Housing Markets</h1>
     <h5>There’s no place like home...</h5>
-    <p>...so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p> 
-    <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. In the United Kingdom we have a record number of people living in temporary acoomodation which is costing the government millions of pounds, the waiting lists for social housing remain exceptional long, delivery of new homes failing to meet targets and suspicions over the quality of those which are built, house prices which have increased far more than wages, mortgage terms getting ever longer, more adult children living with their parents.</p>
-    <p> All of this does make you wonder: are we alone in this? How do people live elsewhere and what are their homes like? Are other countries facing the same challenges and if so, how are they dealing with them.</p>
-    <p>Housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own.</p>
-    
     <div id="map-wrapper"> 
         <svg id="map-container"></svg>
     </div>
+    <p>...so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
+    <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their large sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs and concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima asperiores omnis, cumque voluptates sunt illum quos tempore officiis inventore voluptate, quo blanditiis consectetur, ipsa consequuntur. Rerum eligendi quos dolores tenetur.</p>
+    <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and miserly design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
+    <p>This has a profound impact on people’s lives, society as a whole, and the nature of the housing market itself. We have more adult children living with their parents for longer, unable to afford neither rent nor deposit. Those who manage to buy are older than they have ever been as they must wait longer to save for that deposit or for a family to die to gain an inheritance. The average length of mortgages continues to tick up, increasing the likelihood of payments in retirement.</p>
+    <p>And that is only what is most easily quantifiable. There are the consequences that are unseen or unmeasured. As the formal market increasingly fails to meet people’s needs, people turn to more informal methods as they navigate the gaps of quirks of housing in more creative ways. Markets come in many shades of grey all the way to black.</p>
+    <p>We are familiar with the shock headlines of practices which are exploitative and downright illegal. Extensions or sheds in gardens or 12 people in a room, usually for people with precarious legal statuses.</p>
+    <p>But there is also the extra room in a flatshare that isn’t a bedroom, let out to a friend to split rent further unbeknownst to the landlord. But then other behaviours, networks or connections play a bigger role. Some benefit from friends who have, by some way, been able to afford to buy, staying in spare bedrooms at mates rates.</p>
+    <p>The market itself, many first time buyers skipping that first step on the housing ladder in a 1 or 2 bedroom flat, straight into the family home because by the time they actually have enough for a deposit, they need the space for an imminent family. Some are eschewing the family altogether, unable to give any children the quality of life they deserve.</p>
+    
+    <p>All of this does make you wonder: are we alone in this? Is all this a uniquely British phenomenon or are other countries facing the same challenges? And if so, how are they dealing with them? How do housing markets work elsewhere, how do people live, and what are their homes like?</p>
+    <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses, then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t resist having a recce around the place at the first possible chance. They are for those who scroll through ‘property porn’ daydreaming about the lives they could be living. They are for those who look up the land registry the price paid data for a house that catches their attention as they walk by (an act which usually leads to two reponses: 1) fuck me, how much?!; or 2) fuck me, they bought that for peanuts back in the whichever decade it was).</p>
+    <p>Housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map below, and have a look.</p>
 
     <script src="map-logic.js"></script> 
 </body>

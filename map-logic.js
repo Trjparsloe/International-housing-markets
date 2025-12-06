@@ -3,17 +3,28 @@
 const width = 1000;
 const height = 600;
 
-// NEW SIMPLIFIED LIST: This list now represents ALL countries that are both visited 
-// AND have a dedicated page (e.g., GBR, JPN, GER). 
-// These countries will be the only ones colored and interactive.
-// CRITICAL: Update this list with the 3-letter codes from your GeoJSON!
-const interactiveCountries = ['FRA', 'DEU', 'JPN', 'KOR', 'ITA', 'ESP', 'OMN']; // EXAMPLE LIST - UPDATE WITH YOUR COUNTRIES!
+// Lookup table to map the 3-letter GeoJSON code (ADM0_A3) to your HTML file name.
+// The value must match the capitalized file name (e.g., 'Italy' for Italy.html).
+const countryNameLookup = {
+    'FRA': 'France',
+    'DEU': 'Germany',
+    'JPN': 'Japan',
+    'KOR': 'Korea',
+    'ITA': 'Italy',
+    'ESP': 'Spain',
+    'OMN': 'Oman',
+    'ATA': 'Antarctica'
+    // ADD ALL YOUR PAGES HERE!
+};
+
+// NEW SIMPLIFIED LIST: This list controls ALL coloring and interaction.
+// CRITICAL: Must use the 3-letter codes found in your GeoJSON.
+const interactiveCountries = ['FRA', 'DEU', 'JPN', 'KOR', 'ITA', 'ESP', 'OMN', 'ATA'];
 
 // Define custom colors for the map
-// We are only using ONE color now for the interactive countries.
-const interactiveColor = '#3b82f6'; // Blue (using the page color, but feel free to change)
-const defaultColor = '#d1d5db';    // Gray for non-interactive
-const hoverColor = '#facc15';      // Yellow for hover highlight
+const interactiveColor = '#f97316'; // Orange
+const defaultColor = '#d1d5db';    // Gray
+const hoverColor = '#facc15';      // Yellow
 
 // Select the SVG element defined in your HTML
 const svg = d3.select("#map-container")
@@ -48,12 +59,10 @@ d3.json("./world.json").then(function(data) {
         .style("fill", function(d) {
             const countryId = d.properties.adm0_a3; 
             
-            // Check if the country is in our single list
             if (interactiveCountries.includes(countryId)) {
-                return interactiveColor; // Blue (or whatever color you choose)
+                return interactiveColor;
             }
             
-            // Default (GRAY)
             return defaultColor;
         })
 
@@ -61,7 +70,6 @@ d3.json("./world.json").then(function(data) {
         .on("mouseover", function(event, d) {
             const countryId = d.properties.adm0_a3;
             
-            // Exit if not an interactive country
             if (!interactiveCountries.includes(countryId)) {
                 return; 
             }
@@ -76,7 +84,6 @@ d3.json("./world.json").then(function(data) {
         .on("mouseout", function(event, d) {
             const countryId = d.properties.adm0_a3;
 
-            // Exit if not an interactive country
             if (!interactiveCountries.includes(countryId)) {
                 return;
             }
@@ -97,7 +104,15 @@ d3.json("./world.json").then(function(data) {
                 return; 
             }
             
-            const countryName = countryId.toLowerCase();
-            window.location.href = `/${countryName}.html`;
+            // NEW LOGIC: Use the lookup table to find the capitalized file name (e.g., 'Italy')
+            const fileName = countryNameLookup[countryId];
+            
+            // Only redirect if a file name was found in the lookup table
+            if (fileName) {
+                 window.location.href = `/${fileName}.html`;
+            } else {
+                 // Optional: Log an error if a country is in the list but not in the lookup table
+                 console.error(`Missing file name lookup for: ${countryId}`);
+            }
         });
 });
