@@ -10,26 +10,40 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
     <style>
-        /* Set a fixed size for the SVG canvas */
+        /* NEW: Styles for the wrapper that handles full-bleed and horizontal scrolling */
+        #map-wrapper {
+            /* 1. Set width to 100% of the VIEWPORT (screen) */
+            width: 100vw; 
+            
+            /* 2. CRITICAL: Pulls the element out to the screen edges, overriding the framework's max-width container. */
+            position: relative; 
+            left: 50%; 
+            transform: translateX(-50%); 
+
+            /* Allows horizontal scroll when the map itself is wider than the screen */
+            overflow-x: auto; 
+            max-width: none; 
+            
+            /* Add some vertical spacing to separate it from the text */
+            padding: 2em 0;
+        }
+
+        /* Styles for the SVG canvas inside the wrapper */
         #map-container {
             width: 1000px; 
             height: 600px;
-            margin: 2em auto; /* Center the map and add vertical space */
-            display: block;  /* Ensures the margin auto works */
+            /* CRITICAL: Centers the 1000px map within the full-width wrapper */
+            margin: 0 auto; 
+            display: block; 
+            max-width: none; 
         }
         
-        /* Styling for all country paths drawn by D3 */
+        /* Styling for all country paths drawn by D3 (general styles) */
         .country {
-            transition: fill 0.2s; /* Smooth transition for fill color changes on hover */
+            transition: fill 0.2s; 
         }
         
-        /* Define the style for countries when hovered over */
-        .country:hover {
-            stroke: black; /* Border color */
-            stroke-width: 2px;
-            opacity: 0.9; 
-            cursor: pointer;
-        }
+        /* NOTE: The hover styles (stroke, fill) were moved to map-logic.js! */
     </style>
 </head>
 <body>
@@ -40,7 +54,9 @@
     <p> All of this does make you wonder: are we alone in this? How do people live elsewhere and what are their homes like? Are other countries facing the same challenges and if so, how are they dealing with them.</p>
     <p>Housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own.</p>
     
-    <svg id="map-container"></svg>
+    <div id="map-wrapper"> 
+        <svg id="map-container"></svg>
+    </div>
 
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima asperiores omnis, cumque voluptates sunt illum quos tempore officiis inventore voluptate, quo blanditiis consectetur, ipsa consequuntur. Rerum eligendi quos dolores tenetur.</p>
 
