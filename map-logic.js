@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!track) return; 
 
     const slides = Array.from(track.children);
-    const intervalTime = 7000; // 7 seconds in milliseconds
+    const intervalTime = 4000; // 4 seconds in milliseconds
     let currentSlideIndex = 0;
 
     /**
