@@ -10,7 +10,10 @@
     object-fit: cover;
 }
 .carousel__track-container {
-    background: lightgreen;
+    /* Change the background color to black or a very dark gray */
+    background: #000000; /* Use pure black for the cleanest transition */
+    /* background: #1f2937; /* Alternatively, use a dark gray */
+    
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -191,3 +194,52 @@
         font-size: 4vw; 
     }
 }
+
+/* ... (Your existing CSS rules for .carousel, .carousel__image, etc. remain unchanged) ... */
+
+/* ======================================================================
+   NEW CAROUSEL STYLES (REQUIRED FOR FADING BANNER)
+   
+   NOTE: These rules rely on the new HTML structure introduced in your Index.html 
+   (using .carousel__track and .carousel__slide inside the .banner-container).
+   
+   Since the existing carousel CSS is for sliding carousels, these new rules 
+   specifically target the slide/track opacity for the fading banner.
+   ====================================================================== */
+
+.carousel__track {
+    /* Set opacity transition for fading banner effect (Overrides existing transform transition) */
+    transition: opacity 1s ease-in-out; 
+}
+
+.carousel__slide {
+    /* CRITICAL for fading: All slides start invisible except the current one */
+    opacity: 0; 
+    
+    /* Ensure only opacity transitions, not position/transform */
+    transition: opacity 1s ease-in-out; 
+    
+    /* Ensure slides are stacked on top of each other */
+    left: 0; 
+    transform: none;
+}
+
+.carousel__slide.current-slide {
+    /* The active slide is made visible */
+    opacity: 1; 
+    z-index: 5; /* Ensures it sits above invisible slides */
+}
+
+.carousel__image {
+    /* Ensure image contrast filter is applied inside the slide */
+    filter: brightness(0.7); 
+}
+
+/* NOTE: Since you are using a consistent class structure, these rules might 
+         partially conflict if your other carousels also use the .carousel__track 
+         and .carousel__slide classes but need a sliding (transform) effect instead of fading (opacity).
+         
+         If your other carousels break, you will need to add a modifier class 
+         to them (e.g., .sliding-carousel) to exclude them from this opacity rule.
+         However, for now, we will add the new rules and proceed.
+*/
