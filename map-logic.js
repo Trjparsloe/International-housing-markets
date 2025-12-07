@@ -116,3 +116,40 @@ d3.json("./world.json").then(function(data) {
             }
         });
 });
+
+/* ======================================================================
+   NEW CAROUSEL LOGIC
+   ====================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Select the necessary carousel elements
+    const track = document.querySelector('.carousel__track');
+    
+    // Check if the elements exist before running the script (prevents errors on country pages)
+    if (!track) return; 
+
+    const slides = Array.from(track.children);
+    const intervalTime = 7000; // 7 seconds in milliseconds
+    let currentSlideIndex = 0;
+
+    /**
+     * Moves the carousel to the next slide in the sequence.
+     */
+    const moveToNextSlide = () => {
+        // 1. Determine the current slide
+        const currentSlide = slides[currentSlideIndex];
+        
+        // 2. Calculate the next slide index, looping back to 0 after the last slide
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        const nextSlide = slides[currentSlideIndex];
+
+        // 3. Update the classes to manage the fade transition
+        currentSlide.classList.remove('current-slide');
+        nextSlide.classList.add('current-slide');
+    };
+
+    // Start the automatic rotation
+    // This calls moveToNextSlide() every 7000ms (7 seconds)
+    setInterval(moveToNextSlide, intervalTime);
+});
