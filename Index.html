@@ -9,65 +9,22 @@
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
-    <style>
-        /* CRITICAL NOTE: Map styles below are left in the HTML <style> block for simplicity. 
-           All banner styles are assumed to be in styles.css.
-        */
-        
-        /* NEW: Styles for the wrapper that handles full-bleed and horizontal scrolling */
-        #map-wrapper {
-            /* 1. Set width to 100% of the VIEWPORT (screen) */
-            width: 100vw; 
-            
-            /* 2. CRITICAL: Pulls the element out to the screen edges, overriding the framework's max-width container. */
-            position: relative; 
-            left: 50%; 
-            transform: translateX(-50%); 
-
-            /* Allows horizontal scroll when the map itself is wider than the screen */
-            overflow-x: auto; 
-            max-width: none; 
-            
-            /* Add some vertical spacing to separate it from the text */
-            padding: 2em 0;
-        }
-
-        /* Styles for the SVG canvas inside the wrapper */
-        #map-container {
-            width: 1000px; 
-            height: 600px;
-            /* CRITICAL: Centers the 1000px map within the full-width wrapper */
-            margin: 0 auto; 
-            display: block; 
-            max-width: none; 
-        }
-        
-        /* Styling for all country paths drawn by D3 (general styles) */
-        .country {
-            transition: fill 0.2s; /* Smooth transition for fill color changes on hover */
-            
-            /* UPDATED: Define a light, subtle border for all countries */
-            stroke: #eeeeee;        /* Set to a very light gray/almost white */
-            stroke-width: 0.5px; 
-            stroke-linejoin: round;
-        }
-    </style>
 </head>
 <body>
     
-    <div class="banner-container">
-        <img src="https://images.pexels.com/photos/10368380/pexels-photo-10368380.jpeg" 
-             alt="Blocks of apartment buildings at night" 
+    <div class="banner-container index-banner">
+        <img src="https://picsum.photos/id/433/1200/400" 
+             alt="Cityscape at Night Placeholder" 
              class="banner-image">
         
-        <h1 class="banner-title">AROUND THE WORLD IN 80 HOUSING MARKETS</h1> 
+        <h1 class="banner-title">Around the World in 80 Housing Markets</h1> 
     </div>
 
     <p>There’s no place like home...</p>
     
     <div id="map-wrapper"> 
-        <svg id="map-container"></svg>
-    </div>
+        <svg id="map-container"></svg>
+    </div>
     
     <p>...so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
     <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their large sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs and concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>

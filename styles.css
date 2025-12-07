@@ -27,7 +27,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width:  100%;
+    width: 100%;
 }
 .carousel__button{
     position: absolute;
@@ -73,15 +73,45 @@
     margin: 0 auto; /* Center the container on the page */
 }
 
-#bannerimage{
-    width: 150%;
-    background-image: images ;
-    height: 405px;
-    background-position: center;
+/* ======================================================================
+   MAP STYLES (RESTORED TO FULL-BLEED / EDGE-TO-EDGE)
+   ====================================================================== */
+
+/* Styles for the wrapper that handles full-bleed and horizontal scrolling */
+#map-wrapper {
+    /* RESTORED: These rules make the map span the full screen width (100vw) */
+    width: 100vw; 
+    position: relative; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    /* Allows map to be wider than the screen and enables scrolling */
+    overflow-x: auto; 
+    max-width: none; 
+    padding: 2em 0;
 }
 
+/* Styles for the SVG canvas inside the wrapper */
+#map-container {
+    /* Keeps the fixed size of the map image itself */
+    width: 1000px; 
+    height: 600px;
+    margin: 0 auto; 
+    display: block; 
+    max-width: none; 
+}
+
+/* Styling for all country paths drawn by D3 (general styles) */
+.country {
+    transition: fill 0.2s;
+    stroke: #eeeeee;
+    stroke-width: 0.5px;
+    stroke-linejoin: round;
+}
+
+
 /* ======================================================================
-   BANNER STYLING (For all country pages like Japan.html)
+   BANNER STYLING (Shared Base for ALL Pages)
    ====================================================================== */
 
 /* 1. Container: Sets the fixed height and hides overflow/cropping */
@@ -94,7 +124,7 @@
     margin-right: auto;
     
     /* CRITICAL: FIXED HEIGHT and OVERFLOW HIDING */
-    height: 400px; /* Adjust this height as needed */
+    height: 400px; 
     overflow: hidden; 
 }
 
@@ -103,20 +133,16 @@
     width: 100%;
     height: 100%; /* Image must match container height */
     
-    /* CRITICAL: Scales image to cover the entire box and crops the rest */
     object-fit: cover; 
-    
-    /* NEW CRITICAL FIX: Ensures the image is vertically and horizontally centered 
-       within the 400px fixed box, preventing shifting. */
     object-position: center; 
     
     display: block;
     
-    /* Optional: Filter to enhance contrast for text */
+    /* Optional: Filter to enhance contrast for solid white text */
     filter: brightness(0.7); 
 }
 
-/* 3. Title: Centers the text and applies the blend mode for the cutout */
+/* 3. Title: Centers the text and applies the SOLID WHITE color */
 .banner-title {
     /* Positioning */
     position: absolute;
@@ -124,28 +150,44 @@
     left: 50%;
     transform: translate(-50%, -50%); 
     z-index: 10;
+    text-align: center; 
     
-    /* FINAL FIX: Set a fixed, stable size in pixels (px) for max width.
-       The font size will be 80px when the container is 1000px wide. 
-       We keep the fluid size for small screens (using a media query below). 
-    */
-    font-size: 80px; 
+    /* Base Size for Country Pages (Short Titles) */
+    font-size: 8vw; /* Uses fluid size for short titles */
     
     font-weight: 900;
     margin: 0;
     
-    /* CRITICAL FIX: Ensure the text is pure white */
-    color: white !important; 
-    
-    /* The Solid White Cutout Effect */
-    mix-blend-mode: lighten; 
+    /* CRITICAL FIX: Ensures SOLID WHITE and opacity */
+    color: #FFFFFF !important; 
+    mix-blend-mode: normal; /* Guarantees opaque white block */
     text-shadow: none; 
 }
 
-/* Add media query for responsiveness on small screens */
-@media (max-width: 600px) {
-    .banner-title {
-        /* Use VW only when the screen is small */
-        font-size: 8vw; 
+/* Add media query for responsiveness on small screens (Base Rule) */
+/* No change needed here if base font-size is 8vw */
+
+
+/* ======================================================================
+   INDEX PAGE BANNER MODIFIER (FOR THE LONG TITLE ONLY)
+   ====================================================================== */
+
+/* In styles.css */
+/* --- Index Page Banner Modifier --- */
+
+.banner-container.index-banner .banner-title {
+    /* FINAL FIX: Set stable pixel size to 50px for a clean, non-constrained 3-line fit */
+    font-size: 50px; 
+    
+    font-weight: 800;
+    text-align: center;
+    text-transform: none; /* Keep standard capitalization */
+}
+
+/* Media query to control scaling on mid-size screens */
+@media (max-width: 1400px) {
+    .banner-container.index-banner .banner-title {
+        /* Use a smaller fluid size to scale down gracefully */
+        font-size: 4vw; 
     }
 }
