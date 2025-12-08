@@ -117,8 +117,10 @@ d3.json("./world.json").then(function(data) {
         });
 });
 
+// --- Existing D3 Map Logic remains above this line ---
+
 /* ======================================================================
-   UPDATED CAROUSEL LOGIC (RANDOM ORDER)
+   UPDATED CAROUSEL LOGIC (SEQUENTIAL ORDER RESTORED)
    ====================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -128,28 +130,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const slides = Array.from(track.children);
     const intervalTime = 4000; // 4 seconds in milliseconds
-    let currentSlideIndex = 0; // Starts at 0 (the first slide)
+    let currentSlideIndex = 0; 
 
     /**
-     * Generates a random index that is different from the current index.
-     */
-    const getRandomIndex = (max, current) => {
-        let newIndex;
-        do {
-            // Generate a random integer between 0 (inclusive) and max (exclusive)
-            newIndex = Math.floor(Math.random() * max);
-        } while (newIndex === current); // Keep generating until the index is different
-        return newIndex;
-    };
-
-    /**
-     * Moves the carousel to a randomly selected slide.
+     * Moves the carousel to the next slide in the sequence.
      */
     const moveToNextSlide = () => {
         const currentSlide = slides[currentSlideIndex];
         
-        // **CRITICAL CHANGE HERE:** Generate a new random index
-        currentSlideIndex = getRandomIndex(slides.length, currentSlideIndex);
+        // **CRITICAL CHANGE HERE:** Revert to sequential index calculation
+        // Uses the modulo operator (%) to loop back to 0 after the last slide
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
         
         const nextSlide = slides[currentSlideIndex];
 
