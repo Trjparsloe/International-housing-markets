@@ -118,38 +118,46 @@ d3.json("./world.json").then(function(data) {
 });
 
 /* ======================================================================
-   NEW CAROUSEL LOGIC
+   UPDATED CAROUSEL LOGIC (RANDOM ORDER)
    ====================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Select the necessary carousel elements
     const track = document.querySelector('.carousel__track');
-    
-    // Check if the elements exist before running the script (prevents errors on country pages)
-    if (!track) return; 
+    if (!track) return; // Exit if the carousel elements aren't found on the page
 
     const slides = Array.from(track.children);
     const intervalTime = 4000; // 4 seconds in milliseconds
-    let currentSlideIndex = 0;
+    let currentSlideIndex = 0; // Starts at 0 (the first slide)
 
     /**
-     * Moves the carousel to the next slide in the sequence.
+     * Generates a random index that is different from the current index.
+     */
+    const getRandomIndex = (max, current) => {
+        let newIndex;
+        do {
+            // Generate a random integer between 0 (inclusive) and max (exclusive)
+            newIndex = Math.floor(Math.random() * max);
+        } while (newIndex === current); // Keep generating until the index is different
+        return newIndex;
+    };
+
+    /**
+     * Moves the carousel to a randomly selected slide.
      */
     const moveToNextSlide = () => {
-        // 1. Determine the current slide
         const currentSlide = slides[currentSlideIndex];
         
-        // 2. Calculate the next slide index, looping back to 0 after the last slide
-        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        // **CRITICAL CHANGE HERE:** Generate a new random index
+        currentSlideIndex = getRandomIndex(slides.length, currentSlideIndex);
+        
         const nextSlide = slides[currentSlideIndex];
 
-        // 3. Update the classes to manage the fade transition
+        // Update the classes to manage the fade transition
         currentSlide.classList.remove('current-slide');
         nextSlide.classList.add('current-slide');
     };
 
     // Start the automatic rotation
-    // This calls moveToNextSlide() every 7000ms (7 seconds)
     setInterval(moveToNextSlide, intervalTime);
 });
