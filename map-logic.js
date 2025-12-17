@@ -1,10 +1,11 @@
-// --- 1. Configuration and Setup ---
+/* ======================================================================
+   1. CONFIGURATION AND SETUP (D3 MAP)
+   ====================================================================== */
 
 const width = 1000;
 const height = 600;
 
 // Lookup table to map the 3-letter GeoJSON code (ADM0_A3) to your HTML file name.
-// The value must match the capitalized file name (e.g., 'Italy' for Italy.html).
 const countryNameLookup = {
     'FRA': 'France',
     'DEU': 'Berlin',
@@ -14,36 +15,34 @@ const countryNameLookup = {
     'ESP': 'Spain',
     'OMN': 'Oman',
     'ATA': 'Antarctica'
-    // ADD ALL YOUR PAGES HERE!
 };
 
-// NEW SIMPLIFIED LIST: This list controls ALL coloring and interaction.
-// CRITICAL: Must use the 3-letter codes found in your GeoJSON.
+// Controls coloring and interaction.
 const interactiveCountries = ['FRA', 'DEU', 'JPN', 'KOR', 'ITA', 'ESP', 'OMN', 'ATA'];
 
-// Define custom colors for the map
+// Custom colors for the map
 const interactiveColor = '#f97316'; // Orange
-const defaultColor = '#d1d5db';    // Gray
-const hoverColor = '#facc15';      // Yellow
+const defaultColor = '#d1d5db';     // Gray
+const hoverColor = '#facc15';       // Yellow
 
-// Select the SVG element defined in your HTML
+// Select the SVG element
 const svg = d3.select("#map-container")
     .attr("width", width)
     .attr("height", height);
 
-// Define the map projection (Mercator is standard for world maps)
+// Define the map projection
 const projection = d3.geoMercator()
     .scale(150)           
     .center([0, 20])      
     .translate([width / 2, height / 2]);
 
-// Creates the path generator
 const path = d3.geoPath().projection(projection);
 
 
-// --- 2. DATA LOADING, DRAWING, AND INTERACTIONS ---
+/* ======================================================================
+   2. DATA LOADING AND MAP INTERACTIONS
+   ====================================================================== */
 
-// Correct path to load 'world.json' from the root folder
 d3.json("./world.json").then(function(data) {
     
     svg.append("g")
@@ -55,24 +54,19 @@ d3.json("./world.json").then(function(data) {
         .attr("class", "country") 
         .attr("id", d => d.properties.adm0_a3)
 
-        // --- Coloring Logic (Single Check) ---
+        // Coloring Logic
         .style("fill", function(d) {
             const countryId = d.properties.adm0_a3; 
-            
             if (interactiveCountries.includes(countryId)) {
                 return interactiveColor;
             }
-            
             return defaultColor;
         })
 
-        // --- Interaction Handlers (Hover and Click use the same list) ---
+        // Hover Handlers
         .on("mouseover", function(event, d) {
             const countryId = d.properties.adm0_a3;
-            
-            if (!interactiveCountries.includes(countryId)) {
-                return; 
-            }
+            if (!interactiveCountries.includes(countryId)) return; 
 
             d3.select(this)
               .attr("original-fill", d3.select(this).style("fill"))
@@ -83,10 +77,7 @@ d3.json("./world.json").then(function(data) {
         })
         .on("mouseout", function(event, d) {
             const countryId = d.properties.adm0_a3;
-
-            if (!interactiveCountries.includes(countryId)) {
-                return;
-            }
+            if (!interactiveCountries.includes(countryId)) return;
             
             d3.select(this)
               .style("fill", d3.select(this).attr("original-fill")) 
@@ -95,60 +86,62 @@ d3.json("./world.json").then(function(data) {
               .style("cursor", "default");
         })
 
-        // --- Interaction Handlers (Click) ---
+        // Click Handler (Redirection)
         .on("click", function(event, d) {
             const countryId = d.properties.adm0_a3;
+            if (!interactiveCountries.includes(countryId)) return; 
             
-            // Exit if not an interactive country
-            if (!interactiveCountries.includes(countryId)) {
-                return; 
-            }
-            
-            // NEW LOGIC: Use the lookup table to find the capitalized file name (e.g., 'Italy')
             const fileName = countryNameLookup[countryId];
-            
-            // Only redirect if a file name was found in the lookup table
             if (fileName) {
                  window.location.href = `/${fileName}.html`;
             } else {
-                 // Optional: Log an error if a country is in the list but not in the lookup table
                  console.error(`Missing file name lookup for: ${countryId}`);
             }
         });
 });
 
-// --- Existing D3 Map Logic remains above this line ---
-
 /* ======================================================================
-   UPDATED CAROUSEL LOGIC (SEQUENTIAL ORDER RESTORED)
+   3. SHUFFLED SEQUENTIAL CAROUSEL (IMPROVED RANDOM START)
    ====================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-
     const track = document.querySelector('.carousel__track');
-    if (!track) return; // Exit if the carousel elements aren't found on the page
+    if (!track) return;
 
-    const slides = Array.from(track.children);
-    const intervalTime = 4000; // 4 seconds in milliseconds
-    let currentSlideIndex = 0; 
+    let slides = Array.from(track.children);
+    const intervalTime = 4000;
+    let currentSlideIndex = 0;
 
-    /**
-     * Moves the carousel to the next slide in the sequence.
-     */
+    // 1. Shuffle Function
+    const shuffleSlides = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
+
+    // 2. Perform Shuffle
+    slides = shuffleSlides(slides);
+
+    // 3. RE-ORDER THE DOM: This physically moves the <li> elements in your HTML
+    // to match the new shuffled order. This prevents the "flash" of the original first image.
+    slides.forEach(slide => {
+        slide.classList.remove('current-slide'); // Clean slate
+        track.appendChild(slide); // Moves the element to the end of the list in new order
+    });
+
+    // 4. Set the new first image as visible
+    slides[0].classList.add('current-slide');
+
     const moveToNextSlide = () => {
         const currentSlide = slides[currentSlideIndex];
-        
-        // **CRITICAL CHANGE HERE:** Revert to sequential index calculation
-        // Uses the modulo operator (%) to loop back to 0 after the last slide
         currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-        
         const nextSlide = slides[currentSlideIndex];
 
-        // Update the classes to manage the fade transition
         currentSlide.classList.remove('current-slide');
         nextSlide.classList.add('current-slide');
     };
 
-    // Start the automatic rotation
     setInterval(moveToNextSlide, intervalTime);
 });
