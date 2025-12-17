@@ -1,123 +1,129 @@
+/* ======================================================================
+   GENERAL & EDITORIAL TYPOGRAPHY
+   ====================================================================== */
+body {
+    padding-top: 0; /* Removes the top gap for a full-bleed look */
+}
+
+main p {
+    line-height: 1.8; 
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* DROP CAP: The big first letter for the opening paragraph */
+main p:first-of-type::first-letter {
+    font-size: 4rem;
+    font-weight: 900;
+    float: left;
+    margin-right: 12px;
+    line-height: 0.85;
+    color: #000;
+    text-transform: uppercase;
+}
+
+/* ======================================================================
+   INDEX & GENERAL CAROUSEL STYLES (Fading Effect)
+   ====================================================================== */
 .carousel {
     position: relative;
-    height: 600px;
+    height: 100%;
     width: 100%;
     margin: 0 auto;
 }
+
 .carousel__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.7); 
 }
+
 .carousel__track-container {
-    /* Change the background color to black or a very dark gray */
-    background: #000000; /* Use pure black for the cleanest transition */
-    /* background: #1f2937; /* Alternatively, use a dark gray */
-    
+    background: #000000; 
     height: 100%;
     position: relative;
     overflow: hidden;
 }
+
 .carousel__track {
     padding: 0;
     margin: 0;
     list-style: none;
     position: relative;
     height: 100%;
-    transition: transform 250ms ease-in;
+    transition: opacity 1s ease-in-out; 
 }
+
 .carousel__slide {
     position: absolute;
     top: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
 }
-.carousel__button{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: 0;
-    cursor: pointer;
+
+.carousel__slide.current-slide {
+    opacity: 1; 
+    z-index: 5; 
 }
-.carousel__button--left{
-    left: -60px; 
-}
-.carousel__button--right {
-    right: -60px;
-}
-.carousel__button img {
-    width: 40px;
-}
+
 .carousel__nav {
-    /*background: pink;*/
     display: flex;
     justify-content: center;
     padding: 10px 0;
+    position: absolute; /* Positions indicators over the carousel */
+    bottom: 10px;
+    width: 100%;
+    z-index: 20;
 }
+
 .carousel__indicator {
     border: 0;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    background: rgba(0, 0, 0, .3);
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, .3);
     margin: 0 10px;
     cursor: pointer;
 }
-.carousel__indicator.current-slide{
-    background: rgba(0, 0, 0, .75);
+
+.carousel__indicator.current-slide {
+    background: rgba(255, 255, 255, .9);
 }
 
 .is-hidden { display: none; }
 
-.svg-container {
-    width: 100%; /* Ensure it takes up the full width of the page */
-    max-width: 800px; /* Optional: limit the maximum size of the SVG */
-    margin: 0 auto; /* Center the container on the page */
-}
-
 /* ======================================================================
-   MAP STYLES (RESTORED TO FULL-BLEED / EDGE-TO-EDGE)
+   MAP STYLES (Full-Bleed)
    ====================================================================== */
-
-/* Styles for the wrapper that handles full-bleed and horizontal scrolling */
 #map-wrapper {
-    /* RESTORED: These rules make the map span the full screen width (100vw) */
     width: 100vw; 
     position: relative; 
     left: 50%; 
     transform: translateX(-50%); 
-    
-    /* Allows map to be wider than the screen and enables scrolling */
     overflow-x: auto; 
-    max-width: none; 
     padding: 2em 0;
 }
 
-/* Styles for the SVG canvas inside the wrapper */
 #map-container {
-    /* Keeps the fixed size of the map image itself */
     width: 1000px; 
     height: 600px;
     margin: 0 auto; 
     display: block; 
-    max-width: none; 
 }
 
-/* Styling for all country paths drawn by D3 (general styles) */
 .country {
     transition: fill 0.2s;
     stroke: #eeeeee;
     stroke-width: 0.5px;
-    stroke-linejoin: round;
 }
 
-
 /* ======================================================================
-   BANNER STYLING (Shared Base for ALL Pages)
+   BANNER STYLING (Standard & Index)
    ====================================================================== */
-
-/* 1. Container: Sets the fixed height and hides overflow/cropping */
 .banner-container {
     position: relative; 
     width: 100%;
@@ -125,121 +131,142 @@
     max-width: 1000px; 
     margin-left: auto;
     margin-right: auto;
-    
-    /* CRITICAL: FIXED HEIGHT and OVERFLOW HIDING */
     height: 400px; 
     overflow: hidden; 
 }
 
-/* 2. Image: Scales the image to fill the container, cropping the excess */
+/* THE PEEK-A-BOO FIX: Replaced 600px with 85vh for the Index */
+.banner-container.index-banner {
+    max-width: none; 
+    height: 85vh; 
+    margin-bottom: 3rem;
+}
+
 .banner-image {
     width: 100%;
-    height: 100%; /* Image must match container height */
-    
+    height: 100%;
     object-fit: cover; 
     object-position: center; 
-    
     display: block;
-    
-    /* Optional: Filter to enhance contrast for solid white text */
     filter: brightness(0.7); 
 }
 
-/* 3. Title: Centers the text and applies the SOLID WHITE color */
 .banner-title {
-    /* Positioning */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
     z-index: 10;
     text-align: center; 
-    
-    /* Base Size for Country Pages (Short Titles) */
-    font-size: 8vw; /* Uses fluid size for short titles */
-    
+    font-size: 8vw; 
     font-weight: 900;
     margin: 0;
-    
-    /* CRITICAL FIX: Ensures SOLID WHITE and opacity */
+    width: 90%; 
     color: #FFFFFF !important; 
-    mix-blend-mode: normal; /* Guarantees opaque white block */
-    text-shadow: none; 
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 
-/* Add media query for responsiveness on small screens (Base Rule) */
-/* No change needed here if base font-size is 8vw */
-
+/* THE 4-LINE BLOCK TITLE FIX */
+.banner-container.index-banner .banner-title {
+    max-width: 550px;    
+    line-height: 1.0;    
+    font-size: 4.8rem;   
+    text-transform: none;
+    font-weight: 800;
+    word-spacing: 5px;   
+}
 
 /* ======================================================================
-   INDEX PAGE BANNER MODIFIER (FOR THE LONG TITLE ONLY)
+   IMAGE GRID WITH CAPTIONS
    ====================================================================== */
-
-/* In styles.css */
-/* --- Index Page Banner Modifier --- */
-
-.banner-container.index-banner .banner-title {
-    /* FINAL FIX: Set stable pixel size to 50px for a clean, non-constrained 3-line fit */
-    font-size: 50px; 
-    
-    font-weight: 800;
-    text-align: center;
-    text-transform: none; /* Keep standard capitalization */
+.image-grid-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
 }
 
-/* Media query to control scaling on mid-size screens */
-@media (max-width: 1400px) {
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; 
+    width: 90%;
+    max-width: 1200px;
+}
+
+.image-grid figure.full-row {
+    grid-column: 1 / -1;
+}
+
+.image-grid figure.full-row img {
+    height: 600px; 
+}
+
+.image-grid figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+.image-grid img {
+    width: 100%;
+    height: 450px; 
+    object-fit: cover;
+    display: block;
+    border-radius: 2px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.image-grid figure:hover img {
+    transform: scale(1.05);
+}
+
+.image-grid figcaption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+    font-style: italic;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+}
+
+/* ======================================================================
+   FOOTER & RESPONSIVE
+   ====================================================================== */
+footer {
+    margin-top: 5rem;
+    padding: 2rem 0;
+    border-top: 1px solid #eee;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+}
+
+@media (max-width: 800px) {
+    .image-grid { grid-template-columns: 1fr; gap: 25px; }
+    .image-grid img, .image-grid figure.full-row img { height: 350px; }
+    
+    .banner-container { height: 300px; }
+    .banner-container.index-banner { height: 70vh; }
     .banner-container.index-banner .banner-title {
-        /* Use a smaller fluid size to scale down gracefully */
-        font-size: 4vw; 
+        font-size: 2.8rem;
+        max-width: 300px; 
     }
 }
-
-/* ... (Your existing CSS rules for .carousel, .carousel__image, etc. remain unchanged) ... */
-
-/* ======================================================================
-   NEW CAROUSEL STYLES (REQUIRED FOR FADING BANNER)
-   
-   NOTE: These rules rely on the new HTML structure introduced in your Index.html 
-   (using .carousel__track and .carousel__slide inside the .banner-container).
-   
-   Since the existing carousel CSS is for sliding carousels, these new rules 
-   specifically target the slide/track opacity for the fading banner.
-   ====================================================================== */
-
-.carousel__track {
-    /* Set opacity transition for fading banner effect (Overrides existing transform transition) */
-    transition: opacity 1s ease-in-out; 
-}
-
-.carousel__slide {
-    /* CRITICAL for fading: All slides start invisible except the current one */
-    opacity: 0; 
-    
-    /* Ensure only opacity transitions, not position/transform */
-    transition: opacity 1s ease-in-out; 
-    
-    /* Ensure slides are stacked on top of each other */
-    left: 0; 
-    transform: none;
-}
-
-.carousel__slide.current-slide {
-    /* The active slide is made visible */
-    opacity: 1; 
-    z-index: 5; /* Ensures it sits above invisible slides */
-}
-
-.carousel__image {
-    /* Ensure image contrast filter is applied inside the slide */
-    filter: brightness(0.7); 
-}
-
-/* NOTE: Since you are using a consistent class structure, these rules might 
-         partially conflict if your other carousels also use the .carousel__track 
-         and .carousel__slide classes but need a sliding (transform) effect instead of fading (opacity).
-         
-         If your other carousels break, you will need to add a modifier class 
-         to them (e.g., .sliding-carousel) to exclude them from this opacity rule.
-         However, for now, we will add the new rules and proceed.
-*/
