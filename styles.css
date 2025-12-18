@@ -138,7 +138,7 @@ main p:first-of-type::first-letter {
 /* THE PEEK-A-BOO FIX: Replaced 600px with 85vh for the Index */
 .banner-container.index-banner {
     max-width: none; 
-    height: 85vh; 
+    height: 70vh; 
     margin-bottom: 3rem;
 }
 
