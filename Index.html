@@ -4,15 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Housing Markets</title>
+    
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+
+    <style>
+        /* This forces the map to be wide, bypassing Simple.css constraints */
+        #map-wrapper {
+            width: 90vw;            /* Takes up 90% of the window width */
+            max-width: 1400px;      /* Maximum limit for very large screens */
+            margin: 3rem auto;      /* Centered with space above and below */
+            overflow: visible;
+        }
+
+        #map-container {
+            width: 100%;
+            height: auto;           /* Maintains the 1000x600 aspect ratio */
+            display: block;
+        }
+
+        /* Styling for the text inside <main> */
+        .intro-lead {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     
     <div class="banner-container index-banner">
-        
         <div class="carousel__track-container">
             <ul class="carousel__track">
                 <li class="carousel__slide current-slide">
@@ -74,18 +98,15 @@
                 </li>
             </ul>
         </div>
-        
         <h1 class="banner-title">Around the World in 80 Housing Markets</h1> 
-        
     </div>
 
+ <div id="map-wrapper"> 
+    <svg id="map-container" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet"></svg>
+</div>
+
     <main>
-
-        <div id="map-wrapper"> 
-            <svg id="map-container"></svg>
-        </div>
-
-         <p>There’s no place like home...</p>
+        <p class="intro-lead">There’s no place like home...</p>
         
         <p>...so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
         
@@ -109,6 +130,8 @@
         
         <p>Housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map below, and have a look.</p>
     </main>
+
+    <div id="country-tag"></div>
 
     <script src="map-logic.js"></script> 
     <script src="JS/carousel.js"></script>
