@@ -2,7 +2,7 @@
    GENERAL & EDITORIAL TYPOGRAPHY
    ====================================================================== */
 body {
-    padding-top: 0; /* Removes the top gap for a full-bleed look */
+    padding-top: 0; 
 }
 
 main p {
@@ -11,7 +11,6 @@ main p {
     color: #333;
 }
 
-/* DROP CAP: The big first letter for the opening paragraph */
 main p:first-of-type::first-letter {
     font-size: 4rem;
     font-weight: 900;
@@ -23,7 +22,7 @@ main p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   INDEX & GENERAL CAROUSEL STYLES (Fading Effect)
+   INDEX & GENERAL CAROUSEL STYLES
    ====================================================================== */
 .carousel {
     position: relative;
@@ -74,7 +73,7 @@ main p:first-of-type::first-letter {
     display: flex;
     justify-content: center;
     padding: 10px 0;
-    position: absolute; /* Positions indicators over the carousel */
+    position: absolute; 
     bottom: 10px;
     width: 100%;
     z-index: 20;
@@ -94,52 +93,52 @@ main p:first-of-type::first-letter {
     background: rgba(255, 255, 255, .9);
 }
 
-.is-hidden { display: none; }
-
 /* ======================================================================
-   MAP STYLES (Full-Bleed)
+    MAP STYLES (Updated for Fluid/Cinematic Layout)
    ====================================================================== */
 #map-wrapper {
-    width: 100vw; 
+    width: 98vw;
+    max-width: none;
     position: relative; 
     left: 50%; 
     transform: translateX(-50%); 
-    overflow-x: auto; 
-    padding: 2em 0;
+    margin: -2rem 0; /* A negative margin pulls the map closer to your banner */
+    padding: 0;
 }
 
 #map-container {
-    width: 1000px; 
-    height: 600px;
-    margin: 0 auto; 
+    width: 100%;            
+    height: auto;           
     display: block; 
+    /* Soft shadow to keep the map from feeling "flat" against the white background */
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.08)); 
 }
 
 .country {
-    transition: fill 0.2s;
-    stroke: #eeeeee;
+    transition: fill 0.2s, stroke-width 0.2s;
+    stroke: #ffffff;        /* Changed to white for a cleaner look against gray */
     stroke-width: 0.5px;
 }
 
+
 /* ======================================================================
-   BANNER STYLING (Standard & Index)
+   BANNER STYLING
    ====================================================================== */
 .banner-container {
     position: relative; 
-    width: 100%;
-    margin-bottom: 2em;
-    max-width: 1000px; 
-    margin-left: auto;
+    width: 95%;          
+    max-width: 1400px;   
+    margin-left: auto;   
     margin-right: auto;
-    height: 400px; 
+    height: 450px; 
+    margin-bottom: 3rem;
     overflow: hidden; 
+    border-radius: 4px;  
 }
 
-/* THE PEEK-A-BOO FIX: Replaced 600px with 85vh for the Index */
 .banner-container.index-banner {
-    max-width: none; 
-    height: 70vh; 
-    margin-bottom: 3rem;
+    height: 65vh; /* Reduced height to let the map peek up */
+    max-height: 800px; 
 }
 
 .banner-image {
@@ -161,19 +160,23 @@ main p:first-of-type::first-letter {
     font-size: 8vw; 
     font-weight: 900;
     margin: 0;
-    width: 90%; 
     color: #FFFFFF !important; 
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+    
+    /* Ensures country names stay on one line */
+    white-space: nowrap; 
 }
 
-/* THE 4-LINE BLOCK TITLE FIX */
+/* 4-LINE INDEX TITLE: Forced stack with fixed width */
 .banner-container.index-banner .banner-title {
-    max-width: 550px;    
+    width: 550px;       /* Fixed width forces exactly 4 lines */
+    max-width: 90%;
     line-height: 1.0;    
     font-size: 4.8rem;   
     text-transform: none;
     font-weight: 800;
     word-spacing: 5px;   
+    white-space: normal; /* Allows wrapping for home page only */
 }
 
 /* ======================================================================
@@ -263,10 +266,68 @@ footer {
     .image-grid { grid-template-columns: 1fr; gap: 25px; }
     .image-grid img, .image-grid figure.full-row img { height: 350px; }
     
-    .banner-container { height: 300px; }
-    .banner-container.index-banner { height: 70vh; }
-    .banner-container.index-banner .banner-title {
-        font-size: 2.8rem;
-        max-width: 300px; 
+    .banner-container { 
+        width: 100%;
+        height: 350px; 
     }
+    .banner-container.index-banner { height: 75vh; }
+    .banner-container.index-banner .banner-title {
+        font-size: 2.5rem;
+        max-width: 300px; 
+        white-space: normal;
+    }
+    
+    .banner-title {
+        white-space: nowrap;
+        font-size: 14vw; 
+    }
+}
+
+#country-tag {
+    display: none; /* JS will change this to 'block' */
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    padding: 8px 14px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid #000;
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 99999;
+    box-shadow: 4px 4px 0px rgba(0,0,0,1); /* Sharp shadow for a blueprint look */
+    white-space: nowrap;
+}
+/* INDEX ONLY: Elegant Structural Lead */
+.intro-lead {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px; /* Slightly wider for more "air" */
+    line-height: 2;      /* More space between lines for elegance */
+    color: #000;
+    margin: 4rem 0;
+    
+    /* THE REFINED LINE: Thinner and using your accent color */
+    border-left: 3px solid #f97316; 
+    padding-left: 30px;
+    max-width: 800px;
+}
+
+/* Ensure the drop-cap doesn't interfere with this structured look */
+.intro-lead::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    text-transform: uppercase !important;
+    color: inherit !important;
+}
+#map-container {
+    background-color: #f1f1ef; /* The "Gallery" background */
+    border-radius: 8px;
+    /* Optional: Add a subtle inner glow to the ocean */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.02); 
 }

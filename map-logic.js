@@ -1,109 +1,136 @@
 /* ======================================================================
-   1. CONFIGURATION AND SETUP (D3 MAP)
+   1. CONFIGURATION (CINEMATIC RESPONSIVE SETUP)
    ====================================================================== */
+const width = 1200;  // Internal coordinate system
+const height = 700;
 
-const width = 1000;
-const height = 600;
-
-// Lookup table to map the 3-letter GeoJSON code (ADM0_A3) to your HTML file name.
 const countryNameLookup = {
-    'FRA': 'France',
-    'DEU': 'Berlin',
-    'JPN': 'Japan',
-    'KOR': 'Korea',
-    'ITA': 'Italy',
-    'ESP': 'Spain',
-    'OMN': 'Oman',
-    'ATA': 'Antarctica'
+    '250': 'France',
+    '392': 'Japan',
+    '410': 'Korea',
+    '380': 'Italy',
+    '724': 'Spain',
+    '512': 'Oman',
+    '010': 'Antarctica'
 };
 
-// Controls coloring and interaction.
-const interactiveCountries = ['FRA', 'DEU', 'JPN', 'KOR', 'ITA', 'ESP', 'OMN', 'ATA'];
+const interactiveCountries = Object.keys(countryNameLookup);
 
-// Custom colors for the map
-const interactiveColor = '#f97316'; // Orange
-const defaultColor = '#d1d5db';     // Gray
-const hoverColor = '#facc15';       // Yellow
+// Cities list
+const cityMarkets = [
+    { id: 'HKG', name: 'Hong_Kong', coords: [114.1694, 22.3193] },
+    { id: 'BER', name: 'Berlin', coords: [13.4050, 52.5200] }
+];
 
-// Select the SVG element
-const svg = d3.select("#map-container")
-    .attr("width", width)
-    .attr("height", height);
+const interactiveColor = '#f97316'; 
+const cityDefaultColor = "#2dd4bf"; // Bright Architectural Teal
+const defaultColor = '#d1d5db';     
+const hoverColor = '#facc15';       
 
-// Define the map projection
-const projection = d3.geoMercator()
-    .scale(150)           
-    .center([0, 20])      
-    .translate([width / 2, height / 2]);
+const svg = d3.select("#map-container");
+
+const projection = d3.geoNaturalEarth1()
+    .scale(215) 
+    .translate([width / 2, 380]); // Pushed down to 380 to keep Antarctica in frame
 
 const path = d3.geoPath().projection(projection);
 
-
 /* ======================================================================
-   2. DATA LOADING AND MAP INTERACTIONS
+   2. DRAWING THE MAP
    ====================================================================== */
-
-d3.json("./world.json").then(function(data) {
+d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(topoData) {
     
+    const tag = d3.select("#country-tag");
+    const countries = topojson.feature(topoData, topoData.objects.countries);
+
+    // --- LAYER 1: COUNTRIES ---
     svg.append("g")
         .selectAll("path")
-        .data(data.features) 
+        .data(countries.features) 
         .enter()
         .append("path")
         .attr("d", path) 
         .attr("class", "country") 
-        .attr("id", d => d.properties.adm0_a3)
-
-        // Coloring Logic
-        .style("fill", function(d) {
-            const countryId = d.properties.adm0_a3; 
-            if (interactiveCountries.includes(countryId)) {
-                return interactiveColor;
-            }
-            return defaultColor;
+        .style("fill", d => {
+            const id = String(d.id).padStart(3, '0');
+            if (id === '010') return defaultColor; // Antarctica hidden
+            return interactiveCountries.includes(id) ? interactiveColor : defaultColor;
         })
-
-        // Hover Handlers
         .on("mouseover", function(event, d) {
-            const countryId = d.properties.adm0_a3;
-            if (!interactiveCountries.includes(countryId)) return; 
+            const id = String(d.id).padStart(3, '0');
+            if (!interactiveCountries.includes(id)) return;
+            
+            d3.select(this).style("cursor", "pointer");
 
-            d3.select(this)
-              .attr("original-fill", d3.select(this).style("fill"))
-              .style("fill", hoverColor)
-              .style("stroke", "black")
-              .style("stroke-width", "2px")
-              .style("cursor", "pointer"); 
+            if (id !== '010') {
+                tag.style("display", "block").text(countryNameLookup[id]);
+                d3.select(this)
+                  .style("fill", hoverColor)
+                  .style("stroke", "#000")
+                  .style("stroke-width", "1.5px");
+            }
+        })
+        .on("mousemove", event => {
+            // Updated tag positioning for wider layouts
+            tag.style("top", (event.pageY - 45) + "px").style("left", (event.pageX + 15) + "px");
         })
         .on("mouseout", function(event, d) {
-            const countryId = d.properties.adm0_a3;
-            if (!interactiveCountries.includes(countryId)) return;
-            
-            d3.select(this)
-              .style("fill", d3.select(this).attr("original-fill")) 
-              .style("stroke", "none")
-              .style("stroke-width", "0px")
-              .style("cursor", "default");
-        })
+            const id = String(d.id).padStart(3, '0');
+            if (!interactiveCountries.includes(id)) return;
 
-        // Click Handler (Redirection)
-        .on("click", function(event, d) {
-            const countryId = d.properties.adm0_a3;
-            if (!interactiveCountries.includes(countryId)) return; 
-            
-            const fileName = countryNameLookup[countryId];
-            if (fileName) {
-                 window.location.href = `/${fileName}.html`;
-            } else {
-                 console.error(`Missing file name lookup for: ${countryId}`);
+            tag.style("display", "none");
+            if (id !== '010') {
+                d3.select(this)
+                  .style("fill", interactiveColor)
+                  .style("stroke", "white") // Matches CSS default
+                  .style("stroke-width", "0.5px");
             }
+            d3.select(this).style("cursor", "default");
+        })
+        .on("click", (event, d) => {
+            const id = String(d.id).padStart(3, '0');
+            if (interactiveCountries.includes(id)) window.location.href = `/${countryNameLookup[id]}.html`;
         });
-});
+
+    // --- LAYER 2: CITIES ---
+    svg.append("g")
+        .selectAll("circle")
+        .data(cityMarkets)
+        .enter()
+        .append("circle")
+        .attr("cx", d => projection(d.coords)[0])
+        .attr("cy", d => projection(d.coords)[1])
+        .attr("r", 6.5) // Slightly larger for the bigger map
+        .attr("fill", cityDefaultColor) 
+        .attr("stroke", "#ffffff")        
+        .attr("stroke-width", 2)
+        .style("cursor", "pointer")
+        .on("mouseover", function(event, d) {
+            tag.style("display", "block").text(d.name.replace('_', ' '));
+            d3.select(this)
+              .transition().duration(200)
+              .attr("r", 9)
+              .attr("fill", hoverColor)
+              .attr("stroke", "#000");
+        })
+        .on("mousemove", event => {
+            tag.style("top", (event.pageY - 45) + "px").style("left", (event.pageX + 15) + "px");
+        })
+        .on("mouseout", function() {
+            tag.style("display", "none");
+            d3.select(this)
+              .transition().duration(200)
+              .attr("r", 6.5)
+              .attr("fill", cityDefaultColor)
+              .attr("stroke", "#ffffff");
+        })
+        .on("click", (event, d) => { window.location.href = `/${d.name}.html`; });
+
+}); 
 
 /* ======================================================================
-   3. SHUFFLED SEQUENTIAL CAROUSEL (IMPROVED RANDOM START)
+   3. SHUFFLED SEQUENTIAL CAROUSEL
    ====================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
     const track = document.querySelector('.carousel__track');
     if (!track) return;
@@ -112,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const intervalTime = 4000;
     let currentSlideIndex = 0;
 
-    // 1. Shuffle Function
     const shuffleSlides = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -121,18 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     };
 
-    // 2. Perform Shuffle
     slides = shuffleSlides(slides);
-
-    // 3. RE-ORDER THE DOM: This physically moves the <li> elements in your HTML
-    // to match the new shuffled order. This prevents the "flash" of the original first image.
     slides.forEach(slide => {
-        slide.classList.remove('current-slide'); // Clean slate
-        track.appendChild(slide); // Moves the element to the end of the list in new order
+        slide.classList.remove('current-slide');
+        track.appendChild(slide);
     });
 
-    // 4. Set the new first image as visible
-    slides[0].classList.add('current-slide');
+    if(slides.length > 0) slides[0].classList.add('current-slide');
 
     const moveToNextSlide = () => {
         const currentSlide = slides[currentSlideIndex];
