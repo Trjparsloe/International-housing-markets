@@ -51,7 +51,6 @@ main p:first-of-type::first-letter {
     list-style: none;
     position: relative;
     height: 100%;
-    transition: opacity 1s ease-in-out; 
 }
 
 .carousel__slide {
@@ -69,32 +68,8 @@ main p:first-of-type::first-letter {
     z-index: 5; 
 }
 
-.carousel__nav {
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    position: absolute; 
-    bottom: 10px;
-    width: 100%;
-    z-index: 20;
-}
-
-.carousel__indicator {
-    border: 0;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    background: rgba(255, 255, 255, .3);
-    margin: 0 10px;
-    cursor: pointer;
-}
-
-.carousel__indicator.current-slide {
-    background: rgba(255, 255, 255, .9);
-}
-
 /* ======================================================================
-    MAP STYLES (Updated for Fluid/Cinematic Layout)
+   MAP STYLES
    ====================================================================== */
 #map-wrapper {
     width: 98vw;
@@ -102,27 +77,28 @@ main p:first-of-type::first-letter {
     position: relative; 
     left: 50%; 
     transform: translateX(-50%); 
-    margin: -2rem 0; /* A negative margin pulls the map closer to your banner */
+    margin: -2rem 0; 
     padding: 0;
 }
 
 #map-container {
-    width: 100%;            
-    height: auto;           
+    width: 100%;             
+    height: auto;            
     display: block; 
-    /* Soft shadow to keep the map from feeling "flat" against the white background */
+    background-color: #f1f1ef; 
+    border-radius: 8px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.02); 
     filter: drop-shadow(0 15px 35px rgba(0,0,0,0.08)); 
 }
 
 .country {
     transition: fill 0.2s, stroke-width 0.2s;
-    stroke: #ffffff;        /* Changed to white for a cleaner look against gray */
+    stroke: #ffffff;
     stroke-width: 0.5px;
 }
 
-
 /* ======================================================================
-   BANNER STYLING
+   BANNER CONTAINERS
    ====================================================================== */
 .banner-container {
     position: relative; 
@@ -137,7 +113,7 @@ main p:first-of-type::first-letter {
 }
 
 .banner-container.index-banner {
-    height: 65vh; /* Reduced height to let the map peek up */
+    height: 65vh; 
     max-height: 800px; 
 }
 
@@ -145,11 +121,13 @@ main p:first-of-type::first-letter {
     width: 100%;
     height: 100%;
     object-fit: cover; 
-    object-position: center; 
     display: block;
     filter: brightness(0.7); 
 }
 
+/* ======================================================================
+   BANNER TITLES (ZONE 1: GENERAL & SUB-PAGES)
+   ====================================================================== */
 .banner-title {
     position: absolute;
     top: 50%;
@@ -157,26 +135,32 @@ main p:first-of-type::first-letter {
     transform: translate(-50%, -50%); 
     z-index: 10;
     text-align: center; 
-    font-size: 8vw; 
     font-weight: 900;
     margin: 0;
     color: #FFFFFF !important; 
     text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
-    
-    /* Ensures country names stay on one line */
-    white-space: nowrap; 
+    font-size: 8vw; 
 }
 
-/* 4-LINE INDEX TITLE: Forced stack with fixed width */
+/* Apply specific "Hong Kong" fix to any page with 'sub-page' class */
+.sub-page .banner-title {
+    font-size: clamp(2rem, 8vw, 120px); 
+    width: 90%;
+    white-space: nowrap;
+}
+
+/* ======================================================================
+   BANNER TITLES (ZONE 2: INDEX/CAROUSEL ONLY)
+   ====================================================================== */
 .banner-container.index-banner .banner-title {
-    width: 550px;       /* Fixed width forces exactly 4 lines */
+    width: 550px;       /* Forces the 4-line stack */
     max-width: 90%;
     line-height: 1.0;    
     font-size: 4.8rem;   
     text-transform: none;
     font-weight: 800;
     word-spacing: 5px;   
-    white-space: normal; /* Allows wrapping for home page only */
+    white-space: normal; /* REVERTED: Allows wrapping for the long homepage title */
 }
 
 /* ======================================================================
@@ -203,13 +187,8 @@ main p:first-of-type::first-letter {
     max-width: 1200px;
 }
 
-.image-grid figure.full-row {
-    grid-column: 1 / -1;
-}
-
-.image-grid figure.full-row img {
-    height: 600px; 
-}
+.image-grid figure.full-row { grid-column: 1 / -1; }
+.image-grid figure.full-row img { height: 600px; }
 
 .image-grid figure {
     margin: 0;
@@ -227,9 +206,7 @@ main p:first-of-type::first-letter {
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
-.image-grid figure:hover img {
-    transform: scale(1.05);
-}
+.image-grid figure:hover img { transform: scale(1.05); }
 
 .image-grid figcaption {
     margin-top: 15px;
@@ -242,49 +219,32 @@ main p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   FOOTER & RESPONSIVE
+   INTRO LEAD & COUNTRY TAG
    ====================================================================== */
-footer {
-    margin-top: 5rem;
-    padding: 2rem 0;
-    border-top: 1px solid #eee;
-}
-
-.footer-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer-nav a {
-    text-decoration: none;
-    font-weight: bold;
+.intro-lead {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 2;
     color: #000;
+    margin: 4rem 0;
+    border-left: 3px solid #f97316; 
+    padding-left: 30px;
+    max-width: 800px;
 }
 
-@media (max-width: 800px) {
-    .image-grid { grid-template-columns: 1fr; gap: 25px; }
-    .image-grid img, .image-grid figure.full-row img { height: 350px; }
-    
-    .banner-container { 
-        width: 100%;
-        height: 350px; 
-    }
-    .banner-container.index-banner { height: 75vh; }
-    .banner-container.index-banner .banner-title {
-        font-size: 2.5rem;
-        max-width: 300px; 
-        white-space: normal;
-    }
-    
-    .banner-title {
-        white-space: nowrap;
-        font-size: 14vw; 
-    }
+.intro-lead::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    text-transform: uppercase !important;
+    color: inherit !important;
 }
 
 #country-tag {
-    display: none; /* JS will change this to 'block' */
+    display: none; 
     position: absolute; 
     background: rgba(255, 255, 255, 0.95);
     color: #000;
@@ -294,40 +254,21 @@ footer {
     text-transform: uppercase;
     letter-spacing: 2px;
     border: 1px solid #000;
-    border-radius: 0;
     pointer-events: none;
     z-index: 99999;
-    box-shadow: 4px 4px 0px rgba(0,0,0,1); /* Sharp shadow for a blueprint look */
+    box-shadow: 4px 4px 0px rgba(0,0,0,1);
     white-space: nowrap;
 }
-/* INDEX ONLY: Elegant Structural Lead */
-.intro-lead {
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 4px; /* Slightly wider for more "air" */
-    line-height: 2;      /* More space between lines for elegance */
-    color: #000;
-    margin: 4rem 0;
-    
-    /* THE REFINED LINE: Thinner and using your accent color */
-    border-left: 3px solid #f97316; 
-    padding-left: 30px;
-    max-width: 800px;
-}
 
-/* Ensure the drop-cap doesn't interfere with this structured look */
-.intro-lead::first-letter {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    float: none !important;
-    margin-right: 0 !important;
-    text-transform: uppercase !important;
-    color: inherit !important;
-}
-#map-container {
-    background-color: #f1f1ef; /* The "Gallery" background */
-    border-radius: 8px;
-    /* Optional: Add a subtle inner glow to the ocean */
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.02); 
+/* ======================================================================
+   RESPONSIVE
+   ====================================================================== */
+@media (max-width: 800px) {
+    .image-grid { grid-template-columns: 1fr; gap: 25px; }
+    .image-grid img, .image-grid figure.full-row img { height: 350px; }
+    .banner-container { width: 100%; height: 350px; }
+    .banner-container.index-banner .banner-title {
+        font-size: 2.5rem;
+        max-width: 300px; 
+    }
 }
