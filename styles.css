@@ -11,7 +11,8 @@ main p {
     color: #333;
 }
 
-main p:first-of-type::first-letter {
+/* FIXED: Only targets the first paragraph that is a DIRECT child of main */
+main > p:first-of-type::first-letter {
     font-size: 4rem;
     font-weight: 900;
     float: left;
@@ -126,7 +127,7 @@ main p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   BANNER TITLES (ZONE 1: GENERAL & SUB-PAGES)
+   BANNER TITLES
    ====================================================================== */
 .banner-title {
     position: absolute;
@@ -142,25 +143,21 @@ main p:first-of-type::first-letter {
     font-size: 8vw; 
 }
 
-/* Apply specific "Hong Kong" fix to any page with 'sub-page' class */
 .sub-page .banner-title {
     font-size: clamp(2rem, 8vw, 120px); 
     width: 90%;
     white-space: nowrap;
 }
 
-/* ======================================================================
-   BANNER TITLES (ZONE 2: INDEX/CAROUSEL ONLY)
-   ====================================================================== */
 .banner-container.index-banner .banner-title {
-    width: 550px;       /* Forces the 4-line stack */
+    width: 550px;       
     max-width: 90%;
     line-height: 1.0;    
     font-size: 4.8rem;   
     text-transform: none;
     font-weight: 800;
     word-spacing: 5px;   
-    white-space: normal; /* REVERTED: Allows wrapping for the long homepage title */
+    white-space: normal; 
 }
 
 /* ======================================================================
@@ -219,6 +216,109 @@ main p:first-of-type::first-letter {
 }
 
 /* ======================================================================
+   THE HOUSING REGISTRY (Side-by-Side Grid)
+   ====================================================================== */
+.registry-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.registry-main-title {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+    color: #000;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+}
+
+.registry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 40px 30px !important;
+}
+
+.registry-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.card-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #f97316; 
+    font-family: serif;
+    line-height: 1;
+    margin-bottom: -18px; 
+    z-index: 2;
+    transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.registry-card:hover .card-number {
+    color: #facc15; 
+    transform: translateY(-5px);
+}
+
+.card-thumb {
+    width: 100%;
+    height: 180px;
+    background: #000;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8; 
+    transition: opacity 0.3s ease;
+}
+
+.registry-card:hover img {
+    opacity: 1;
+}
+
+.card-info {
+    margin-top: 15px;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.registry-card:hover .card-info h3 {
+    color: #facc15;
+}
+
+.card-info p {
+    margin: 5px 0 0;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* FIXED: Explicitly disable Drop-Cap for Registry text */
+.card-info p::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    line-height: inherit !important;
+    color: inherit !important;
+    text-transform: none !important;
+}
+
+/* ======================================================================
    INTRO LEAD & COUNTRY TAG
    ====================================================================== */
 .intro-lead {
@@ -234,6 +334,7 @@ main p:first-of-type::first-letter {
     max-width: 800px;
 }
 
+/* FIXED: Restrict intro-lead behavior as well */
 .intro-lead::first-letter {
     font-size: inherit !important;
     font-weight: inherit !important;

@@ -8,8 +8,6 @@ const countryNameLookup = {
     '250': 'France',
     '392': 'Japan',
     '410': 'Korea',
-    '380': 'Italy',
-    '724': 'Spain',
     '512': 'Oman',
     '010': 'Antarctica'
 };
