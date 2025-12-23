@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berlin - International Housing Markets</title>
+    <title>Germany - International Housing Markets</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="sub-page">
 
     <nav style="padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
         <a href="index.html" style="text-decoration: none; font-weight: bold; color: #f97316;">← Back to World Map</a>
     </nav>
 
-    <div class="banner-container">
-        <img src="images/Berlin/Berlin front.jpg" alt="Berlin Cityscape" class="banner-image">
-        <h1 class="banner-title">BERLIN</h1> 
-    </div>
+    <div id="banner-placeholder"></div>
     
     <main>
         <p>There is something special about the first place you move to after leaving home. For me that was Berlin. It has been a joy to learn more about the housing markets of the city and country that have hugely influenced the way I think about places.</p>
@@ -93,5 +90,9 @@
         <p style="text-align: center;"><a href="index.html">← Back to World Map</a></p>
     </footer>
 
+    <script src="banner-loader.js"></script>
+    <script>
+        loadBanner('GERMANY', 'images/Berlin/Berlin front.jpg', 'banner-placeholder');
+    </script>
 </body>
 </html>
