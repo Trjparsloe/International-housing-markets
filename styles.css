@@ -373,3 +373,52 @@ main > p:first-of-type::first-letter {
         max-width: 300px; 
     }
 }
+/* Minimalist Placeholder Card */
+.registry-card.coming-soon-minimal {
+    cursor: default;
+    border: 2px dashed #d1d5db; /* Grey outline */
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px; /* Matches the height of your other cards */
+    text-decoration: none;
+    transition: none;
+}
+
+/* Ensure it doesn't "lift" on hover like active cards */
+.registry-card.coming-soon-minimal:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--accent); /* Optional: slight glow on hover to show intent */
+}
+
+.placeholder-content {
+    text-align: center;
+}
+
+.remaining-count {
+    display: block;
+    font-size: 5rem;
+    font-weight: 800;
+    color: #f97316; /* Your unified orange */
+    line-height: 1;
+    font-family: var(--font-family); /* Matches your site font */
+}
+
+.remaining-label {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    font-weight: bold;
+    color: #f97316;
+    margin-top: 0.5rem;
+}
+
+/* Keep the Hero logic: if it's the 4th, 6th, etc., it stays a box. 
+   If it's the 3rd, 5th, it stretches. */
+@media (min-width: 800px) {
+    .registry-card.coming-soon-minimal:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        min-height: 200px;
+    }
+}
