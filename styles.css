@@ -321,26 +321,38 @@ main > p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   COMING SOON / PLACEHOLDER STYLES
+   COMING SOON / PLACEHOLDER STYLES (Refined Color Logic)
    ====================================================================== */
 .registry-card.coming-soon-minimal {
     cursor: default;
-    border: 2px dashed #d1d5db; 
+    border: 2px dashed #888; /* Darker grey outline */
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 300px; 
     text-decoration: none;
-    transition: none;
-    /* This ensures it fills its grid cell correctly */
+    transition: border-color 0.3s ease; 
     grid-column: auto; 
+    pointer-events: auto; 
 }
 
+.registry-card.coming-soon-minimal .remaining-count,
+.registry-card.coming-soon-minimal .remaining-label {
+    color: #888; /* Matching darker grey text */
+    transition: color 0.3s ease;
+}
+
+/* Hover State: Goes Orange */
 .registry-card.coming-soon-minimal:hover {
-    transform: none;
+    transform: none; 
     box-shadow: none;
-    border-color: #f97316; 
+    border-color: #f97316; /* Orange border on hover */
+}
+
+.registry-card.coming-soon-minimal:hover .remaining-count,
+.registry-card.coming-soon-minimal:hover .remaining-label {
+    color: #f97316; /* Orange text on hover */
 }
 
 .placeholder-content {
@@ -351,7 +363,6 @@ main > p:first-of-type::first-letter {
     display: block;
     font-size: 5rem;
     font-weight: 800;
-    color: #f97316; 
     line-height: 1;
 }
 
@@ -359,7 +370,6 @@ main > p:first-of-type::first-letter {
     font-size: 1rem;
     letter-spacing: 4px;
     font-weight: bold;
-    color: #f97316;
     margin-top: 0.5rem;
 }
 
