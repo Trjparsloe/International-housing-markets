@@ -5,9 +5,7 @@ const width = 1200;
 const height = 750;
 
 const countryNameLookup = {
-    '250': 'France',
     '392': 'Japan',
-    '410': 'Korea',
     '512': 'Oman',
     '276': 'Germany',
     '010': 'Antarctica'
@@ -16,7 +14,7 @@ const countryNameLookup = {
 const interactiveCountries = Object.keys(countryNameLookup);
 
 const cityMarkets = [
-    { id: 'HKG', name: 'Hong_Kong', coords: [114.1694, 22.3193] }
+    // { id: 'HKG', name: 'Hong_Kong', coords: [114.1694, 22.3193] }
 ];
 
 const interactiveColor = '#f97316'; 
@@ -35,7 +33,7 @@ const projection = d3.geoNaturalEarth1()
 const path = d3.geoPath().projection(projection);
 
 /* ======================================================================
-   2. DRAWING THE MAP (PROTECTED)
+   2. DRAWING THE MAP (UPDATED FOR MULTI-HIGHLIGHT)
    ====================================================================== */
 if (svg.node()) {
     d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(topoData) {
@@ -47,12 +45,20 @@ if (svg.node()) {
 
         countries.features.forEach(d => {
             const id = String(d.id).padStart(3, '0');
+            
             if (id === '250' && d.geometry.type === "MultiPolygon") {
                 d.geometry.coordinates.forEach((coords, index) => {
-                    const isMainland = coords[0][0][0] > -10; 
+                    const lon = coords[0][0][0];
+                    const lat = coords[0][0][1];
+
+                    // Identify Mainland France and Corsica
+                    const isMainland = lon > -10; 
+                    const isCorsica = (lon > 8 && lon < 10 && lat > 41 && lat < 43);
+
                     refinedFeatures.push({
                         type: "Feature",
-                        id: isMainland ? '250' : `999-${index}`,
+                        // Link Mainland and Corsica, separate others (Guiana, etc.)
+                        id: (isMainland || isCorsica) ? '250' : `999-${index}`,
                         properties: d.properties,
                         geometry: { type: "Polygon", coordinates: coords }
                     });
@@ -62,7 +68,6 @@ if (svg.node()) {
             }
         });
 
-        // 2a. Draw Countries
         svg.append("g")
             .selectAll("path")
             .data(refinedFeatures) 
@@ -82,10 +87,18 @@ if (svg.node()) {
             .on("mouseover", function(event, d) {
                 const id = String(d.id).padStart(3, '0');
                 if (!interactiveCountries.includes(id)) return;
+                
                 d3.select(this).style("cursor", "pointer");
+
                 if (id !== '010') {
                     tag.style("display", "block").text(countryNameLookup[id]);
-                    d3.select(this).style("fill", hoverColor).style("stroke", "#ffffff").style("stroke-width", "2px");
+                    
+                    // HIGHLIGHT ALL PIECES OF THIS COUNTRY
+                    svg.selectAll("path")
+                       .filter(node => String(node.id).padStart(3, '0') === id)
+                       .style("fill", hoverColor)
+                       .style("stroke", "#ffffff")
+                       .style("stroke-width", "2px");
                 }
             })
             .on("mousemove", event => {
@@ -94,10 +107,16 @@ if (svg.node()) {
             .on("mouseout", function(event, d) {
                 const id = String(d.id).padStart(3, '0');
                 tag.style("display", "none");
-                if (id !== '010' && interactiveCountries.includes(id)) {
-                    d3.select(this).style("fill", interactiveColor).style("stroke", "white").style("stroke-width", "0.5px");
-                }
                 d3.select(this).style("cursor", "default");
+
+                if (id !== '010' && interactiveCountries.includes(id)) {
+                    // RESET ALL PIECES OF THIS COUNTRY
+                    svg.selectAll("path")
+                       .filter(node => String(node.id).padStart(3, '0') === id)
+                       .style("fill", interactiveColor)
+                       .style("stroke", "white")
+                       .style("stroke-width", "0.5px");
+                }
             })
             .on("click", (event, d) => {
                 const id = String(d.id).padStart(3, '0');
@@ -117,7 +136,7 @@ if (svg.node()) {
             .attr("cy", d => projection(d.coords)[1])
             .attr("r", 6.5) 
             .attr("fill", cityDefaultColor) 
-            .attr("stroke", "#ffffff") // White halo helps HK show against orange China
+            .attr("stroke", "#ffffff")       
             .attr("stroke-width", 3)   
             .style("cursor", "pointer")
             .on("mouseover", function(event, d) {
