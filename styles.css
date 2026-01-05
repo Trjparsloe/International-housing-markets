@@ -84,7 +84,7 @@ main > p:first-of-type::first-letter {
 
 #map-container {
     width: 100%;             
-    height: auto;            
+    height: auto;             
     display: block; 
     background-color: #f1f1ef; 
     border-radius: 8px;
@@ -236,7 +236,8 @@ main > p:first-of-type::first-letter {
 
 .registry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    /* Use auto-fit to ensure the grid behaves when items are removed */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
     gap: 40px 30px !important;
 }
 
@@ -270,6 +271,7 @@ main > p:first-of-type::first-letter {
     background: #000;
     overflow: hidden;
     border-radius: 2px;
+    position: relative; /* Necessary for placeholder overlays */
 }
 
 .card-thumb img {
@@ -319,6 +321,70 @@ main > p:first-of-type::first-letter {
 }
 
 /* ======================================================================
+   COMING SOON / PLACEHOLDER STYLES
+   ====================================================================== */
+.registry-card.coming-soon-minimal {
+    cursor: default;
+    border: 2px dashed #d1d5db; 
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px; 
+    text-decoration: none;
+    transition: none;
+    /* This ensures it fills its grid cell correctly */
+    grid-column: auto; 
+}
+
+.registry-card.coming-soon-minimal:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: #f97316; 
+}
+
+.placeholder-content {
+    text-align: center;
+}
+
+.remaining-count {
+    display: block;
+    font-size: 5rem;
+    font-weight: 800;
+    color: #f97316; 
+    line-height: 1;
+}
+
+.remaining-label {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    font-weight: bold;
+    color: #f97316;
+    margin-top: 0.5rem;
+}
+
+/* Logic: Stretch placeholder ONLY if it's an odd index (lonely on a row) */
+@media (min-width: 800px) {
+    .registry-card.coming-soon-minimal:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        min-height: 200px;
+    }
+}
+
+/* ======================================================================
+   ANTARCTICA FULLSCREEN RESPONSIVE
+   ====================================================================== */
+/* Target the Pingu image specifically or any full-page images */
+.pingu {
+    max-width: 100%;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ======================================================================
    INTRO LEAD & COUNTRY TAG
    ====================================================================== */
 .intro-lead {
@@ -334,7 +400,6 @@ main > p:first-of-type::first-letter {
     max-width: 800px;
 }
 
-/* FIXED: Restrict intro-lead behavior as well */
 .intro-lead::first-letter {
     font-size: inherit !important;
     font-weight: inherit !important;
@@ -371,54 +436,5 @@ main > p:first-of-type::first-letter {
     .banner-container.index-banner .banner-title {
         font-size: 2.5rem;
         max-width: 300px; 
-    }
-}
-/* Minimalist Placeholder Card */
-.registry-card.coming-soon-minimal {
-    cursor: default;
-    border: 2px dashed #d1d5db; /* Grey outline */
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 300px; /* Matches the height of your other cards */
-    text-decoration: none;
-    transition: none;
-}
-
-/* Ensure it doesn't "lift" on hover like active cards */
-.registry-card.coming-soon-minimal:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: var(--accent); /* Optional: slight glow on hover to show intent */
-}
-
-.placeholder-content {
-    text-align: center;
-}
-
-.remaining-count {
-    display: block;
-    font-size: 5rem;
-    font-weight: 800;
-    color: #f97316; /* Your unified orange */
-    line-height: 1;
-    font-family: var(--font-family); /* Matches your site font */
-}
-
-.remaining-label {
-    font-size: 1rem;
-    letter-spacing: 4px;
-    font-weight: bold;
-    color: #f97316;
-    margin-top: 0.5rem;
-}
-
-/* Keep the Hero logic: if it's the 4th, 6th, etc., it stays a box. 
-   If it's the 3rd, 5th, it stretches. */
-@media (min-width: 800px) {
-    .registry-card.coming-soon-minimal:last-child:nth-child(odd) {
-        grid-column: 1 / -1;
-        min-height: 200px;
     }
 }
