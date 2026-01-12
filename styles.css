@@ -11,8 +11,8 @@ main p {
     color: #333;
 }
 
-/* FIXED: Only targets the first paragraph that is a DIRECT child of main */
-main > p:first-of-type::first-letter {
+/* FIXED DROP CAP: Targets the first paragraph found inside main */
+main p:first-of-type::first-letter {
     font-size: 4rem;
     font-weight: 900;
     float: left;
@@ -20,6 +20,58 @@ main > p:first-of-type::first-letter {
     line-height: 0.85;
     color: #000;
     text-transform: uppercase;
+}
+
+/* ======================================================================
+   UNIFIED HEADINGS (SHARED TEXT STYLES)
+   ====================================================================== */
+.intro-lead,
+.editorial-subheading {
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    color: #000;
+    margin: 4rem 0 2rem 0;
+    display: block;
+}
+
+/* ONLY the Intro Lead gets the orange bar and padding */
+.intro-lead {
+    border-left: 3px solid #f97316; 
+    padding-left: 30px;
+}
+
+/* Subheadings get NO border and NO left padding */
+.editorial-subheading {
+    border-left: none;
+    padding-left: 0;
+}
+
+/* Clean up first-letter logic for both to avoid accidental drop-caps */
+.intro-lead::first-letter,
+.editorial-subheading::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    text-transform: uppercase !important;
+    color: inherit !important;
+}
+
+/* ======================================================================
+   THE EDITORIAL WELL (Reading Optimization)
+   ====================================================================== */
+main p, 
+.editorial-subheading,
+.intro-lead,
+main blockquote,
+main i {
+    max-width: 70ch; 
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 /* ======================================================================
@@ -161,19 +213,20 @@ main > p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   IMAGE GRID WITH CAPTIONS
+   DYNAMIC IMAGE GRID (No Cropping)
    ====================================================================== */
 .image-grid-container {
     width: 100vw;
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
     margin-top: 4rem;
     margin-bottom: 4rem;
     display: flex;
     justify-content: center;
+    max-width: none !important;
 }
 
 .image-grid {
@@ -182,25 +235,31 @@ main > p:first-of-type::first-letter {
     gap: 40px; 
     width: 90%;
     max-width: 1200px;
+    margin: 0 auto !important;
+    align-items: start; /* Grid items align to top */
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto; /* Allow natural aspect ratio */
+    object-fit: contain; 
+    display: block;
+    border-radius: 2px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .image-grid figure.full-row { grid-column: 1 / -1; }
-.image-grid figure.full-row img { height: 600px; }
+
+.image-grid figure.full-row img { 
+    height: auto; 
+    max-height: 85vh; /* Prevents oversized vertical images */
+}
 
 .image-grid figure {
     margin: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden; 
-}
-
-.image-grid img {
-    width: 100%;
-    height: 450px; 
-    object-fit: cover;
-    display: block;
-    border-radius: 2px;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
 .image-grid figure:hover img { transform: scale(1.05); }
@@ -216,11 +275,11 @@ main > p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   THE HOUSING REGISTRY (Side-by-Side Grid)
+   THE HOUSING REGISTRY
    ====================================================================== */
 .registry-section {
-    max-width: 1200px;
-    margin: 4rem auto;
+    max-width: 1200px !important;
+    margin: 4rem auto !important;
     padding: 0 2rem;
 }
 
@@ -236,7 +295,6 @@ main > p:first-of-type::first-letter {
 
 .registry-grid {
     display: grid;
-    /* Use auto-fit to ensure the grid behaves when items are removed */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
     gap: 40px 30px !important;
 }
@@ -271,13 +329,13 @@ main > p:first-of-type::first-letter {
     background: #000;
     overflow: hidden;
     border-radius: 2px;
-    position: relative; /* Necessary for placeholder overlays */
+    position: relative; 
 }
 
 .card-thumb img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Kept 'cover' here for consistent registry thumb sizes */
     opacity: 0.8; 
     transition: opacity 0.3s ease;
 }
@@ -302,14 +360,14 @@ main > p:first-of-type::first-letter {
 }
 
 .card-info p {
-    margin: 5px 0 0;
-    font-size: 0.85rem;
-    color: #666;
-    font-style: italic;
-    line-height: 1.4;
+    margin: 5px 0 0 !important;
+    font-size: 0.85rem !important;
+    color: #666 !important;
+    font-style: italic !important;
+    line-height: 1.4 !important;
+    max-width: none !important;
 }
 
-/* FIXED: Explicitly disable Drop-Cap for Registry text */
 .card-info p::first-letter {
     font-size: inherit !important;
     font-weight: inherit !important;
@@ -321,11 +379,11 @@ main > p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   COMING SOON / PLACEHOLDER STYLES (Refined Color Logic)
+   COMING SOON / PLACEHOLDER STYLES
    ====================================================================== */
 .registry-card.coming-soon-minimal {
     cursor: default;
-    border: 2px dashed #888; /* Darker grey outline */
+    border: 2px dashed #888; 
     background: transparent;
     display: flex;
     align-items: center;
@@ -333,26 +391,20 @@ main > p:first-of-type::first-letter {
     min-height: 300px; 
     text-decoration: none;
     transition: border-color 0.3s ease; 
-    grid-column: auto; 
-    pointer-events: auto; 
 }
 
 .registry-card.coming-soon-minimal .remaining-count,
 .registry-card.coming-soon-minimal .remaining-label {
-    color: #888; /* Matching darker grey text */
-    transition: color 0.3s ease;
+    color: #888; 
 }
 
-/* Hover State: Goes Orange */
 .registry-card.coming-soon-minimal:hover {
-    transform: none; 
-    box-shadow: none;
-    border-color: #f97316; /* Orange border on hover */
+    border-color: #f97316; 
 }
 
 .registry-card.coming-soon-minimal:hover .remaining-count,
 .registry-card.coming-soon-minimal:hover .remaining-label {
-    color: #f97316; /* Orange text on hover */
+    color: #f97316; 
 }
 
 .placeholder-content {
@@ -373,7 +425,6 @@ main > p:first-of-type::first-letter {
     margin-top: 0.5rem;
 }
 
-/* Logic: Stretch placeholder ONLY if it's an odd index (lonely on a row) */
 @media (min-width: 800px) {
     .registry-card.coming-soon-minimal:last-child:nth-child(odd) {
         grid-column: 1 / -1;
@@ -382,43 +433,8 @@ main > p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   ANTARCTICA FULLSCREEN RESPONSIVE
+   COUNTRY TAG & RESPONSIVE
    ====================================================================== */
-/* Target the Pingu image specifically or any full-page images */
-.pingu {
-    max-width: 100%;
-    max-height: 100vh;
-    width: auto;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* ======================================================================
-   INTRO LEAD & COUNTRY TAG
-   ====================================================================== */
-.intro-lead {
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    line-height: 2;
-    color: #000;
-    margin: 4rem 0;
-    border-left: 3px solid #f97316; 
-    padding-left: 30px;
-    max-width: 800px;
-}
-
-.intro-lead::first-letter {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    float: none !important;
-    margin-right: 0 !important;
-    text-transform: uppercase !important;
-    color: inherit !important;
-}
-
 #country-tag {
     display: none; 
     position: absolute; 
@@ -436,12 +452,8 @@ main > p:first-of-type::first-letter {
     white-space: nowrap;
 }
 
-/* ======================================================================
-   RESPONSIVE
-   ====================================================================== */
 @media (max-width: 800px) {
     .image-grid { grid-template-columns: 1fr; gap: 25px; }
-    .image-grid img, .image-grid figure.full-row img { height: 350px; }
     .banner-container { width: 100%; height: 350px; }
     .banner-container.index-banner .banner-title {
         font-size: 2.5rem;
