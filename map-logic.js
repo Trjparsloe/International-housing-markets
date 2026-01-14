@@ -1,118 +1,163 @@
-// --- 1. Configuration and Setup ---
+/* ======================================================================
+   1. MAP CONFIGURATION & PROJECTION
+   ====================================================================== */
+const width = 1200;  
+const height = 750;
 
-const width = 1000;
-const height = 600;
-
-// Lookup table to map the 3-letter GeoJSON code (ADM0_A3) to your HTML file name.
-// The value must match the capitalized file name (e.g., 'Italy' for Italy.html).
 const countryNameLookup = {
-    'FRA': 'France',
-    'DEU': 'Berlin',
-    'JPN': 'Japan',
-    'KOR': 'Korea',
-    'ITA': 'Italy',
-    'ESP': 'Spain',
-    'OMN': 'Oman',
-    'ATA': 'Antarctica'
-    // ADD ALL YOUR PAGES HERE!
+    '392': 'Japan',
+    '512': 'Oman',
+    '276': 'Germany',
+    '010': 'Antarctica'
 };
 
-// NEW SIMPLIFIED LIST: This list controls ALL coloring and interaction.
-// CRITICAL: Must use the 3-letter codes found in your GeoJSON.
-const interactiveCountries = ['FRA', 'DEU', 'JPN', 'KOR', 'ITA', 'ESP', 'OMN', 'ATA'];
+const interactiveCountries = Object.keys(countryNameLookup);
 
-// Define custom colors for the map
-const interactiveColor = '#f97316'; // Orange
-const defaultColor = '#d1d5db';    // Gray
-const hoverColor = '#facc15';      // Yellow
+const cityMarkets = [
+    // { id: 'HKG', name: 'Hong_Kong', coords: [114.1694, 22.3193] }
+];
 
-// Select the SVG element defined in your HTML
-const svg = d3.select("#map-container")
-    .attr("width", width)
-    .attr("height", height);
+const interactiveColor = '#f97316'; 
+const cityDefaultColor = '#f97316'; 
+const defaultColor = '#d1d5db';     
+const hoverColor = '#facc15';      
 
-// Define the map projection (Mercator is standard for world maps)
-const projection = d3.geoMercator()
-    .scale(150)           
-    .center([0, 20])      
-    .translate([width / 2, height / 2]);
+const svg = d3.select("#map-container");
 
-// Creates the path generator
+const projection = d3.geoNaturalEarth1()
+    .scale(245) 
+    .center([0, 0])       
+    .rotate([-11, 0]) 
+    .translate([width / 2, height / 2.2]); 
+
 const path = d3.geoPath().projection(projection);
 
+/* ======================================================================
+   2. DRAWING THE MAP (UPDATED FOR MULTI-HIGHLIGHT)
+   ====================================================================== */
+if (svg.node()) {
+    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(topoData) {
+        
+        const tag = d3.select("#country-tag");
+        let countries = topojson.feature(topoData, topoData.objects.countries);
 
-// --- 2. DATA LOADING, DRAWING, AND INTERACTIONS ---
+        let refinedFeatures = [];
 
-// Correct path to load 'world.json' from the root folder
-d3.json("./world.json").then(function(data) {
-    
-    svg.append("g")
-        .selectAll("path")
-        .data(data.features) 
-        .enter()
-        .append("path")
-        .attr("d", path) 
-        .attr("class", "country") 
-        .attr("id", d => d.properties.adm0_a3)
+        countries.features.forEach(d => {
+            const id = String(d.id).padStart(3, '0');
+            
+            if (id === '250' && d.geometry.type === "MultiPolygon") {
+                d.geometry.coordinates.forEach((coords, index) => {
+                    const lon = coords[0][0][0];
+                    const lat = coords[0][0][1];
 
-        // --- Coloring Logic (Single Check) ---
-        .style("fill", function(d) {
-            const countryId = d.properties.adm0_a3; 
-            
-            if (interactiveCountries.includes(countryId)) {
-                return interactiveColor;
-            }
-            
-            return defaultColor;
-        })
+                    // Identify Mainland France and Corsica
+                    const isMainland = lon > -10; 
+                    const isCorsica = (lon > 8 && lon < 10 && lat > 41 && lat < 43);
 
-        // --- Interaction Handlers (Hover and Click use the same list) ---
-        .on("mouseover", function(event, d) {
-            const countryId = d.properties.adm0_a3;
-            
-            if (!interactiveCountries.includes(countryId)) {
-                return; 
-            }
-
-            d3.select(this)
-              .attr("original-fill", d3.select(this).style("fill"))
-              .style("fill", hoverColor)
-              .style("stroke", "black")
-              .style("stroke-width", "2px")
-              .style("cursor", "pointer"); 
-        })
-        .on("mouseout", function(event, d) {
-            const countryId = d.properties.adm0_a3;
-
-            if (!interactiveCountries.includes(countryId)) {
-                return;
-            }
-            
-            d3.select(this)
-              .style("fill", d3.select(this).attr("original-fill")) 
-              .style("stroke", "none")
-              .style("stroke-width", "0px")
-              .style("cursor", "default");
-        })
-
-        // --- Interaction Handlers (Click) ---
-        .on("click", function(event, d) {
-            const countryId = d.properties.adm0_a3;
-            
-            // Exit if not an interactive country
-            if (!interactiveCountries.includes(countryId)) {
-                return; 
-            }
-            
-            // NEW LOGIC: Use the lookup table to find the capitalized file name (e.g., 'Italy')
-            const fileName = countryNameLookup[countryId];
-            
-            // Only redirect if a file name was found in the lookup table
-            if (fileName) {
-                 window.location.href = `/${fileName}.html`;
+                    refinedFeatures.push({
+                        type: "Feature",
+                        // Link Mainland and Corsica, separate others (Guiana, etc.)
+                        id: (isMainland || isCorsica) ? '250' : `999-${index}`,
+                        properties: d.properties,
+                        geometry: { type: "Polygon", coordinates: coords }
+                    });
+                });
             } else {
-                 // Optional: Log an error if a country is in the list but not in the lookup table
-                 console.error(`Missing file name lookup for: ${countryId}`);
+                refinedFeatures.push(d);
             }
         });
-});
+
+        svg.append("g")
+            .selectAll("path")
+            .data(refinedFeatures) 
+            .enter()
+            .append("path")
+            .attr("d", path) 
+            .attr("class", "country") 
+            .style("fill", d => {
+                const id = String(d.id).padStart(3, '0');
+                if (id === '010') return defaultColor; 
+                return interactiveCountries.includes(id) ? interactiveColor : defaultColor;
+            })
+            .style("pointer-events", d => {
+                const id = String(d.id).padStart(3, '0');
+                return interactiveCountries.includes(id) ? "all" : "none";
+            })
+            .on("mouseover", function(event, d) {
+                const id = String(d.id).padStart(3, '0');
+                if (!interactiveCountries.includes(id)) return;
+                
+                d3.select(this).style("cursor", "pointer");
+
+                if (id !== '010') {
+                    tag.style("display", "block").text(countryNameLookup[id]);
+                    
+                    // HIGHLIGHT ALL PIECES OF THIS COUNTRY
+                    svg.selectAll("path")
+                       .filter(node => String(node.id).padStart(3, '0') === id)
+                       .style("fill", hoverColor)
+                       .style("stroke", "#ffffff")
+                       .style("stroke-width", "2px");
+                }
+            })
+            .on("mousemove", event => {
+                tag.style("top", (event.pageY - 45) + "px").style("left", (event.pageX + 15) + "px");
+            })
+            .on("mouseout", function(event, d) {
+                const id = String(d.id).padStart(3, '0');
+                tag.style("display", "none");
+                d3.select(this).style("cursor", "default");
+
+                if (id !== '010' && interactiveCountries.includes(id)) {
+                    // RESET ALL PIECES OF THIS COUNTRY
+                    svg.selectAll("path")
+                       .filter(node => String(node.id).padStart(3, '0') === id)
+                       .style("fill", interactiveColor)
+                       .style("stroke", "white")
+                       .style("stroke-width", "0.5px");
+                }
+            })
+            .on("click", (event, d) => {
+                const id = String(d.id).padStart(3, '0');
+                if (!interactiveCountries.includes(id)) return;
+                window.location.href = id === '010' ? `Antarctica.html` : `${countryNameLookup[id]}.html`;
+            });
+
+        /* ======================================================================
+           3. CITY DOTS (With High-Contrast Halo)
+           ====================================================================== */
+        svg.append("g")
+            .selectAll("circle")
+            .data(cityMarkets)
+            .enter()
+            .append("circle")
+            .attr("cx", d => projection(d.coords)[0])
+            .attr("cy", d => projection(d.coords)[1])
+            .attr("r", 6.5) 
+            .attr("fill", cityDefaultColor) 
+            .attr("stroke", "#ffffff")       
+            .attr("stroke-width", 3)   
+            .style("cursor", "pointer")
+            .on("mouseover", function(event, d) {
+                tag.style("display", "block").text(d.name.replace('_', ' '));
+                d3.select(this).transition().duration(200)
+                    .attr("r", 9)
+                    .attr("fill", hoverColor)
+                    .attr("stroke", "#000000") 
+                    .attr("stroke-width", 2);
+            })
+            .on("mousemove", event => {
+                tag.style("top", (event.pageY - 45) + "px").style("left", (event.pageX + 15) + "px");
+            })
+            .on("mouseout", function() {
+                tag.style("display", "none");
+                d3.select(this).transition().duration(200)
+                    .attr("r", 6.5)
+                    .attr("fill", cityDefaultColor)
+                    .attr("stroke", "#ffffff")
+                    .attr("stroke-width", 3);
+            })
+            .on("click", (event, d) => { window.location.href = `${d.name}.html`; });
+    });
+}

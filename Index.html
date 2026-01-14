@@ -4,85 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Housing Markets</title>
+    
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+    <script src="https://unpkg.com/topojson@3"></script>
+
     <style>
-        /* CRITICAL NOTE: Map styles below are left in the HTML <style> block for simplicity. 
-           All banner styles are assumed to be in styles.css.
-        */
-        
-        /* NEW: Styles for the wrapper that handles full-bleed and horizontal scrolling */
         #map-wrapper {
-            /* 1. Set width to 100% of the VIEWPORT (screen) */
-            width: 100vw; 
-            
-            /* 2. CRITICAL: Pulls the element out to the screen edges, overriding the framework's max-width container. */
-            position: relative; 
-            left: 50%; 
-            transform: translateX(-50%); 
-
-            /* Allows horizontal scroll when the map itself is wider than the screen */
-            overflow-x: auto; 
-            max-width: none; 
-            
-            /* Add some vertical spacing to separate it from the text */
-            padding: 2em 0;
+            width: 90vw;
+            max-width: 1400px;
+            margin: 3rem auto;
+            overflow: visible;
         }
-
-        /* Styles for the SVG canvas inside the wrapper */
         #map-container {
-            width: 1000px; 
-            height: 600px;
-            /* CRITICAL: Centers the 1000px map within the full-width wrapper */
-            margin: 0 auto; 
-            display: block; 
-            max-width: none; 
+            width: 100%;
+            height: auto;
+            display: block;
         }
-        
-        /* Styling for all country paths drawn by D3 (general styles) */
-        .country {
-            transition: fill 0.2s; /* Smooth transition for fill color changes on hover */
-            
-            /* UPDATED: Define a light, subtle border for all countries */
-            stroke: #eeeeee;        /* Set to a very light gray/almost white */
-            stroke-width: 0.5px; 
-            stroke-linejoin: round;
+        .intro-lead {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     
-    <div class="banner-container">
-        <img src="https://images.pexels.com/photos/10368380/pexels-photo-10368380.jpeg" 
-             alt="Blocks of apartment buildings at night" 
-             class="banner-image">
-        
-        <h1 class="banner-title">AROUND THE WORLD IN 80 HOUSING MARKETS</h1> 
+    <div class="banner-container index-banner">
+        <div class="carousel__track-container">
+            <ul class="carousel__track">
+                <li class="carousel__slide current-slide"><img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong.jpg" alt="Hong Kong"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/house for investment.jpg" alt="House for investment"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Italy first.jpg" alt="Italian house"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea.jpg" alt="Korean apartments"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman.jpg" alt="Oman housing"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_karl_marx_allee.jpg" alt="Berlin Karl Marx Allee"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_kreuzberg.jpg" alt="Berlin Kreuzberg Apartments"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_2.jpg" alt="Hong Kong High Density Housing 2"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_3.jpg" alt="Hong Kong High Density Housing 3"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea_2.jpg" alt="Korean apartments 2"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman_muscat.jpg" alt="Oman Muscat Building"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Paris_chinatown.jpg" alt="Paris Chinatown Housing"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Taiwan_1.jpg" alt="Taiwan Apartments"></li>
+            </ul>
+        </div>
+        <h1 class="banner-title">Around the World in 80 Housing Markets</h1> 
     </div>
 
-    <p>There’s no place like home...</p>
-    
     <div id="map-wrapper"> 
-        <svg id="map-container"></svg>
-    </div>
-    
-    <p>...so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
-    <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their large sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs and concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>
+        <svg id="map-container" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
 
-    <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and miserly design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
-    <p>This has a profound impact on people’s lives, society as a whole, and the nature of the housing market itself. We have more adult children living with their parents for longer, unable to afford neither rent nor deposit. Those who manage to buy are older than they have ever been as they must wait longer to save for that deposit or for a family to die to gain an inheritance. The average length of mortgages continues to tick up, increasing the likelihood of payments in retirement.</p>
-    <p>And that is only what is most easily quantifiable. There are the consequences that are unseen or unmeasured. As the formal market increasingly fails to meet people’s needs, people turn to more informal methods as they navigate the gaps of quirks of housing in more creative ways. Markets come in many shades of grey all the way to black.</p>
-    <p>We are familiar with the shock headlines of practices which are exploitative and downright illegal. Extensions or sheds in gardens or 12 people in a room, usually for people with precarious legal statuses.</p>
-    <p>But there is also the extra room in a flatshare that isn’t a bedroom, let out to a friend to split rent further unbeknownst to the landlord. But then other behaviours, networks or connections play a bigger role. Some benefit from friends who have, by some way, been able to afford to buy, staying in spare bedrooms at mates rates.</p>
-    <p>The market itself, many first time buyers skipping that first step on the housing ladder in a 1 or 2 bedroom flat, straight into the family home because by the time they actually have enough for a deposit, they need the space for an imminent family. Some are eschewing the family altogether, unable to give any children the quality of life they deserve.</p>
-    
-    <p>All of this does make you wonder: are we alone in this? Is all this a uniquely British phenomenon or are other countries facing the same challenges? And if so, how are they dealing with them? How do housing markets work elsewhere, how do people live, and what are their homes like?</p>
-    <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses, then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t resist having a recce around the place at the first possible chance. They are for those who scroll through ‘property porn’ daydreaming about the lives they could be living. They are for those who look up the land registry the price paid data for a house that catches their attention as they walk by (an act which usually leads to two reponses: 1) fuck me, how much?!; or 2) fuck me, they bought that for peanuts back in the whichever decade it was).</p>
-    <p>Housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map below, and have a look.</p>
+    <main>
+        <p class="intro-lead">There’s no place like home…</p>
+        
+        <p>…so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
+        
+        <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs. And even the concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>
 
+        <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and miserly design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
+
+        <h3 class="editorial-subheading">We shape our housing markets; thereafter they shape us</h3>
+
+        <p>This has a profound impact on people’s lives, society as a whole, and the nature of the housing market itself. We are seeing measurable trends where more adult children are living with their parents for longer, unable to afford neither rent nor deposit. Those who manage to buy are older than they have ever been as they must wait longer to save or gain an inheritance for that deposit. This also leads to many first-time buyers skipping the first step on the ladder all together, straight into a family home to save on stamp duty costs or because they need space to start their family. Many people are also eschewing having a family altogether, unable to afford for their children the quality of life they deserve. Meanwhile, the average length of mortgages continues to tick up, increasing the likelihood of payments in retirement, while the number of people per household has also risen, leading to overcrowding.</p>
+
+        <p>And that is only what is most easily quantifiable. There are the consequences that are unseen or unmeasured. As the formal market increasingly fails to meet people’s needs, people turn to more informal methods. They navigate the gaps or quirks of housing in more creative ways, creating markets in many shades of grey all the way to black. Many of us are reminded daily through those we see living on the streets, in parks, or makeshift encampments in forests. We read the headlines of scandalous exposés such as illegally rented sheds in suburban backgardens, providing shelter often for those with precarious legal statuses.</p>
+
+        <p>But we often miss those more ambiguous signs of adaptations to markets. They are evident in the erosion of shared living space in rented accommodation, questionable subletting practices, and the rise of hidden homelessness or sofa surfing. They are also evident in the changing way we relate to one another. They can shape our network of connections as we bond more with, say, a friend-become-flat-mate who has been able to buy and provide their spare bedroom at mates rates. They are also becoming more important in the world of romance, where access to property or family wealth is seeing the creeping return of a dating market á la Jane Austen.</p>
+
+        <p>Churchill’s famous quote <i>"We shape our buildings; thereafter they shape us"</i> has ignited many a reflection on the role of architecture, design, and the built environment as a whole. The exact same can be said of our housing markets; their influence is arguably getting stronger.</p>
+
+        <h3 class="editorial-subheading">A look elsewhere...</h3>
+
+        <p>All of this does make you wonder: are we alone in this? Is all this a uniquely British phenomenon or are other countries facing the same challenges? And if so, how are they dealing with them? How do housing markets work elsewhere, how do people live, and what are their homes like?</p>
+
+        <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses, then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t resist having a recce around the place at the first possible chance. They are for those who scroll through ‘property porn’ daydreaming about the lives they could be living. They are for those who look up the land registry the price paid data for a house that catches their attention as they walk by (an act which usually leads to one of two forms of astonishment tinged with despair: 1) how much it costs now, or 2) how little it cost back in the day compared to how much it costs now).</p>
+
+        <p>What I hope they show, above all, is that housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map above or list below, and have a look.</p>
+
+        <section class="registry-section">
+    <h2 class="registry-main-title">The Housing Registry</h2>
+    <div class="registry-grid">
+        <a href="Germany.html" class="registry-card">
+            <span class="card-number">01</span>
+            <div class="card-thumb">
+                <img src="images/index/Berlin_kreuzberg.jpg" alt="Germany">
+            </div>
+            <div class="card-info">
+                <h3>Germany</h3>
+                <p>The Rental Bastion</p>
+            </div>
+        </a>
+
+        <a href="Japan.html" class="registry-card">
+            <span class="card-number">02</span>
+            <div class="card-thumb">
+                <img src="images/index/Japan.jpg" alt="Japan">
+            </div>
+            <div class="card-info">
+                <h3>Japan</h3>
+                <p>The Disappearing House</p>
+            </div>
+        </a>
+
+        <a href="Oman.html" class="registry-card">
+            <span class="card-number">03</span>
+            <div class="card-thumb">
+                <img src="images/index/Oman.jpg" alt="Oman">
+            </div>
+            <div class="card-info">
+                <h3>Oman</h3>
+                <p>The 600m² Scheme</p>
+            </div>
+        </a>
+<div class="registry-card coming-soon-minimal">
+    <div class="placeholder-content">
+        <span class="remaining-count">77</span>
+        <span class="remaining-label">MORE TO GO...</span>
+    </div>
+</div>
+    </div>
+</section>
+    </main>
+
+    <div id="country-tag"></div>
+
+    <script src="banner-carousel.js"></script>
     <script src="map-logic.js"></script> 
 </body>
 </html>
