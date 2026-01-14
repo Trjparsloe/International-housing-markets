@@ -1,151 +1,462 @@
+/* ======================================================================
+   GENERAL & EDITORIAL TYPOGRAPHY
+   ====================================================================== */
+body {
+    padding-top: 0; 
+}
+
+main p {
+    line-height: 1.8; 
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* FIXED DROP CAP: Targets the first paragraph found inside main */
+main p:first-of-type::first-letter {
+    font-size: 4rem;
+    font-weight: 900;
+    float: left;
+    margin-right: 12px;
+    line-height: 0.85;
+    color: #000;
+    text-transform: uppercase;
+}
+
+/* ======================================================================
+   UNIFIED HEADINGS (SHARED TEXT STYLES)
+   ====================================================================== */
+.intro-lead,
+.editorial-subheading {
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    color: #000;
+    margin: 4rem 0 2rem 0;
+    display: block;
+}
+
+/* ONLY the Intro Lead gets the orange bar and padding */
+.intro-lead {
+    border-left: 3px solid #f97316; 
+    padding-left: 30px;
+}
+
+/* Subheadings get NO border and NO left padding */
+.editorial-subheading {
+    border-left: none;
+    padding-left: 0;
+}
+
+/* Clean up first-letter logic for both to avoid accidental drop-caps */
+.intro-lead::first-letter,
+.editorial-subheading::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    text-transform: uppercase !important;
+    color: inherit !important;
+}
+
+/* ======================================================================
+   THE EDITORIAL WELL (Reading Optimization)
+   ====================================================================== */
+main p, 
+.editorial-subheading,
+.intro-lead,
+main blockquote,
+main i {
+    max-width: 70ch; 
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* ======================================================================
+   INDEX & GENERAL CAROUSEL STYLES
+   ====================================================================== */
 .carousel {
     position: relative;
-    height: 600px;
+    height: 100%;
     width: 100%;
     margin: 0 auto;
 }
+
 .carousel__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.7); 
 }
+
 .carousel__track-container {
-    background: lightgreen;
+    background: #000000; 
     height: 100%;
     position: relative;
     overflow: hidden;
 }
+
 .carousel__track {
     padding: 0;
     margin: 0;
     list-style: none;
     position: relative;
     height: 100%;
-    transition: transform 250ms ease-in;
 }
+
 .carousel__slide {
     position: absolute;
     top: 0;
     bottom: 0;
-    width:  100%;
-}
-.carousel__button{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-}
-.carousel__button--left{
-    left: -60px; 
-}
-.carousel__button--right {
-    right: -60px;
-}
-.carousel__button img {
-    width: 40px;
-}
-.carousel__nav {
-    /*background: pink;*/
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-.carousel__indicator {
-    border: 0;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    background: rgba(0, 0, 0, .3);
-    margin: 0 10px;
-    cursor: pointer;
-}
-.carousel__indicator.current-slide{
-    background: rgba(0, 0, 0, .75);
+    left: 0;
+    width: 100%;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
 }
 
-.is-hidden { display: none; }
-
-.svg-container {
-    width: 100%; /* Ensure it takes up the full width of the page */
-    max-width: 800px; /* Optional: limit the maximum size of the SVG */
-    margin: 0 auto; /* Center the container on the page */
-}
-
-#bannerimage{
-    width: 150%;
-    background-image: images ;
-    height: 405px;
-    background-position: center;
+.carousel__slide.current-slide {
+    opacity: 1; 
+    z-index: 5; 
 }
 
 /* ======================================================================
-   BANNER STYLING (For all country pages like Japan.html)
+   MAP STYLES
    ====================================================================== */
-
-/* 1. Container: Sets the fixed height and hides overflow/cropping */
-.banner-container {
+#map-wrapper {
+    width: 98vw;
+    max-width: none;
     position: relative; 
-    width: 100%;
-    margin-bottom: 2em;
-    max-width: 1000px; 
-    margin-left: auto;
-    margin-right: auto;
-    
-    /* CRITICAL: FIXED HEIGHT and OVERFLOW HIDING */
-    height: 400px; /* Adjust this height as needed */
-    overflow: hidden; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    margin: -2rem 0; 
+    padding: 0;
 }
 
-/* 2. Image: Scales the image to fill the container, cropping the excess */
+#map-container {
+    width: 100%;             
+    height: auto;             
+    display: block; 
+    background-color: #f1f1ef; 
+    border-radius: 8px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.02); 
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.08)); 
+}
+
+.country {
+    transition: fill 0.2s, stroke-width 0.2s;
+    stroke: #ffffff;
+    stroke-width: 0.5px;
+}
+
+/* ======================================================================
+   BANNER CONTAINERS
+   ====================================================================== */
+.banner-container {
+    position: relative; 
+    width: 95%;          
+    max-width: 1400px;   
+    margin-left: auto;   
+    margin-right: auto;
+    height: 450px; 
+    margin-bottom: 3rem;
+    overflow: hidden; 
+    border-radius: 4px;  
+}
+
+.banner-container.index-banner {
+    height: 65vh; 
+    max-height: 800px; 
+}
+
 .banner-image {
     width: 100%;
-    height: 100%; /* Image must match container height */
-    
-    /* CRITICAL: Scales image to cover the entire box and crops the rest */
+    height: 100%;
     object-fit: cover; 
-    
-    /* NEW CRITICAL FIX: Ensures the image is vertically and horizontally centered 
-       within the 400px fixed box, preventing shifting. */
-    object-position: center; 
-    
     display: block;
-    
-    /* Optional: Filter to enhance contrast for text */
     filter: brightness(0.7); 
 }
 
-/* 3. Title: Centers the text and applies the blend mode for the cutout */
+/* ======================================================================
+   BANNER TITLES
+   ====================================================================== */
 .banner-title {
-    /* Positioning */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
     z-index: 10;
-    
-    /* FINAL FIX: Set a fixed, stable size in pixels (px) for max width.
-       The font size will be 80px when the container is 1000px wide. 
-       We keep the fluid size for small screens (using a media query below). 
-    */
-    font-size: 80px; 
-    
+    text-align: center; 
     font-weight: 900;
     margin: 0;
-    
-    /* CRITICAL FIX: Ensure the text is pure white */
-    color: white !important; 
-    
-    /* The Solid White Cutout Effect */
-    mix-blend-mode: lighten; 
-    text-shadow: none; 
+    color: #FFFFFF !important; 
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+    font-size: 8vw; 
 }
 
-/* Add media query for responsiveness on small screens */
-@media (max-width: 600px) {
-    .banner-title {
-        /* Use VW only when the screen is small */
-        font-size: 8vw; 
+.sub-page .banner-title {
+    font-size: clamp(2rem, 8vw, 120px); 
+    width: 90%;
+    white-space: nowrap;
+}
+
+.banner-container.index-banner .banner-title {
+    width: 550px;       
+    max-width: 90%;
+    line-height: 1.0;    
+    font-size: 4.8rem;   
+    text-transform: none;
+    font-weight: 800;
+    word-spacing: 5px;   
+    white-space: normal; 
+}
+
+/* ======================================================================
+   DYNAMIC IMAGE GRID (No Cropping)
+   ====================================================================== */
+.image-grid-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    max-width: none !important;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; 
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto !important;
+    align-items: start; /* Grid items align to top */
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto; /* Allow natural aspect ratio */
+    object-fit: contain; 
+    display: block;
+    border-radius: 2px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.image-grid figure.full-row { grid-column: 1 / -1; }
+
+.image-grid figure.full-row img { 
+    height: auto; 
+    max-height: 85vh; /* Prevents oversized vertical images */
+}
+
+.image-grid figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+.image-grid figure:hover img { transform: scale(1.05); }
+
+.image-grid figcaption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+    font-style: italic;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+}
+
+/* ======================================================================
+   THE HOUSING REGISTRY
+   ====================================================================== */
+.registry-section {
+    max-width: 1200px !important;
+    margin: 4rem auto !important;
+    padding: 0 2rem;
+}
+
+.registry-main-title {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+    color: #000;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+}
+
+.registry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 40px 30px !important;
+}
+
+.registry-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.card-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #f97316; 
+    font-family: serif;
+    line-height: 1;
+    margin-bottom: -18px; 
+    z-index: 2;
+    transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.registry-card:hover .card-number {
+    color: #facc15; 
+    transform: translateY(-5px);
+}
+
+.card-thumb {
+    width: 100%;
+    height: 180px;
+    background: #000;
+    overflow: hidden;
+    border-radius: 2px;
+    position: relative; 
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Kept 'cover' here for consistent registry thumb sizes */
+    opacity: 0.8; 
+    transition: opacity 0.3s ease;
+}
+
+.registry-card:hover img {
+    opacity: 1;
+}
+
+.card-info {
+    margin-top: 15px;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.registry-card:hover .card-info h3 {
+    color: #facc15;
+}
+
+.card-info p {
+    margin: 5px 0 0 !important;
+    font-size: 0.85rem !important;
+    color: #666 !important;
+    font-style: italic !important;
+    line-height: 1.4 !important;
+    max-width: none !important;
+}
+
+.card-info p::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    line-height: inherit !important;
+    color: inherit !important;
+    text-transform: none !important;
+}
+
+/* ======================================================================
+   COMING SOON / PLACEHOLDER STYLES
+   ====================================================================== */
+.registry-card.coming-soon-minimal {
+    cursor: default;
+    border: 2px dashed #888; 
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px; 
+    text-decoration: none;
+    transition: border-color 0.3s ease; 
+}
+
+.registry-card.coming-soon-minimal .remaining-count,
+.registry-card.coming-soon-minimal .remaining-label {
+    color: #888; 
+}
+
+.registry-card.coming-soon-minimal:hover {
+    border-color: #f97316; 
+}
+
+.registry-card.coming-soon-minimal:hover .remaining-count,
+.registry-card.coming-soon-minimal:hover .remaining-label {
+    color: #f97316; 
+}
+
+.placeholder-content {
+    text-align: center;
+}
+
+.remaining-count {
+    display: block;
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.remaining-label {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+@media (min-width: 800px) {
+    .registry-card.coming-soon-minimal:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        min-height: 200px;
+    }
+}
+
+/* ======================================================================
+   COUNTRY TAG & RESPONSIVE
+   ====================================================================== */
+#country-tag {
+    display: none; 
+    position: absolute; 
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    padding: 8px 14px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid #000;
+    pointer-events: none;
+    z-index: 99999;
+    box-shadow: 4px 4px 0px rgba(0,0,0,1);
+    white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+    .image-grid { grid-template-columns: 1fr; gap: 25px; }
+    .banner-container { width: 100%; height: 350px; }
+    .banner-container.index-banner .banner-title {
+        font-size: 2.5rem;
+        max-width: 300px; 
     }
 }
