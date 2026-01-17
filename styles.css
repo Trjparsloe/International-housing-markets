@@ -242,7 +242,7 @@ main i {
 /* FIXING UNEVEN CAMERAS: Landscape Pairs */
 .landscape-shot img {
     width: 100%;
-    height: 400px; /* Forces uniform height for landscape shots */
+    height: 400px; 
     object-fit: cover; 
     display: block;
     border-radius: 2px;
@@ -251,7 +251,7 @@ main i {
 /* FIXING UNEVEN CAMERAS: Portrait Pairs */
 .portrait-shot img {
     width: 100%;
-    height: 650px; /* Forces uniform height for vertical shots */
+    height: 650px; 
     object-fit: cover;
     display: block;
     border-radius: 2px;
@@ -282,6 +282,15 @@ main i {
     font-style: italic;
     border-left: 2px solid #ddd;
     padding-left: 10px;
+}
+
+/* FIX: Align full-row captions to the edge of the hero image */
+.image-grid figure.full-row figcaption {
+    max-width: 1200px !important; /* Forces caption to match the grid width */
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0; 
 }
 
 /* ======================================================================
