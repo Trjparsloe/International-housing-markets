@@ -239,7 +239,7 @@ main i {
     align-items: start; 
 }
 
-/* FIXING UNEVEN CAMERAS: Landscape Pairs */
+/* Landscape Pairs */
 .landscape-shot img {
     width: 100%;
     height: 400px; 
@@ -248,7 +248,7 @@ main i {
     border-radius: 2px;
 }
 
-/* FIXING UNEVEN CAMERAS: Portrait Pairs */
+/* Portrait Pairs */
 .portrait-shot img {
     width: 100%;
     height: 650px; 
@@ -284,13 +284,14 @@ main i {
     padding-left: 10px;
 }
 
-/* FIX: Align full-row captions to the edge of the hero image */
-.image-grid figure.full-row figcaption {
-    max-width: 1200px !important; /* Forces caption to match the grid width */
-    width: 100%;
+/* FINAL ALIGNMENT FIX: Override Simple.css and reading well constraints */
+main .image-grid figure.full-row figcaption {
+    max-width: 1200px !important;
+    width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    padding-left: 0; 
+    padding-left: 0 !important; 
+    display: block !important;
 }
 
 /* ======================================================================
@@ -411,6 +412,7 @@ main i {
     max-width: none !important;
 }
 
+/* Registry card specific first-letter reset */
 .card-info p::first-letter {
     font-size: inherit !important;
     font-weight: inherit !important;
