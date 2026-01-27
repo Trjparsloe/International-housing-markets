@@ -1,17 +1,53 @@
 /* ======================================================================
-   GENERAL & EDITORIAL TYPOGRAPHY
+   CORE THEME DNA
+   ====================================================================== */
+:root {
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font-family);
+    background-color: #ffffff;
+    color: #212121;
+    scroll-behavior: smooth;
+}
+
+/* ======================================================================
+   THE MASTER LAYOUT (Centering the Content)
    ====================================================================== */
 body {
     padding-top: 0; 
+    margin: 0;
+    position: relative;
 }
 
+main {
+    max-width: 1100px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: block;
+}
+
+/* ======================================================================
+   GENERAL & EDITORIAL TYPOGRAPHY
+   ====================================================================== */
 main p {
     line-height: 1.8; 
+    margin-top: 0;
     margin-bottom: 1.5rem;
     color: #333;
+    max-width: 70ch;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
-/* FIXED DROP CAP: Targets the first paragraph found inside main */
+/* FIXED DROP CAP */
 main p:first-of-type::first-letter {
     font-size: 4rem;
     font-weight: 900;
@@ -25,8 +61,7 @@ main p:first-of-type::first-letter {
 /* ======================================================================
    UNIFIED HEADINGS (SHARED TEXT STYLES)
    ====================================================================== */
-.intro-lead,
-.editorial-subheading {
+.intro-lead {
     font-family: var(--font-family);
     font-size: 1.1rem;
     font-weight: 700;
@@ -34,25 +69,45 @@ main p:first-of-type::first-letter {
     letter-spacing: 4px;
     line-height: 1.4;
     color: #000;
-    margin: 4rem 0 2rem 0;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    max-width: 70ch;
+    margin-left: auto !important;
+    margin-right: auto !important;
     display: block;
-}
-
-/* ONLY the Intro Lead gets the orange bar and padding */
-.intro-lead {
     border-left: 3px solid #f97316; 
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
-/* Subheadings get NO border and NO left padding */
-.editorial-subheading {
+main h3.editorial-subheading {
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    color: #000;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    max-width: 70ch;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
     border-left: none;
     padding-left: 0;
 }
 
-/* Clean up first-letter logic for both to avoid accidental drop-caps */
-.intro-lead::first-letter,
-.editorial-subheading::first-letter {
+/* Explicit Resetting of first-letter logic */
+.intro-lead::first-letter {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    float: none !important;
+    margin-right: 0 !important;
+    text-transform: uppercase !important;
+    color: inherit !important;
+}
+
+main h3.editorial-subheading::first-letter {
     font-size: inherit !important;
     font-weight: inherit !important;
     float: none !important;
@@ -62,16 +117,37 @@ main p:first-of-type::first-letter {
 }
 
 /* ======================================================================
-   THE EDITORIAL WELL (Reading Optimization)
+   THE EDITORIAL WELL (Explicit Individual Control)
    ====================================================================== */
-main p, 
-.editorial-subheading,
-.intro-lead,
-main blockquote,
-main i {
-    max-width: 70ch; 
+main blockquote {
+    max-width: 70ch;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-left: 2px solid #eee;
+    font-style: italic;
+    color: #555;
+}
+
+main i {
+    font-style: italic;
+}
+
+main b {
+    font-weight: 700;
+}
+
+main strong {
+    font-weight: 700;
+}
+
+main em {
+    font-style: italic;
 }
 
 /* ======================================================================
@@ -122,18 +198,8 @@ main i {
 }
 
 /* ======================================================================
-   MAP STYLES
+   MAP STYLES & INTERACTIVITY
    ====================================================================== */
-#map-wrapper {
-    width: 98vw;
-    max-width: none;
-    position: relative; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    margin: -2rem 0; 
-    padding: 0;
-}
-
 #map-container {
     width: 100%;             
     height: auto;             
@@ -148,6 +214,29 @@ main i {
     transition: fill 0.2s, stroke-width 0.2s;
     stroke: #ffffff;
     stroke-width: 0.5px;
+    cursor: pointer;
+}
+
+/* THE MODERNIST SHADOW BOX LABEL */
+#country-tag {
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid #000000;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,1); 
+    display: none; 
+    white-space: nowrap;
 }
 
 /* ======================================================================
@@ -155,19 +244,20 @@ main i {
    ====================================================================== */
 .banner-container {
     position: relative; 
-    width: 95%;          
-    max-width: 1400px;   
-    margin-left: auto;   
+    width: 100%;
+    max-width: 70ch; 
+    margin-left: auto;
     margin-right: auto;
     height: 450px; 
     margin-bottom: 3rem;
     overflow: hidden; 
-    border-radius: 4px;  
+    border-radius: 8px; 
 }
 
 .banner-container.index-banner {
     height: 65vh; 
     max-height: 800px; 
+    margin-top: 2rem;
 }
 
 .banner-image {
@@ -192,20 +282,15 @@ main i {
     margin: 0;
     color: #FFFFFF !important; 
     text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
-    font-size: 8vw; 
-}
-
-.sub-page .banner-title {
-    font-size: clamp(2rem, 8vw, 120px); 
     width: 90%;
-    white-space: nowrap;
+    font-size: clamp(2rem, 5vw, 4.5rem);
 }
 
 .banner-container.index-banner .banner-title {
-    width: 550px;       
+    width: 450px;       
     max-width: 90%;
     line-height: 1.0;    
-    font-size: 4.8rem;   
+    font-size: 3.8rem;
     text-transform: none;
     font-weight: 800;
     word-spacing: 5px;   
@@ -213,7 +298,7 @@ main i {
 }
 
 /* ======================================================================
-   DYNAMIC IMAGE GRID (Selective Aspect Ratio)
+   DYNAMIC IMAGE GRID (Sub-page Layout)
    ====================================================================== */
 .image-grid-container {
     width: 100vw;
@@ -226,7 +311,6 @@ main i {
     margin-bottom: 4rem;
     display: flex;
     justify-content: center;
-    max-width: none !important;
 }
 
 .image-grid {
@@ -235,30 +319,34 @@ main i {
     gap: 40px; 
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto !important;
-    align-items: start; 
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
-/* Landscape Pairs */
 .landscape-shot img {
     width: 100%;
     height: 400px; 
     object-fit: cover; 
     display: block;
     border-radius: 2px;
+    transition: transform 0.6s ease;
 }
 
-/* Portrait Pairs */
 .portrait-shot img {
     width: 100%;
     height: 650px; 
     object-fit: cover;
     display: block;
     border-radius: 2px;
+    transition: transform 0.6s ease;
 }
 
-/* Full-Row images stay natural */
-.image-grid figure.full-row { grid-column: 1 / -1; }
+.image-grid figure.full-row { 
+    grid-column: 1 / -1; 
+}
+
 .image-grid figure.full-row img { 
     height: auto; 
     max-height: 85vh; 
@@ -272,7 +360,9 @@ main i {
     overflow: hidden; 
 }
 
-.image-grid figure:hover img { transform: scale(1.05); transition: 0.6s ease; }
+.image-grid figure:hover img { 
+    transform: scale(1.05); 
+}
 
 .image-grid figcaption {
     margin-top: 15px;
@@ -284,23 +374,14 @@ main i {
     padding-left: 10px;
 }
 
-/* FINAL ALIGNMENT FIX: Override Simple.css and reading well constraints */
-main .image-grid figure.full-row figcaption {
-    max-width: 1200px !important;
-    width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 0 !important; 
-    display: block !important;
-}
-
 /* ======================================================================
    THE VISUAL APPENDIX (Masonry Style)
    ====================================================================== */
 .visual-appendix {
     column-count: 3;
     column-gap: 15px;
-    padding: 2rem 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     width: 100%;
 }
 
@@ -316,15 +397,24 @@ main .image-grid figure.full-row figcaption {
     height: auto;
     border-radius: 2px;
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.appendix-item:hover img {
+    transform: scale(1.02);
 }
 
 /* ======================================================================
    THE HOUSING REGISTRY
    ====================================================================== */
 .registry-section {
-    max-width: 1200px !important;
-    margin: 4rem auto !important;
-    padding: 0 2rem;
+    width: 100%;
+    max-width: 70ch; 
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0;
 }
 
 .registry-main-title {
@@ -339,7 +429,7 @@ main .image-grid figure.full-row figcaption {
 
 .registry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    grid-template-columns: 1fr 1fr !important;
     gap: 40px 30px !important;
 }
 
@@ -351,6 +441,10 @@ main .image-grid figure.full-row figcaption {
     transition: transform 0.3s ease;
 }
 
+.registry-card:not(.coming-soon-minimal):hover {
+    transform: translateY(-5px);
+}
+
 .card-number {
     font-size: 3.5rem;
     font-weight: 900;
@@ -359,12 +453,11 @@ main .image-grid figure.full-row figcaption {
     line-height: 1;
     margin-bottom: -18px; 
     z-index: 2;
-    transition: color 0.2s ease, transform 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 .registry-card:hover .card-number {
     color: #facc15; 
-    transform: translateY(-5px);
 }
 
 .card-thumb {
@@ -373,7 +466,6 @@ main .image-grid figure.full-row figcaption {
     background: #000;
     overflow: hidden;
     border-radius: 2px;
-    position: relative; 
 }
 
 .card-thumb img {
@@ -388,23 +480,17 @@ main .image-grid figure.full-row figcaption {
     opacity: 1;
 }
 
-.card-info {
-    margin-top: 15px;
-}
-
 .card-info h3 {
-    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 0;
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.registry-card:hover .card-info h3 {
-    color: #facc15;
-}
-
 .card-info p {
-    margin: 5px 0 0 !important;
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
     font-size: 0.85rem !important;
     color: #666 !important;
     font-style: italic !important;
@@ -412,7 +498,6 @@ main .image-grid figure.full-row figcaption {
     max-width: none !important;
 }
 
-/* Registry card specific first-letter reset */
 .card-info p::first-letter {
     font-size: inherit !important;
     font-weight: inherit !important;
@@ -424,36 +509,27 @@ main .image-grid figure.full-row figcaption {
 }
 
 /* ======================================================================
-   COMING SOON / PLACEHOLDER STYLES
+   COMING SOON / HERO LOGIC (SPECIAL CASE)
    ====================================================================== */
 .registry-card.coming-soon-minimal {
-    cursor: default;
     border: 2px dashed #888; 
-    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 300px; 
-    text-decoration: none;
-    transition: border-color 0.3s ease; 
-}
-
-.registry-card.coming-soon-minimal .remaining-count,
-.registry-card.coming-soon-minimal .remaining-label {
-    color: #888; 
-}
-
-.registry-card.coming-soon-minimal:hover {
-    border-color: #f97316; 
-}
-
-.registry-card.coming-soon-minimal:hover .remaining-count,
-.registry-card.coming-soon-minimal:hover .remaining-label {
-    color: #f97316; 
+    min-height: 300px;
+    cursor: default;
 }
 
 .placeholder-content {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.registry-card.coming-soon-minimal:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
 }
 
 .remaining-count {
@@ -461,50 +537,74 @@ main .image-grid figure.full-row figcaption {
     font-size: 5rem;
     font-weight: 800;
     line-height: 1;
+    color: #888;
+    transition: color 0.3s ease;
 }
 
 .remaining-label {
     font-size: 1rem;
     letter-spacing: 4px;
     font-weight: bold;
-    margin-top: 0.5rem;
+    color: #888;
+    transition: color 0.3s ease;
 }
 
-@media (min-width: 800px) {
-    .registry-card.coming-soon-minimal:last-child:nth-child(odd) {
-        grid-column: 1 / -1;
-        min-height: 200px;
-    }
+.registry-card.coming-soon-minimal:hover {
+    border-color: #f97316;
+}
+
+.registry-card.coming-soon-minimal:hover .remaining-count,
+.registry-card.coming-soon-minimal:hover .remaining-label {
+    color: #f97316;
 }
 
 /* ======================================================================
-   COUNTRY TAG & RESPONSIVE
+   SUB-PAGE NAVIGATION & FOOTER
    ====================================================================== */
-#country-tag {
-    display: none; 
-    position: absolute; 
-    background: rgba(255, 255, 255, 0.95);
-    color: #000;
-    padding: 8px 14px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 1px solid #000;
-    pointer-events: none;
-    z-index: 99999;
-    box-shadow: 4px 4px 0px rgba(0,0,0,1);
-    white-space: nowrap;
+.sub-nav {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    max-width: 70ch;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-@media (max-width: 900px) { .visual-appendix { column-count: 2; } }
+.footer-nav {
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.back-link {
+    font-weight: bold;
+    color: #f97316 !important;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none !important;
+}
+
+.back-link .arrow {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e1e1e1;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* ======================================================================
+   RESPONSIVE
+   ====================================================================== */
+@media (max-width: 900px) { 
+    .visual-appendix { column-count: 2; } 
+}
 
 @media (max-width: 800px) {
-    .image-grid { grid-template-columns: 1fr; gap: 25px; }
-    .banner-container { width: 100%; height: 350px; }
-    .banner-container.index-banner .banner-title {
-        font-size: 2.5rem;
-        max-width: 300px; 
-    }
+    .registry-grid { grid-template-columns: 1fr !important; }
+    .image-grid { grid-template-columns: 1fr; }
+    .banner-container { width: 100%; }
     .visual-appendix { column-count: 1; }
 }
