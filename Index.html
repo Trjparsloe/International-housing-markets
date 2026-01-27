@@ -5,32 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Housing Markets</title>
     
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
 
     <style>
+        /* Specific map layout override to ensure it spills over correctly on the index */
         #map-wrapper {
-            width: 90vw;
-            max-width: 1400px;
-            margin: 3rem auto;
+            width: 100vw;
+            max-width: none;
+            margin: 3rem 0;
             overflow: visible;
-        }
-        #map-container {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .intro-lead {
-            margin-top: 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            /* This breaks out of the centered body flow */
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
-<body>
+<body class="index-page">
     
     <div class="banner-container index-banner">
         <div class="carousel__track-container">
@@ -65,7 +61,7 @@
         
         <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs. And even the concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>
 
-        <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and miserly design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
+        <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and mimsy design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
 
         <h3 class="editorial-subheading">We shape our housing markets; thereafter they shape us</h3>
 
@@ -86,48 +82,49 @@
         <p>What I hope they show, above all, is that housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map above or list below, and have a look.</p>
 
         <section class="registry-section">
-    <h2 class="registry-main-title">The Housing Registry</h2>
-    <div class="registry-grid">
-        <a href="Germany.html" class="registry-card">
-            <span class="card-number">01</span>
-            <div class="card-thumb">
-                <img src="images/index/Berlin_kreuzberg.jpg" alt="Germany">
-            </div>
-            <div class="card-info">
-                <h3>Germany</h3>
-                <p>The Rental Bastion</p>
-            </div>
-        </a>
+            <h2 class="registry-main-title">The Housing Registry</h2>
+            <div class="registry-grid">
+                <a href="Germany.html" class="registry-card">
+                    <span class="card-number">01</span>
+                    <div class="card-thumb">
+                        <img src="images/index/Berlin_kreuzberg.jpg" alt="Germany">
+                    </div>
+                    <div class="card-info">
+                        <h3>Germany</h3>
+                        <p>The Rental Bastion</p>
+                    </div>
+                </a>
 
-        <a href="Japan.html" class="registry-card">
-            <span class="card-number">02</span>
-            <div class="card-thumb">
-                <img src="images/index/machiya in nara 2.jpg" alt="Japan">
-            </div>
-            <div class="card-info">
-                <h3>Japan</h3>
-                <p>The Disappearing House</p>
-            </div>
-        </a>
+                <a href="Japan.html" class="registry-card">
+                    <span class="card-number">02</span>
+                    <div class="card-thumb">
+                        <img src="images/index/machiya in nara 2.jpg" alt="Japan">
+                    </div>
+                    <div class="card-info">
+                        <h3>Japan</h3>
+                        <p>The Disappearing House</p>
+                    </div>
+                </a>
 
-        <a href="Oman.html" class="registry-card">
-            <span class="card-number">03</span>
-            <div class="card-thumb">
-                <img src="images/index/Oman.jpg" alt="Oman">
+                <a href="Oman.html" class="registry-card">
+                    <span class="card-number">03</span>
+                    <div class="card-thumb">
+                        <img src="images/index/Oman.jpg" alt="Oman">
+                    </div>
+                    <div class="card-info">
+                        <h3>Oman</h3>
+                        <p>The 600m² Scheme</p>
+                    </div>
+                </a>
+                
+                <div class="registry-card coming-soon-minimal">
+                    <div class="placeholder-content">
+                        <span class="remaining-count">77</span>
+                        <span class="remaining-label">MORE TO GO...</span>
+                    </div>
+                </div>
             </div>
-            <div class="card-info">
-                <h3>Oman</h3>
-                <p>The 600m² Scheme</p>
-            </div>
-        </a>
-<div class="registry-card coming-soon-minimal">
-    <div class="placeholder-content">
-        <span class="remaining-count">77</span>
-        <span class="remaining-label">MORE TO GO...</span>
-    </div>
-</div>
-    </div>
-</section>
+        </section>
     </main>
 
     <div id="country-tag"></div>

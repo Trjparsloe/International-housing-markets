@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japan - International Housing Markets</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" href="styles.css"> 
 </head>
-<body>
+<body class="sub-page">
 
-    <nav style="padding: 1rem 2rem; max-width: 1200px; margin: 0 auto;">
-        <a href="index.html" style="text-decoration: none; font-weight: bold; color: #f97316;">← Back to World Map</a>
+    <nav class="sub-nav">
+        <a href="index.html" class="back-link">
+            <span class="arrow">←</span> Back to World Map
+        </a>
     </nav>
     
-    <div class="banner-container">
-        <img src="images/Japan/Barbie house.jpg" alt="Japanese Housing" class="banner-image">
-        <h1 class="banner-title">JAPAN</h1> 
-    </div>
+    <div id="banner-placeholder"></div>
     
     <main>
         <p>It’s a standard rite of passage for anyone interested in the built environment to venture to Japan at some point.</p>
@@ -34,11 +32,11 @@
         <div class="image-grid-container">
             <div class="image-grid">
                 
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/Concrete house.jpg" alt="Concrete house">
                     <figcaption>‘Who needs windows when you have concrete?’—A bold example of Japan's experimental residential architecture.</figcaption>
                 </figure>
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/highlighter houses.jpg" alt="Highlighter houses">
                     <figcaption>The ‘Trio of Highlighters’: Vivid evidence of a planning system that rejects the prescriptive local aesthetics of Europe.</figcaption>
                 </figure>
@@ -48,41 +46,50 @@
                     <figcaption>The ‘Barbie San Francisco townhouse’: A playful, hyper-modern take on domesticity in the dense Tokyo grid.</figcaption>
                 </figure>
 
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/street.jpg" alt="Street scene">
                     <figcaption>Rabbit warrens of everyday life: Domestic activity spills out into the street when interior space is at a premium.</figcaption>
                 </figure>
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/blue staircase.jpg" alt="Blue staircase">
                     <figcaption>Functional vibrancy: Bright accents and external circulation paths optimize small-footprint living.</figcaption>
                 </figure>
 
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/blue house.jpg" alt="Blue house">
                     <figcaption>Monochromatic daring: Japan's 30-year housing lifecycle encourages bolder choices in color and materiality.</figcaption>
                 </figure>
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/square windows house.jpg" alt="Square windows house">
                     <figcaption>Geometric efficiency: Managing privacy and light through rhythmic facade openings.</figcaption>
                 </figure>
 
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/okayama house.jpg" alt="Okayama house">
                     <figcaption>Contextual variations: Regional housing styles still maintain the philosophy of "constant renewal."</figcaption>
                 </figure>
-                <figure>
+                <figure class="landscape-shot">
                     <img src="images/Japan/random houses.jpg" alt="Random houses">
                     <figcaption>The architectural 'Wild West': A kaleidoscope of typologies side-by-side.</figcaption>
                 </figure>
 
             </div>
         </div>
+
+        <p><i>Disclaimer: These posts reflect my best understanding of each market. They are based on conversations with locals and experts, academic articles, and other online publications. If there is anything that is factually wrong or out of date, please do get in touch!</i></p>
+
+        <footer class="footer-nav">
+            <hr>
+            <a href="index.html" class="back-link">
+                <span class="arrow">←</span> Back to World Map
+            </a>
+        </footer>
     </main>
 
-    <footer>
-        <hr>
-        <p style="text-align: center;"><a href="index.html">← Back to World Map</a></p>
-    </footer>
+    <script src="banner-loader.js"></script>
+    <script>
+        loadBanner('JAPAN', 'images/Japan/Barbie house.jpg', 'banner-placeholder');
+    </script>
 
 </body>
 </html>
