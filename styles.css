@@ -351,6 +351,12 @@ main em {
     height: auto; 
     max-height: 85vh; 
     object-fit: contain;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.image-grid figure.full-row:hover img {
+    transform: scale(1.03);
 }
 
 .image-grid figure {
@@ -360,10 +366,11 @@ main em {
     overflow: hidden; 
 }
 
-.image-grid figure:hover img { 
+.image-grid figure:not(.full-row):hover img { 
     transform: scale(1.05); 
 }
 
+/* Standard Captions */
 .image-grid figcaption {
     margin-top: 15px;
     font-size: 0.9rem;
@@ -372,6 +379,14 @@ main em {
     font-style: italic;
     border-left: 2px solid #ddd;
     padding-left: 10px;
+}
+
+/* Hero (Centered) Captions */
+.image-grid figure.full-row figcaption {
+    max-width: 70ch;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 20px;
 }
 
 /* ======================================================================
