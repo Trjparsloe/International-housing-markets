@@ -611,6 +611,36 @@ hr {
 }
 
 /* ======================================================================
+   THE EASTER EGG (Pingu logic - Static, Centered, Clean)
+   ====================================================================== */
+.pingu-body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* This line kills the stray asterisks */
+    font-size: 0 !important; 
+}
+
+.pingu {
+    display: block;
+    max-width: 90vw;   
+    max-height: 80vh;  
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Ensures no bulge or movement */
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    filter: none !important;
+}
+/* ======================================================================
    RESPONSIVE
    ====================================================================== */
 @media (max-width: 900px) { 
