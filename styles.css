@@ -403,7 +403,7 @@ main em {
 .appendix-item {
     display: inline-block;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     break-inside: avoid;
 }
 
@@ -417,6 +417,18 @@ main em {
 
 .appendix-item:hover img {
     transform: scale(1.02);
+}
+
+/* APPENDIX CAPTION FIX: Synchronizes door captions with grid style */
+.appendix-item figcaption {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+    font-style: italic;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+    text-align: left;
 }
 
 /* ======================================================================
