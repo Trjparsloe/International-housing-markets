@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/topojson@3"></script>
 
     <style>
-        /* Specific map layout override to ensure it spills over correctly on the index */
+        /* Specific map layout override */
         #map-wrapper {
             width: 100vw;
             max-width: none;
@@ -19,15 +19,27 @@
             overflow: visible;
             display: flex;
             justify-content: center;
-            /* This breaks out of the centered body flow */
             position: relative;
             left: 50%;
             transform: translateX(-50%);
         }
+
+        /* Prevent content from hiding under the new sticky header */
+        body {
+            padding-top: 60px;
+        }
     </style>
-</head>
-<body class="index-page">
-    
+<header id="global-header">
+    <div class="header-container">
+        <a href="index.html" class="header-logo">Home</a>
+        <nav class="header-nav">
+            <a href="index.html#map-wrapper">Map</a>
+            <a href="index.html#registry">Registry</a>
+            <a href="about.html">About</a>
+        </nav>
+    </div>
+</header>
+
     <div class="banner-container index-banner">
         <div class="carousel__track-container">
             <ul class="carousel__track">
@@ -77,11 +89,11 @@
 
         <p>All of this does make you wonder: are we alone in this? Is all this a uniquely British phenomenon or are other countries facing the same challenges? And if so, how are they dealing with them? How do housing markets work elsewhere, how do people live, and what are their homes like?</p>
 
-        <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses, then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t resist having a recce around the place at the first possible chance. They are for those who scroll through ‘property porn’ daydreaming about the lives they could be living. They are for those who look up the land registry the price paid data for a house that catches their attention as they walk by (an act which usually leads to one of two forms of astonishment tinged with despair: 1) how much it costs now, or 2) how little it cost back in the day compared to how much it costs now).</p>
+        <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses, then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t resist having a recce around the place at the first possible chance. They are for those who scroll through ‘property porn’ daydreaming about the lives they could be living. They are for those who look up the land registry the price paid data for a house that catches their attention as they walk by (an act which usually leads to one of two forms of astonishment tinged with despair: 1) how much it costs now, or 2) how little it cost back in the day compared to how much it costs now eyeball).</p>
 
         <p>What I hope they show, above all, is that housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map above or list below, and have a look.</p>
 
-        <section class="registry-section">
+        <section id="registry" class="registry-section">
             <h2 class="registry-main-title">The Housing Registry</h2>
             <div class="registry-grid">
                 <a href="Germany.html" class="registry-card">
