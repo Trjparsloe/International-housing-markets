@@ -8,9 +8,8 @@
     <style>
         /* Separate logic to align the Registry-style header to the left */
         .about-header-container {
-            padding-top: 2rem;
-            margin-bottom: 4rem;
-            /* Removed the border-bottom: 1px solid #eee; to avoid the double-line issue */
+            padding-top: 1rem; /* Reduced from 2rem */
+            margin-bottom: 1.5rem; /* Reduced from 4rem to pull text/image up */
             text-align: left; 
         }
 
@@ -28,7 +27,7 @@
         @media (max-width: 900px) {
             .about-content-wrapper { 
                 flex-direction: column !important; 
-                gap: 40px !important; 
+                gap: 30px !important; 
             }
             .about-sidebar { 
                 position: static !important; 
@@ -86,33 +85,33 @@
                 </div>
             </div>
 
-            <div class="about-sidebar" style="flex: 1; position: sticky; top: 2rem;">
+            <div class="about-sidebar" style="flex: 1; position: sticky; top: 1rem;">
                 
-                <div style="position: relative; margin-bottom: 3rem;">
-                    <div style="position: absolute; top: 12px; left: 12px; width: 100%; height: 100%; background: #f97316; z-index: -1;"></div>
+                <div style="position: relative; margin-bottom: 2rem;">
+                    <div style="position: absolute; top: 10px; left: 10px; width: 100%; height: 100%; background: #f97316; z-index: -1;"></div>
                     <img src="images/About page/Toby Parsloe headshot.jpg" alt="Toby Parsloe" style="width: 100%; display: block; border: 1px solid #111; background-color: #fff;">
                 </div>
                 
-                <h3 class="editorial-subheading" style="margin-bottom: 1.5rem;">Background</h3>
+                <h3 class="editorial-subheading" style="margin-bottom: 1rem;">Background</h3>
                 
                 <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 1.8;">
-                    <li style="margin-bottom: 1.5rem;">
+                    <li style="margin-bottom: 1.2rem;">
                         <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2024–PRESENT</span><br>
                         <strong>Senior Market Analyst</strong><br>Hometrack
                     </li>
-                    <li style="margin-bottom: 1.5rem;">
+                    <li style="margin-bottom: 1.2rem;">
                         <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2022–2024</span><br>
                         <strong>Residential Research Analyst</strong><br>Savills
                     </li>
-                    <li style="margin-bottom: 1.5rem;">
+                    <li style="margin-bottom: 1.2rem;">
                         <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2017–2021</span><br>
                         <strong>PhD Architecture</strong><br>University of Cambridge
                     </li>
-                    <li style="margin-bottom: 1.5rem;">
+                    <li style="margin-bottom: 1.2rem;">
                         <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2015–2016</span><br>
                         <strong>MPhil Architecture and Urban Studies</strong><br>University of Cambridge
                     </li>
-                    <li style="margin-bottom: 1.5rem;">
+                    <li style="margin-bottom: 1.2rem;">
                         <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2012–2015</span><br>
                         <strong>BA History</strong><br>University of Bristol
                     </li>
@@ -121,9 +120,9 @@
 
         </div>
 
-        <footer class="footer-nav" style="margin-top: 5rem;">
+        <footer class="footer-nav" style="margin-top: 4rem;">
             <hr style="border: 0; border-top: 1px solid #eee;">
-            <a href="index.html" class="back-link" style="display: inline-block; margin: 2rem 0; text-decoration: none; color: #000; font-weight: 700; font-size: 0.8rem;">
+            <a href="index.html" class="back-link" style="display: inline-block; margin: 1.5rem 0; text-decoration: none; color: #000; font-weight: 700; font-size: 0.8rem;">
                 <span class="arrow">←</span> BACK TO WORLD MAP
             </a>
         </footer>
