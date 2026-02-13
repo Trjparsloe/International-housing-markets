@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Separate logic to align the Registry-style header to the left */
+        .about-header-container {
+            padding-top: 2rem;
+            margin-bottom: 4rem;
+            /* Removed the border-bottom: 1px solid #eee; to avoid the double-line issue */
+            text-align: left; 
+        }
+
+        .about-header-container .registry-main-title {
+            margin-left: 0 !important;
+            margin-right: auto !important;
+            text-align: left !important;
+            display: inline-block;
+            transform: none !important;
+            left: 0 !important;
+            position: relative;
+        }
+
+        /* Responsive stack adjustment for the content columns */
+        @media (max-width: 900px) {
+            .about-content-wrapper { 
+                flex-direction: column !important; 
+                gap: 40px !important; 
+            }
+            .about-sidebar { 
+                position: static !important; 
+                order: -1; 
+                max-width: 400px; 
+                margin: 0 auto; 
+            }
+            .about-header-container .registry-main-title {
+                font-size: 1.8rem !important;
+            }
+        }
+    </style>
 </head>
 <body class="sub-page">
 
@@ -19,58 +55,78 @@
         </div>
     </header>
 
-    <main>
-        <h1 class="intro-lead">
-            [Insert a bold, one-sentence mission statement here regarding the 80 Houses project]
-        </h1>
+    <main style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
-        <p>
-            [Insert 2-3 sentences here explaining why you started this project. Mention your interest in global housing markets and the goal of documenting 80 different locations.]
-        </p>
+        <div class="about-header-container">
+            <h2 class="registry-main-title">About</h2>
+        </div>
 
-        <p>
-            [Optional: Add another paragraph here about your methodology or what you hope readers take away from these architectural dispatches.]
-        </p>
-
-        <hr>
-
-        <div class="image-grid" style="grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 4rem;">
+        <div class="about-content-wrapper" style="display: flex; gap: 80px; align-items: flex-start;">
             
-            <div class="about-bio">
-                <h3 class="editorial-subheading" style="margin-top: 0;">The Curator</h3>
-                <p>
-                    [Insert your professional bio here. Mention your background and your specific expertise or interest in real estate and urban design.]
+            <div class="about-text" style="flex: 2; line-height: 1.8; color: #333;">
+                <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem; color: #000; font-weight: 400;">
+                    If money were no object, I would happily spend most of my time travelling the world looking at cool buildings. While sadly I am not there yet, I thought at least I could make a start and follow this curiosity as much as possible...
                 </p>
-                <p>
-                    [Optional: Add a sentence about your favorite discovery so far or where you are headed next.]
-                </p>
+                
+                <p>These pages are for people who might share a part of this simple dream. They are for the architecturally-adjacent, who wish they had the slightest bit of talent to design buildings but instead must content themselves with experiencing and learning about them.</p>
+
+                <p>My name is Toby Parsloe and I work as a housing market analyst at Hometrack, part of the wider Zoopla property group. My fascination with the built environment started during my undergrad in History at the University of Bristol. At the time the department was famous for teaching environmental history, namely the impact of non-human agency on historical processes. Despite being painfully hungover, I distinctly remember a morning lecture during the first term of second year where Dr Andrew Flack gave us our introduction to spatial theory. That was a lightbulb moment in which I felt a sudden validation for exactly the way I had always seen the world, through spaces and places.</p>
+
+                <p>I was fortunate enough to pursue this interest further, studying for an MPhil in Architecture and Urban Studies followed by a PhD in Architecture at the University of Cambridge. As cliché as it sounds, being in an architecture department felt like coming home, surrounded by people who put similar value on a certain way of seeing things, namely through space and urbanism. I fell into a research topic of the architecture of refugee camps, shelter, and housing in Berlin in response to the 2015 refugee crisis and quickly discovered that so many problems were rooted in issues of housing. It didn’t matter if I was chatting to a friend in a Berlin bar or a resident in one of the city’s refugee shelters: affordable and adequate housing would inevitably feature as a key concern. It became clear I needed to enter into the world of real estate and housing policy.</p>
+
+                <p>Following my PhD I secured a place on the Savills affordable housing graduate scheme to become a surveyor but found myself quickly switching over to the residential research team and discovering the wonderful world of real estate research. The benefits of an international organisation like Savills included offices around the world, and so whenever I found myself abroad I made a point to drop by the local offices to understand a bit about the country’s market and how it differed from the UK. This morphed into LinkedIn posts and the title <em>Around the World in 80 Housing Markets</em>. After a couple of years I moved to Hometrack and into the world of proptech, where our new tech lead who started on the same day as me said he could teach me to build a basic website for this blog in about 30 minutes. To be fair to him he was correct, although countless more hours were needed to wrangle it into something remotely readable and palatable on the senses. But here we are!</p>
+
+                <p>If you have any questions or would like to suggest interesting markets to explore next, please do get in touch.</p>
+
+                <div class="about-contact" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+                    <nav style="display: flex; gap: 30px;">
+                        <a href="https://www.linkedin.com/in/toby-parsloe/" target="_blank" style="color: #f97316; text-decoration: none; font-weight: 700; letter-spacing: 1px; font-size: 0.8rem;">LINKEDIN →</a>
+                        <a href="mailto:toby.parsloe@example.com" style="color: #f97316; text-decoration: none; font-weight: 700; letter-spacing: 1px; font-size: 0.8rem;">EMAIL →</a>
+                    </nav>
+                </div>
             </div>
 
-            <div class="about-contact">
-                <h3 class="editorial-subheading" style="margin-top: 0;">Connect</h3>
-                <p>For professional inquiries, collaborations, or to correct significant misinformation (as per the disclaimer), please reach out via the channels below:</p>
+            <div class="about-sidebar" style="flex: 1; position: sticky; top: 2rem;">
                 
-                <nav class="header-nav" style="display: flex; flex-direction: column; gap: 20px; margin-top: 2rem;">
-                    <a href="[Insert LinkedIn URL]" target="_blank" style="color: #f97316; text-decoration: none; font-weight: 700; letter-spacing: 1px;">LINKEDIN →</a>
-                    <a href="mailto:[Insert Email Address]" style="color: #f97316; text-decoration: none; font-weight: 700; letter-spacing: 1px;">EMAIL →</a>
-                </nav>
+                <div style="position: relative; margin-bottom: 3rem;">
+                    <div style="position: absolute; top: 12px; left: 12px; width: 100%; height: 100%; background: #f97316; z-index: -1;"></div>
+                    <img src="images/About page/Toby Parsloe headshot.jpg" alt="Toby Parsloe" style="width: 100%; display: block; border: 1px solid #111; background-color: #fff;">
+                </div>
+                
+                <h3 class="editorial-subheading" style="margin-bottom: 1.5rem;">Background</h3>
+                
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 1.8;">
+                    <li style="margin-bottom: 1.5rem;">
+                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2024–PRESENT</span><br>
+                        <strong>Senior Market Analyst</strong><br>Hometrack
+                    </li>
+                    <li style="margin-bottom: 1.5rem;">
+                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2022–2024</span><br>
+                        <strong>Residential Research Analyst</strong><br>Savills
+                    </li>
+                    <li style="margin-bottom: 1.5rem;">
+                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2017–2021</span><br>
+                        <strong>PhD Architecture</strong><br>University of Cambridge
+                    </li>
+                    <li style="margin-bottom: 1.5rem;">
+                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2015–2016</span><br>
+                        <strong>MPhil Architecture and Urban Studies</strong><br>University of Cambridge
+                    </li>
+                    <li style="margin-bottom: 1.5rem;">
+                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2012–2015</span><br>
+                        <strong>BA History</strong><br>University of Bristol
+                    </li>
+                </ul>
             </div>
 
         </div>
 
-        <footer class="footer-nav">
-            <hr>
-            <a href="index.html" class="back-link">
-                <span class="arrow">←</span> Back to World Map
+        <footer class="footer-nav" style="margin-top: 5rem;">
+            <hr style="border: 0; border-top: 1px solid #eee;">
+            <a href="index.html" class="back-link" style="display: inline-block; margin: 2rem 0; text-decoration: none; color: #000; font-weight: 700; font-size: 0.8rem;">
+                <span class="arrow">←</span> BACK TO WORLD MAP
             </a>
         </footer>
     </main>
-
-    <style>
-        @media (max-width: 800px) {
-            .image-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-        }
-    </style>
-
 </body>
 </html>
