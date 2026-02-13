@@ -13,6 +13,22 @@
             object-fit: cover;
             aspect-ratio: 3 / 4;
         }
+
+        /* Social Housing Layout: 2 side-by-side, 1 full-width below */
+        .social-housing-cluster {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        .social-housing-cluster .full-span {
+            grid-column: span 2;
+        }
+        .social-housing-cluster img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
     </style>
 </head>
 <body class="sub-page">
@@ -89,18 +105,18 @@
         <p>Similarly generous schemes are available for social housing. The social housing policy was initially established in 1973 to provide homes that are ‘adequate’, in terms of physical characteristics and intended purpose. I find this use of the term pretty interesting, as what we define as ‘adequate’ in terms of housing can often feel quite subjective. It evokes the modernist debates about what counts as ‘enough’ in terms of a minimum dwelling standard: what people rightly need at a bare minimum. But these things are never universal.</p>
 
         <div class="image-grid-container">
-            <div class="image-grid">
-                <figure class="landscape-shot">
+            <div class="social-housing-cluster">
+                <figure>
                     <img src="images/Oman/Social housing 1.jpeg">
-                    <figcaption>Social housing units, 2024</figcaption>
+                    <figcaption>Social housing 1, 2024</figcaption>
                 </figure>
-                <figure class="landscape-shot">
+                <figure>
                     <img src="images/Oman/social housing 2.jpg">
-                    <figcaption>Social housing project, 2024</figcaption>
+                    <figcaption>Social housing 2, 2024</figcaption>
                 </figure>
-                <figure class="full-row">
+                <figure class="full-span">
                     <img src="images/Oman/social housing 3.jpeg">
-                    <figcaption>Overview of social housing development, 2024</figcaption>
+                    <figcaption>Social housing 3, Muscat 2024</figcaption>
                 </figure>
             </div>
         </div>
@@ -119,7 +135,7 @@
                 </figure>
                 <figure class="portrait-shot">
                     <img src="images/Oman/House for rent in muscat lscp.jpg" class="portrait-crop">
-                    <figcaption>House for rent availability, Muscat 2024</figcaption>
+                    <figcaption>House for rent availability (Portrait crop), Muscat 2024</figcaption>
                 </figure>
             </div>
         </div>
@@ -141,7 +157,7 @@
             </div>
         </div>
 
-        <p>Building codes demand the house to have a central position on its plot, with a 5m set back from the front and 3m from either side. They also limit the built-up area to 40% for each plot and must not exceed two floors and 8m in height. Through these codes the single family villa becomes the government standard as a housing typology for locals, and exemplifies the traditional expectation of individual land ownership. But they contrast to the traditional typology of semi-detached courtyard houses in a densely built settlement that used to be the main typology. The modern villas are intended to provide maximum privacy, but in doing so require a huge amount of space.</p>
+        <p>Building codes demand the house to have a central position on its plot, with a 5m set back from the front and 3m from either side. They also limit the built-up area to 40% for each plot and must not exceed two floors and 8m in height. Through these codes the single family villa becomes the government standard as a housing typology for locals, and exemplifies the traditional expectation of individual land ownership. But they contrast to the traditional typology of semi-detached courtyard houses in a densely built settlement that used to be the main typology. The modern villas are intended to provide maximum privacy, but in doing so require a huge amount of space. Town after town reveals monofunctional urban sprawl to an extent I’ve never seen before, creating a huge dependency on cars and long commuting distances. This leads to unsustainable land consumption that causes higher costs for infrastructure networks to stretch far but only accommodates a few households. Each plot feels peculiarly suspended in voided space, set back far for other nearby villas or in small clusters. Social housing units provide a slight reprieve to this separation, where one story houses are usually attached in neat rows built on government land. But they are still often spaced out and separated from other structures.</p>
 
         <div class="image-grid-container">
             <div class="image-grid">
@@ -152,10 +168,6 @@
             </div>
         </div>
         
-        <p>Town after town reveals monofunctional urban sprawl to an extent I’ve never seen before, creating a huge dependency on cars and long commuting distances. This leads to unsustainable land consumption that causes higher costs for infrastructure networks to stretch far but only accommodates a few households.</p>
-
-        <p>Each plot feels peculiarly suspended in voided space, set back far for other nearby villas or in small clusters. Social housing units provide a slight reprieve to this separation, where one story houses are usually attached in neat rows built on government land. But they are still often spaced out and separated from other structures.</p>
-
         <p>The standardised typology is applied across the sultanate and, according to one academic paper I read, fails to show consideration to the local demographic, geographical, social, and climatic conditions that once defined Omani housing. Each villa comes to be exposed to the sun on all sides, with no protection from hot wind, dust, high temperature and moving sands.</p>
 
         <div class="image-grid-container">
@@ -167,9 +179,9 @@
             </div>
         </div>
 
-        <p>This is compounded by the fact that the new buildings are mostly made from concrete, evident in the half-built shells of some plots. Traditional homes used to be built from thick walls with very limited screened openings to help keep the heat at bay. In the new villas, larger, more western windows which can be covered by shutters are common. Air conditioning units come to compensate for the thin walls and speckle the facades, accompanied by the extra energy use this entails to maintain a habitable temperature.</p>
+        <p>This is compounded by the fact that the new buildings are mostly made from concrete, evident in the half-built shells of some plots. Traditional homes used to be built from thick walls with very limited screened openings to help keep the heat at bay. In the new villas, larger, more western windows which can be covered by shutters are common. Air conditioning units come to compensate for the thin walls and speckle the facades, accompanied by the extra energy use this entails to maintain a habitable temperature. Nevertheless, some traditional forms of spatial organisation are preserved. First is the mandated colouring of the homes. Regulations dictate that the exteriors of buildings be white or light shade like ivory or beige in order to maintain a traditional architectural aesthetic as well as help reflect sunlight in the hot climate. Any other colour requires government permission to use. Indeed, one need only look at the sprawl of villas to see a cohesive visual identity of lightness, in spite of other factors that differentiate them from one another. The cities come to glisten in the sunlight of the day, while at night they emit a ghostly paleness under the many lights that illuminate them. I did find one villa lit in colourful shades of greens and purples at night, which I like to think of as a subtle subversion to the rule that wouldn’t be apparent on any daytime inspection.</p>
 
-        <p>Nevertheless, some traditional forms of spatial organisation are preserved. First is the mandated colouring of the homes. Regulations dictate that the exteriors of buildings be white or light shade like ivory or beige in order to maintain a traditional architectural aesthetic as well as help reflect sunlight in the hot climate. Any other colour requires government permission to use. Indeed, one need only look at the sprawl of villas to see a cohesive visual identity of lightness, in spite of other factors that differentiate them from one another. The cities come to glisten in the sunlight of the day, while at night they emit a ghostly paleness under the many lights that illuminate them. I did find one villa lit in colourful shades of greens and purples at night, which I like to think of as a subtle subversion to the rule that wouldn’t be apparent on any daytime inspection.</p>
+        <p>The second preserved tradition is the spatial organisation of internal spaces and their exterior manifestation. The Majlis rooms near the home entrance are a dedicated place for receiving guests and holding social gatherings. Houses will often have a second front entrance into this room to allow the full separation between private family life and visitors, and you can see this in the villas looking in from the outside.</p>
 
         <div class="image-grid-container">
             <div class="image-grid">
@@ -177,8 +189,6 @@
                 <figure class="landscape-shot"><img src="images/Oman/modern villa at night lscp.jpg"><figcaption>Illuminated subversion: colorful night shades, 2024</figcaption></figure>
             </div>
         </div>
-
-        <p>The second preserved tradition is the spatial organisation of internal spaces and their exterior manifestation. The Majlis rooms near the home entrance are a dedicated place for receiving guests and holding social gatherings. Houses will often have a second front entrance into this room to allow the full separation between private family life and visitors, and you can see this in the villas looking in from the outside.</p>
 
         <div class="image-grid-container">
             <div class="image-grid">
@@ -193,9 +203,7 @@
             </div>
         </div>
 
-        <p>A positive shift is that the Omani government has clearly cottoned on to the problems of sprawling development. The Oman Ministry of Housing and Urban Planning has set out its Oman Vision 2040 which seeks to develop a network of urban areas which are more compact, walkable, and energy efficient. The flagship project for this is the Sultan Haitham City, a new smart city next to Muscat. It is intended for 100,000 residents and will feature different housing types and tenures that are within walking distance to new public amenities, parks, and open green spaces. It is all intimately tied into the country’s desire to transition away from its economic reliance on oil to a more diverse offering, as is happening with much of the region.</p>
-
-        <p>This is all encouraging to see, and in a way shows how Oman is embodying similar trends to the rest of the Gulf nations. But it also seems very distinct from its neighbours. The low-rise nature of its towns and cities also make its built environment feel much more familiar and less overwhelming (at least to my British sensitivities). While the grand projects of the UAE and Saudi Arabia operate often on a mind boggling scale, with tall skyscrapers and dramatic developments like Neom and the Line, Oman seems to operate in a much more reserved fashion. I think this is a tremendous thing, making it seem focused on more sustainable and incremental progress rather than grand, flashy statements.</p>
+        <p>A positive shift is that the Omani government has clearly cottoned on to the problems of sprawling development. The Oman Ministry of Housing and Urban Planning has set out its Oman Vision 2040 which seeks to develop a network of urban areas which are more compact, walkable, and energy efficient. The flagship project for this is the Sultan Haitham City, a new smart city next to Muscat. It is intended for 100,000 residents and will feature different housing types and tenures that are within walking distance to new public amenities, parks, and open green spaces. It is all intimately tied into the country’s desire to transition away from its economic reliance on oil to a more diverse offering, as is happening with much of the region. This is all encouraging to see, and in a way shows how Oman is embodying similar trends to the rest of the Gulf nations. But it also seems very distinct from its neighbours. The low-rise nature of its towns and cities also make its built environment feel much more familiar and less overwhelming (at least to my British sensitivities). While the grand projects of the UAE and Saudi Arabia operate often on a mind boggling scale, with tall skyscrapers and dramatic developments like Neom and the Line, Oman seems to operate in a much more reserved fashion. I think this is a tremendous thing, making it seem focused on more sustainable and incremental progress rather than grand, flashy statements.</p>
 
         <div class="image-grid-container">
             <div class="image-grid">
@@ -208,21 +216,20 @@
 
         <h3 class="editorial-subheading">The doors of Oman</h3>
 
+        <p>I couldn’t omit mentioning one feature of the buildings that I have not experienced anywhere before: the amazing diversity of ornate doors that adorn Omani homes. Striking combinations of patterns in wood, metal, and paintwork provide beautiful entrances to domestic spaces. Even homes which in all other means appear fairly utilitarian still feature elaborate doors that give a fitting sense of welcome into the home. When regulation dictates that all buildings have to be painted white or in light shades, the door often provides the only opportunity for a striking visual contrast.</p>
+
         <div class="visual-appendix">
             <figure class="appendix-item"><img src="images/Oman/grand door with gold prt.jpg"><figcaption>Grand gold, 2024</figcaption></figure>
             <figure class="appendix-item"><img src="images/Oman/brown door prt.jpg"><figcaption>Ornate brown, 2024</figcaption></figure>
             <figure class="appendix-item"><img src="images/Oman/door with pointed arch prt.jpg"><figcaption>Pointed arch, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/doors 6 prt.jpg"><figcaption>Dilapidated, 2024</figcaption></figure>
+            <figure class="appendix-item"><img src="images/Oman/doors 6 prt.jpg"><figcaption>Metal geometry, 2024</figcaption></figure>
             <figure class="appendix-item"><img src="images/Oman/brown door with peeling wall paint prt.jpg"><figcaption>Peeling paint, 2024</figcaption></figure>
             <figure class="appendix-item"><img src="images/Oman/deconstructed door prt.jpg"><figcaption>Deconstructed, 2024</figcaption></figure>
             <figure class="appendix-item"><img src="images/Oman/door golden knocker prt.jpg"><figcaption>Golden knocker, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/door in national museum 1 prt.jpg"><figcaption>Museum piece 1, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/door in national museum 2 prt.jpg"><figcaption>Museum piece 2, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/Doors 1 prt.jpg"><figcaption>Framed by turrets, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/Dirty door.jpg"><figcaption>Dusty door, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/doors 4 prt.jpg"><figcaption>Missing lintel 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/doors blocky pyramid pattern prt.jpg"><figcaption>Pyramid pattern, 2024</figcaption></figure>
-            <figure class="appendix-item"><img src="images/Oman/doors near wadi shaab prrt.jpg"><figcaption>Wadi Shaab, 2024</figcaption></figure>
+            <figure class="appendix-item"><img src="images/Oman/door in national museum 1 prt.jpg"><figcaption>Museum archive 1, 2024</figcaption></figure>
+            <figure class="appendix-item"><img src="images/Oman/door in national museum 2 prt.jpg"><figcaption>Museum archive 2, 2024</figcaption></figure>
+            <figure class="appendix-item"><img src="images/Oman/Doors 1 prt.jpg"><figcaption>Classic wood 1, 2024</figcaption></figure>
+            <figure class="appendix-item"><img src="images/Oman/doors 4 prt.jpg"><figcaption>Classic wood 4, 2024</figcaption></figure>
             <figure class="appendix-item"><img src="images/Oman/muscat door restaurant prt.jpg"><figcaption>Restaurant entry, 2024</figcaption></figure>
         </div>
 
@@ -230,7 +237,7 @@
             <div class="image-grid">
                 <figure class="full-row">
                     <img src="images/Oman/bonus pic with camel prt.jpg">
-                    <figcaption>Bonus picture: I got to meet a camel at it was pretty fantastic, 2024</figcaption>
+                    <figcaption>Bonus picture: I got to meet a camel and it was pretty fantastic, 2024</figcaption>
                 </figure>
             </div>
         </div>
