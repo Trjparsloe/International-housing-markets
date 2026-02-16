@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/topojson@3"></script>
 
     <style>
-        /* Specific map layout override */
+        /* Keep map full width */
         #map-wrapper {
             width: 100vw;
             max-width: none;
@@ -24,11 +24,46 @@
             transform: translateX(-50%);
         }
 
-        /* Prevent content from hiding under the new sticky header */
+        /* Prevent content from hiding under header */
         body {
             padding-top: 60px;
+            overflow-x: hidden;
+        }
+
+        /* THE "SWEET SPOT" BANNER: 60% Width */
+        .index-banner {
+            width: 60vw; /* Just a nudge wider than standard text */
+            max-width: 900px; /* Limits size on desktop to protect portrait photos */
+            margin: 2.5rem auto; 
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .index-banner .carousel__track-container {
+            aspect-ratio: 3 / 2; /* Works well for both portrait and landscape mix */
+            height: auto;
+        }
+
+        .index-banner .carousel__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fills container; 60% width prevents "over-zooming" */
+        }
+
+        @media (max-width: 800px) {
+            .index-banner {
+                width: 90vw; /* Standard mobile width */
+            }
+            .index-banner .carousel__track-container {
+                aspect-ratio: 1 / 1; 
+            }
         }
     </style>
+</head>
+<body class="home-page">
+
 <header id="global-header">
     <div class="header-container">
         <a href="index.html" class="header-logo">Home</a>
