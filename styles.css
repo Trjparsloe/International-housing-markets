@@ -813,3 +813,42 @@ body {
     .header-logo { font-size: 0.75rem; letter-spacing: 1px; }
     .header-nav a { font-size: 0.7rem; }
 }
+/* --- Global Header & Banner Fixes --- */
+
+/* Pushes content down on all sub-pages so the header doesn't overlap images */
+body.sub-page {
+    padding-top: 70px !important;
+}
+
+/* Ensures banners on all pages keep their rounded corners and don't wiggle */
+.sub-page .banner-container {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    overflow: hidden !important;
+}
+
+/* Prevent horizontal "wiggle" on all sub-pages */
+.sub-page {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* --- Global Responsive Appendix (The Doors Grid) --- */
+/* This makes sure the 3-column layout stacks automatically on every page */
+@media (max-width: 800px) {
+    .visual-appendix {
+        column-count: 1 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .appendix-item {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        margin-bottom: 30px;
+    }
+    .appendix-item img {
+        width: 100% !important;
+    }
+}
