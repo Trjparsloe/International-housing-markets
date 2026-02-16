@@ -6,7 +6,53 @@
     <title>Oman - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css"> 
     <style>
-        /* Special class to treat landscape images as portrait crops next to portrait shots */
+        /* WIGGLE FIX & RESPONSIVE DOORS */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        .visual-appendix {
+            column-count: 3;
+            column-gap: 15px;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            width: 100%;
+        }
+
+        .appendix-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 25px;
+            break-inside: avoid;
+            transition: transform 0.3s ease;
+        }
+
+        .appendix-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .appendix-item:hover img {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 800px) {
+            .visual-appendix {
+                column-count: 1 !important;
+            }
+            .appendix-item {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* CUSTOM PAGE CLASSES */
         .portrait-crop {
             width: 100%;
             height: 100%;
@@ -14,7 +60,6 @@
             aspect-ratio: 3 / 4;
         }
 
-        /* Social Housing Layout: 2 side-by-side, 1 full-width below */
         .social-housing-cluster {
             display: grid;
             grid-template-columns: 1fr 1fr;
