@@ -46,9 +46,21 @@
         @media (max-width: 800px) {
             .visual-appendix {
                 column-count: 1 !important;
+                /* Resetting padding/margins to fix the "shifted" look */
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
             .appendix-item {
                 margin-bottom: 30px;
+                /* Explicitly removing default figure margins that shift it right */
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100% !important;
+            }
+            .appendix-item img {
+                width: 100% !important;
             }
         }
 
