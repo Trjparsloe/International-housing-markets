@@ -11,53 +11,72 @@
     <script src="https://unpkg.com/topojson@3"></script>
 
     <style>
-        /* Keep map full width */
+        /* THE MAP - Restoring the Peekaboo Gap */
         #map-wrapper {
             width: 100vw;
             max-width: none;
-            margin: 3rem 0;
+            margin: 2rem 0 3rem 0; /* More breathing room below the banner */
             overflow: visible;
             display: flex;
             justify-content: center;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
+            background-color: #fcfcfc;
         }
 
-        /* Prevent content from hiding under header */
+        /* TIGHT HEADER BUFFER */
         body {
-            padding-top: 60px;
+            /* Reduced from 60px/70px to bring the banner up nearly touching the header */
+            padding-top: 55px; 
             overflow-x: hidden;
         }
 
-        /* THE "SWEET SPOT" BANNER: 60% Width */
+        /* THE "SWEET SPOT" BANNER - Tucked against the top */
         .index-banner {
-            width: 60vw; /* Just a nudge wider than standard text */
-            max-width: 900px; /* Limits size on desktop to protect portrait photos */
-            margin: 2.5rem auto; 
+            width: 60vw; 
+            max-width: 900px; 
+            margin: 0.2rem auto 0 auto; /* Fraction of space at top, no space at bottom (map margin handles it) */
             border-radius: 4px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: #000;
         }
 
         .index-banner .carousel__track-container {
-            aspect-ratio: 3 / 2; /* Works well for both portrait and landscape mix */
+            aspect-ratio: 3 / 2; 
             height: auto;
+            width: 100%;
+            display: block;
         }
 
         .index-banner .carousel__image {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Fills container; 60% width prevents "over-zooming" */
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
+        }
+
+        /* Spacing for intro text */
+        main {
+            padding-top: 0;
+            margin-top: 0; 
         }
 
         @media (max-width: 800px) {
+            body {
+                padding-top: 52px; /* Even tighter for mobile headers */
+            }
             .index-banner {
-                width: 90vw; /* Standard mobile width */
+                width: 90vw; 
+                margin-top: 0.1rem;
             }
             .index-banner .carousel__track-container {
                 aspect-ratio: 1 / 1; 
+            }
+            #map-wrapper {
+                margin: 1.5rem 0 2rem 0;
             }
         }
     </style>
