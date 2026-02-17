@@ -11,11 +11,11 @@
     <script src="https://unpkg.com/topojson@3"></script>
 
     <style>
-        /* THE MAP - Restoring the Peekaboo Gap */
+        /* Map Peekaboo Gap */
         #map-wrapper {
             width: 100vw;
             max-width: none;
-            margin: 2rem 0 3rem 0; /* More breathing room below the banner */
+            margin: 2rem 0 3rem 0; 
             overflow: visible;
             display: flex;
             justify-content: center;
@@ -25,18 +25,17 @@
             background-color: #fcfcfc;
         }
 
-        /* TIGHT HEADER BUFFER */
+        /* Tight Header Buffer */
         body {
-            /* Reduced from 60px/70px to bring the banner up nearly touching the header */
             padding-top: 55px; 
             overflow-x: hidden;
         }
 
-        /* THE "SWEET SPOT" BANNER - Tucked against the top */
+        /* Banner styling */
         .index-banner {
             width: 60vw; 
             max-width: 900px; 
-            margin: 0.2rem auto 0 auto; /* Fraction of space at top, no space at bottom (map margin handles it) */
+            margin: 0.2rem auto 0 auto; 
             border-radius: 4px;
             overflow: hidden;
             position: relative;
@@ -58,26 +57,16 @@
             display: block;
         }
 
-        /* Spacing for intro text */
-        main {
-            padding-top: 0;
-            margin-top: 0; 
-        }
-
         @media (max-width: 800px) {
-            body {
-                padding-top: 52px; /* Even tighter for mobile headers */
-            }
+            body { padding-top: 52px; }
             .index-banner {
-                width: 90vw; 
-                margin-top: 0.1rem;
+                width: 95vw; 
+                margin-top: 0.5rem;
             }
             .index-banner .carousel__track-container {
                 aspect-ratio: 1 / 1; 
             }
-            #map-wrapper {
-                margin: 1.5rem 0 2rem 0;
-            }
+            #map-wrapper { margin: 1.5rem 0 2rem 0; }
         }
     </style>
 </head>
@@ -122,11 +111,9 @@
 
     <main>
         <p class="intro-lead">There’s no place like home…</p>
-        
         <p>…so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
-        
         <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs. And even the concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>
-
+        
         <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and miserky design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
 
         <h3 class="editorial-subheading">We shape our housing markets; thereafter they shape us</h3>
@@ -160,7 +147,6 @@
                         <p>Why buy when you can rent</p>
                     </div>
                 </a>
-
                 <a href="Japan.html" class="registry-card">
                     <span class="card-number">02</span>
                     <div class="card-thumb">
@@ -171,7 +157,6 @@
                         <p>The 30 Year House</p>
                     </div>
                 </a>
-
                 <a href="Oman.html" class="registry-card">
                     <span class="card-number">03</span>
                     <div class="card-thumb">
@@ -182,7 +167,6 @@
                         <p>Free Land for All</p>
                     </div>
                 </a>
-                
                 <div class="registry-card coming-soon-minimal">
                     <div class="placeholder-content">
                         <span class="remaining-count">77</span>
