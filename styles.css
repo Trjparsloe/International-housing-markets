@@ -854,3 +854,21 @@ body.sub-page {
         width: 100% !important;
     }
 }
+
+/* Final fix for Anchor Jumps on all screen sizes */
+#map-wrapper, 
+#registry, 
+.registry-section, 
+[id] {
+    /* We increase this slightly for mobile to account for browser UI bars */
+    scroll-margin-top: 90px !important; 
+}
+
+/* Specific adjustment for very small screens */
+@media (max-width: 600px) {
+    #map-wrapper, 
+    #registry, 
+    .registry-section {
+        scroll-margin-top: 100px !important;
+    }
+}
