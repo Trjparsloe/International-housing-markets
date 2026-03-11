@@ -19,12 +19,31 @@
         </div>
     </header>
 
+    <aside class="side-nav-container">
+        <nav class="side-nav">
+            <div class="side-nav-label">Contents</div>
+            <ul>
+                <li><a href="#intro" class="nav-link active">Introduction</a></li>
+                <li><a href="#giveaway" class="nav-link">The ultimate government giveaway</a></li>
+                <li><a href="#schemes" class="nav-link">Three affordable housing schemes</a></li>
+                <li><a href="#sprawl" class="nav-link">The villa, the wall, and exceptional urban sprawl</a></li>
+                <li><a href="#doors" class="nav-link">The doors of Oman</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="right-progress-rail">
+        <div class="progress-fill" id="verticalBar"></div>
+    </div>
+
     <div id="banner-placeholder"></div>
     
     <main>
-        <p>I can’t think of a region that could claim as radical an alteration in recent years more so than the Arabian Peninsula. Nowhere else better captures the essence of the late 20th and early 21st centuries: the impact of global oil dependence and the booming wealth that followed, to a hasty pivot away to ensure development can continue in a new age of sustainable energy generation. Dubai in particular has taken a distinctive spot in British culture in recent years with its variety of associations.</p>
+        <div id="intro">
+            <p>I can’t think of a region that could claim as radical an alteration in recent years more so than the Arabian Peninsula. Nowhere else better captures the essence of the late 20th and early 21st centuries: the impact of global oil dependence and the booming wealth that followed, to a hasty pivot away to ensure development can continue in a new age of sustainable energy generation. Dubai in particular has taken a distinctive spot in British culture in recent years with its variety of associations.</p>
 
-        <p>I must admit, it is not somewhere I had delved into much before. So when I got a chance to visit Oman, I was exceptionally excited to explore the housing market of a region I didn’t know much about.</p>
+            <p>I must admit, it is not somewhere I had delved into much before. So when I got a chance to visit Oman, I was exceptionally excited to explore the housing market of a region I didn’t know much about.</p>
+        </div>
 
         <div class="image-grid-container">
             <div class="image-grid">
@@ -35,7 +54,7 @@
             </div>
         </div>
 
-        <h3 class="editorial-subheading">The ultimate government giveaway</h3>
+        <h3 id="giveaway" class="editorial-subheading">The ultimate government giveaway</h3>
 
         <p>The defining feature of the Omani housing market is a government scheme managed by the Ministry of Housing and Urban Planning (MHUP) that allocates a 600m² plot of land to every citizen to build a house on. This began in 1984 for men over 21 and was extended in 2008 to include women over 24.</p>
 
@@ -75,7 +94,7 @@
 
         <p>Some plots also might get half built, but due to unforeseen circumstances or a lack of money have to pause indefinitely. A drive through the countryside reveals many houses in various stages of construction and no sign of builders around. It is difficult to tell which are making progress and which might remain half finished in perpetuity…</p>
 
-        <h3 class="editorial-subheading">Three affordable housing schemes</h3>
+        <h3 id="schemes" class="editorial-subheading">Three affordable housing schemes</h3>
 
         <p>Similarly generous schemes are available for social housing. The social housing policy was initially established in 1973 to provide homes that are ‘adequate’, in terms of physical characteristics and intended purpose. I find this use of the term pretty interesting, as what we define as ‘adequate’ in terms of housing can often feel quite subjective. It evokes the modernist debates about what counts as ‘enough’ in terms of a minimum dwelling standard: what people rightly need at a bare minimum. But these things are never universal.</p>
 
@@ -119,7 +138,7 @@
             </div>
         </div>
 
-        <h3 class="editorial-subheading">The villa, the wall, and exceptional urban sprawl</h3>
+        <h3 id="sprawl" class="editorial-subheading">The villa, the wall, and exceptional urban sprawl</h3>
 
         <p>These factors combine to encourage the defining architectural feature of Omani housing: low-rise single family villas surrounded by high-rise walls, spread out in uncanny fashion.</p>
 
@@ -197,7 +216,7 @@
             </div>
         </div>
 
-        <h3 class="editorial-subheading">The doors of Oman</h3>
+        <h3 id="doors" class="editorial-subheading">The doors of Oman</h3>
 
         <p>I couldn’t omit mentioning one feature of the buildings that I have not experienced anywhere before: the amazing diversity of ornate doors that adorn Omani homes. Striking combinations of patterns in wood, metal, and paintwork provide beautiful entrances to domestic spaces. Even homes which in all other means appear fairly utilitarian still feature elaborate doors that give a fitting sense of welcome into the home. When regulation dictates that all buildings have to be painted white or in light shades, the door often provides the only opportunity for a striking visual contrast.</p>
 
@@ -242,5 +261,6 @@
     <script src="banner-loader.js"></script>
     <script>loadBanner('OMAN', 'images/Oman/villa town 1 lscp.jpg', 'banner-placeholder');</script>
     <script src="lightbox.js"></script>
+    <script src="side-nav.js"></script>
 </body>
 </html>
