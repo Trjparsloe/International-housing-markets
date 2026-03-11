@@ -988,7 +988,6 @@ body.sub-page {
     max-width: 700px;
     pointer-events: auto; /* Re-enable interaction */
 }
-
 /* ======================================================================
    MOBILE OPTIMIZATIONS
    ====================================================================== */
@@ -1016,5 +1015,95 @@ body.sub-page {
     .lightbox-caption {
         font-size: 1rem;
         padding: 0 10px;
+    }
+} /* <--- THIS WAS MISSING: It closes the 768px media query */
+
+/* ======================================================================
+   SIDEBAR NAVIGATION - ENHANCED VERSION
+   ====================================================================== */
+
+.side-nav-container {
+    position: fixed;
+    left: 50px; /* Slightly further from the edge */
+    top: 160px; 
+    width: 280px; /* Increased width for longer titles */
+    z-index: 100;
+}
+
+.side-nav {
+    font-family: var(--font-family);
+}
+
+.side-nav-label {
+    font-size: 0.85rem; /* Bigger label */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #aaa;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid #f0f0f0; /* Thicker background line */
+}
+
+.side-nav li {
+    margin-bottom: 20px; /* More breathing room between sections */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #888;
+    font-size: 1.05rem; /* Noticeably larger text */
+    line-height: 1.5;
+    padding-left: 20px;
+    display: block;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent; /* Thicker indicator line */
+    margin-left: -2px; /* To overlap the 2px ul border exactly */
+}
+
+/* The "Light Up" / Progress effect */
+.nav-link.active {
+    color: #000;
+    font-weight: 700; /* Bolder when active */
+    border-left: 3px solid #000;
+}
+
+.nav-link:hover {
+    color: #444;
+    border-left: 3px solid #ccc;
+}
+
+/* ======================================================================
+   RIGHT-SIDE VERTICAL PROGRESS LINE - ORANGE EDITION
+   ====================================================================== */
+
+.right-progress-rail {
+    position: fixed;
+    right: 40px; 
+    top: 20%;    
+    height: 60%; 
+    width: 2px;
+    background: rgba(0, 0, 0, 0.05); /* Very faint grey track */
+    z-index: 100;
+}
+
+.progress-fill {
+    width: 2px;
+    height: 0%; 
+    background: #f97316; /* Your Brand Orange */
+    transition: height 0.1s ease-out;
+    /* Subtle glow for extra polish */
+    box-shadow: 0 0 5px rgba(249, 115, 22, 0.4); 
+}
+
+/* Hide on smaller screens */
+@media (max-width: 1300px) {
+    .right-progress-rail {
+        display: none;
     }
 }
