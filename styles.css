@@ -1162,3 +1162,18 @@ body.sub-page {
     height: 0%;
     transition: height 0.1s linear, width 0.1s linear;
 }
+/* ======================================================================
+   LIGHTBOX OVERRIDE: Hide Sidebar & Handle when gallery is open
+   ====================================================================== */
+
+/* This hides the sidebar container when the overlay is active */
+#lightbox-overlay.active ~ .side-nav-container,
+#lightbox-overlay.active ~ .side-nav-handle {
+    display: none !important;
+}
+
+/* Fallback: If they aren't direct siblings in your HTML, this covers it */
+body:has(#lightbox-overlay.active) .side-nav-container,
+body:has(#lightbox-overlay.active) .side-nav-handle {
+    display: none !important;
+}
