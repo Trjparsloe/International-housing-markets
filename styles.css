@@ -191,6 +191,8 @@ main em {
     height: 100%;
     position: relative;
     overflow: hidden;
+    /* SPEED FIX: Reserve space immediately to prevent the page from jumping */
+    aspect-ratio: 16 / 9;
 }
 
 .carousel__track {
@@ -212,7 +214,9 @@ main em {
 }
 
 .carousel__slide.current-slide {
-    opacity: 1; 
+    /* SPEED FIX: Force the first image to show even before JS initializes */
+    opacity: 1 !important; 
+    display: block !important;
     z-index: 5; 
 }
 /* ======================================================================
