@@ -1016,26 +1016,25 @@ body.sub-page {
         font-size: 1rem;
         padding: 0 10px;
     }
-} /* <--- THIS WAS MISSING: It closes the 768px media query */
-
+} 
 /* ======================================================================
-   SIDEBAR NAVIGATION - ENHANCED VERSION
+   SIDEBAR NAVIGATION - ENHANCED & ADAPTIVE VERSION
    ====================================================================== */
 
 .side-nav-container {
     position: fixed;
-    left: 50px; /* Slightly further from the edge */
+    left: 50px; 
     top: 160px; 
-    width: 280px; /* Increased width for longer titles */
-    z-index: 100;
-}
-
-.side-nav {
+    width: 280px; 
+    z-index: 10002; /* Ensure it floats above images */
     font-family: var(--font-family);
+    /* Transition handles the slide-out speed and smoothness */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.3s ease, left 0.4s ease;
+    display: block !important;
 }
 
 .side-nav-label {
-    font-size: 0.85rem; /* Bigger label */
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: #aaa;
@@ -1047,29 +1046,28 @@ body.sub-page {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-left: 2px solid #f0f0f0; /* Thicker background line */
+    border-left: 2px solid #f0f0f0;
 }
 
 .side-nav li {
-    margin-bottom: 20px; /* More breathing room between sections */
+    margin-bottom: 20px;
 }
 
 .nav-link {
     text-decoration: none;
     color: #888;
-    font-size: 1.05rem; /* Noticeably larger text */
+    font-size: 1.05rem;
     line-height: 1.5;
     padding-left: 20px;
     display: block;
     transition: all 0.3s ease;
-    border-left: 3px solid transparent; /* Thicker indicator line */
-    margin-left: -2px; /* To overlap the 2px ul border exactly */
+    border-left: 3px solid transparent;
+    margin-left: -2px;
 }
 
-/* The "Light Up" / Progress effect */
 .nav-link.active {
     color: #000;
-    font-weight: 700; /* Bolder when active */
+    font-weight: 700;
     border-left: 3px solid #000;
 }
 
@@ -1079,31 +1077,88 @@ body.sub-page {
 }
 
 /* ======================================================================
-   RIGHT-SIDE VERTICAL PROGRESS LINE - ORANGE EDITION
+   LAPTOP ADAPTATION (Protruding Shadow-Depth Handle)
+   ====================================================================== */
+
+@media (max-width: 1450px) {
+    .side-nav-container {
+        left: 0 !important;
+        /* Tuck it away so the black line is the 'spine' */
+        transform: translateX(-280px); 
+        background: white !important;
+        padding: 20px 10px;
+        border-radius: 0 12px 12px 0;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+        border-right: 3px solid #000;
+        z-index: 100005 !important;
+        
+        /* CRITICAL: This allows the 'CONTENTS' box to be seen outside the sidebar */
+        overflow: visible !important; 
+    }
+
+    .side-nav-container:hover {
+        transform: translateX(0) !important;
+        border-right: 3px solid transparent;
+        box-shadow: 10px 0 50px rgba(0,0,0,0.2);
+    }
+
+    /* THE HANDLE: CONTENTS Label */
+    .side-nav-container::after {
+        content: 'CONTENTS —';
+        display: block !important;
+        position: absolute;
+        
+        /* Positioned so the white box is fully visible over the image */
+        right: -65px; 
+        top: 60px;
+        
+        transform: rotate(90deg);
+        transform-origin: left bottom;
+        
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        font-weight: 900;
+        color: #000;
+        background: #fff;
+        padding: 10px 20px;
+        border: 3px solid #000;
+        border-radius: 10px;
+        
+        /* Shadow Depth */
+        box-shadow: 6px 6px 0px #000; 
+        
+        pointer-events: auto; /* Makes the tab itself clickable/hoverable */
+        transition: all 0.2s ease;
+        opacity: 1;
+        visibility: visible !important;
+    }
+
+    .side-nav-container:hover::after {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+/* ======================================================================
+   RIGHT-SIDE PROGRESS LINE (Orange DNA)
    ====================================================================== */
 
 .right-progress-rail {
     position: fixed;
-    right: 40px; 
-    top: 20%;    
-    height: 60%; 
+    z-index: 10001; 
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.05);
+    /* Default desktop positions */
+    right: 40px;
+    top: 20%;
+    height: 60%;
     width: 2px;
-    background: rgba(0, 0, 0, 0.05); /* Very faint grey track */
-    z-index: 100;
+    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease;
 }
 
 .progress-fill {
-    width: 2px;
-    height: 0%; 
-    background: #f97316; /* Your Brand Orange */
-    transition: height 0.1s ease-out;
-    /* Subtle glow for extra polish */
+    background: #f97316;
     box-shadow: 0 0 5px rgba(249, 115, 22, 0.4); 
-}
-
-/* Hide on smaller screens */
-@media (max-width: 1300px) {
-    .right-progress-rail {
-        display: none;
-    }
+    width: 100%;
+    height: 0%;
+    transition: height 0.1s linear, width 0.1s linear;
 }
