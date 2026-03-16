@@ -1177,3 +1177,47 @@ body:has(#lightbox-overlay.active) .side-nav-container,
 body:has(#lightbox-overlay.active) .side-nav-handle {
     display: none !important;
 }
+/* ======================================================================
+   GALLERY MODE: Hide UI Elements when Lightbox is open
+   ====================================================================== */
+
+/* Hides Sidebar, Sidebar Handle, and the Orange Progress Rail */
+body:has(#lightbox-overlay.active) .side-nav-container,
+body:has(#lightbox-overlay.active) .side-nav-handle,
+body:has(#lightbox-overlay.active) .right-progress-rail {
+    display: none !important;
+}
+
+/* Fallback for older browsers (Sibling Selector) */
+#lightbox-overlay.active ~ .side-nav-container,
+#lightbox-overlay.active ~ .side-nav-handle,
+#lightbox-overlay.active ~ .right-progress-rail {
+    display: none !important;
+}
+
+/* ======================================================================
+   MODERNIST ILLUMINATED DROP CAP (Strict Intro Only)
+   ====================================================================== */
+
+/* This targets ONLY the very first paragraph inside the #intro div */
+#intro p:first-of-type::first-letter {
+    font-size: 3.2rem;
+    font-weight: 900;
+    float: left;
+    margin-right: 20px;
+    margin-top: 8px;
+    padding: 12px 18px;
+    background-color: #f97316;
+    color: #fff;
+    line-height: 1;
+    border-radius: 2px;
+    box-shadow: 6px 6px 0px #000;
+    text-transform: uppercase;
+}
+
+/* Explicitly disable it for any other paragraphs that might be trying to sneak in */
+.editorial-subheading + p::first-letter,
+main h3 + p::first-letter {
+    all: unset !important;
+    font-family: var(--font-family) !important;
+}
