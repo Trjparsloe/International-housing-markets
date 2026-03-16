@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oman - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css"> 
+
+    <link rel="preload" as="image" href="images/Oman/villa town 1 lscp.jpg" fetchpriority="high">
 </head>
 <body class="sub-page">
 
@@ -36,7 +38,14 @@
         <div class="progress-fill" id="verticalBar"></div>
     </div>
 
-    <div id="banner-placeholder"></div>
+    <div class="banner-container">
+        <img src="images/Oman/villa town 1 lscp.jpg" 
+             alt="OMAN" 
+             class="banner-image" 
+             fetchpriority="high" 
+             loading="eager">
+        <h1 class="banner-title">OMAN</h1>
+    </div>
     
     <main>
         <div id="intro">
@@ -258,8 +267,6 @@
 
     </main>
 
-    <script src="banner-loader.js"></script>
-    <script>loadBanner('OMAN', 'images/Oman/villa town 1 lscp.jpg', 'banner-placeholder');</script>
     <script src="lightbox.js"></script>
     <script src="side-nav.js"></script>
 </body>

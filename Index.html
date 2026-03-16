@@ -7,6 +7,8 @@
     
     <link rel="stylesheet" href="styles.css">
 
+    <link rel="preload" as="image" href="images/index/Berlin.jpg" fetchpriority="high">
+
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
 
@@ -95,20 +97,22 @@
     <div class="banner-container index-banner">
         <div class="carousel__track-container">
             <ul class="carousel__track">
-                <li class="carousel__slide current-slide"><img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong.jpg" alt="Hong Kong"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/house for investment.jpg" alt="House for investment"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Italy first.jpg" alt="Italian house"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea.jpg" alt="Korean apartments"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman.jpg" alt="Oman housing"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_karl_marx_allee.jpg" alt="Berlin Karl Marx Allee"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_kreuzberg.jpg" alt="Berlin Kreuzberg Apartments"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_2.jpg" alt="Hong Kong High Density Housing 2"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_3.jpg" alt="Hong Kong High Density Housing 3"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea_2.jpg" alt="Korean apartments 2"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman_muscat.jpg" alt="Oman Muscat Building"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Paris_chinatown.jpg" alt="Paris Chinatown Housing"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Taiwan_1.jpg" alt="Taiwan Apartments"></li>
+                <li class="carousel__slide current-slide">
+                    <img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin" fetchpriority="high" loading="eager">
+                </li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong.jpg" alt="Hong Kong" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/house for investment.jpg" alt="House for investment" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Italy first.jpg" alt="Italian house" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea.jpg" alt="Korean apartments" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman.jpg" alt="Oman housing" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_karl_marx_allee.jpg" alt="Berlin Karl Marx Allee" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_kreuzberg.jpg" alt="Berlin Kreuzberg Apartments" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_2.jpg" alt="Hong Kong High Density Housing 2" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_3.jpg" alt="Hong Kong High Density Housing 3" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea_2.jpg" alt="Korean apartments 2" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman_muscat.jpg" alt="Oman Muscat Building" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Paris_chinatown.jpg" alt="Paris Chinatown Housing" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Taiwan_1.jpg" alt="Taiwan Apartments" loading="lazy"></li>
             </ul>
         </div>
         <h1 class="banner-title">Around the World in 80 Housing Markets</h1> 

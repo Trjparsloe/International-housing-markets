@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Germany - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="preload" as="image" href="images/Berlin/Berlin front prt.jpg" fetchpriority="high">
 </head>
 <body class="sub-page">
 
@@ -20,21 +22,29 @@
     </header>
 
     <aside class="side-nav-container">
-    <nav class="side-nav">
-        <div class="side-nav-label">Contents</div> <ul>
-            <li><a href="#intro" class="nav-link active">Introduction</a></li>
-            <li><a href="#renting" class="nav-link">Why buy when you can rent</a></li>
-            <li><a href="#subletting" class="nav-link">Why rent if you can sublet (or sub-sub-sublet)</a></li>
-            <li><a href="#architecture" class="nav-link">The Architectural Payoff</a></li>
-        </ul>
-    </nav>
-</aside>
+        <nav class="side-nav">
+            <div class="side-nav-label">Contents</div> 
+            <ul>
+                <li><a href="#intro" class="nav-link active">Introduction</a></li>
+                <li><a href="#renting" class="nav-link">Why buy when you can rent</a></li>
+                <li><a href="#subletting" class="nav-link">Why rent if you can sublet (or sub-sub-sublet)</a></li>
+                <li><a href="#architecture" class="nav-link">The Architectural Payoff</a></li>
+            </ul>
+        </nav>
+    </aside>
 
     <div class="right-progress-rail">
         <div class="progress-fill" id="verticalBar"></div>
     </div>
 
-    <div id="banner-placeholder"></div>
+    <div class="banner-container">
+        <img src="images/Berlin/Berlin front prt.jpg" 
+             alt="GERMANY" 
+             class="banner-image" 
+             fetchpriority="high" 
+             loading="eager">
+        <h1 class="banner-title">GERMANY</h1>
+    </div>
     
     <main>
         <div id="intro">
@@ -211,7 +221,7 @@
             </div>
         </div>
 
-        <p>The majority of this renewal was sensitive to local character, upgrading or updating what was already there. One important exception which deserves honorable mention was one of my favourite architect couples who were involved in this but took it in a totally different direction. Hinrich and Inken Baller’s buildings are beautifully distinctive, embodying art nouveau vibes with organic, flowing forms and lots of ornamentation. They are exquisitely permeable, with large, asymmetric balconies and huge windows to let in light while the ground floor tends to have open spaces that act like gatehouses. One website appropriately describes the style as somewhere ‘between Gaudí and Hundertwasser.’ Anyone who has had a drink on the Admiralbrücke in Kreuzberg on a fine summer evening will have likely noticed one of their peculiar buildings.</p>
+        <p>The majority of this renewal was sensitive to local character, upgrading or updating what was already there. One important exception which deserves honorable mention was one of my favourite architect couples who were involved in this but took it in a totally different direction. Hinrich and Inken Baller’s buildings are beautifully distinctive, embodying art nouveau vibes with organic, flowing forms and lots of ornamentation. They are exquisitely permeable, with large, asymmetric balconies and huge windows to let in light while the ground floor tends to have open spaces that act like gatehouses. One website appropriately describes the style as somewhere ‘between Gaudí and Hundertwasser.’ Anyone who had a drink on the Admiralbrücke in Kreuzberg on a fine summer evening will have likely noticed one of their peculiar buildings.</p>
 
         <div class="image-grid-container">
             <div class="image-grid">
@@ -235,10 +245,6 @@
 
     </main>
 
-    <script src="banner-loader.js"></script>
-    <script>
-        loadBanner('GERMANY', 'images/Berlin/Berlin front prt.jpg', 'banner-placeholder');
-    </script>
     <script src="lightbox.js"></script>
     <script src="side-nav.js"></script>
 </body>
