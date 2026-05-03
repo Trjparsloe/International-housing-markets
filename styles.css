@@ -1106,42 +1106,39 @@ body.sub-page {
         box-shadow: 10px 0 50px rgba(0,0,0,0.2);
     }
 
-    /* THE HANDLE: CONTENTS Label */
+    /* THE HANDLE: Simple Decorative Tab (No text) */
     .side-nav-container::after {
-        content: 'CONTENTS —';
+        content: ''; 
         display: block !important;
         position: absolute;
         
-        /* Positioned so the white box is fully visible over the image */
-        right: -65px; 
-        top: 60px;
+        /* 1. Reset positioning to be relative to the viewport/screen edge */
+        /* Since the container is at left: 0, we push the tab to the right edge of the hidden container */
+        left: 280px; 
+        top: 100px;
         
-        transform: rotate(90deg);
-        transform-origin: left bottom;
+        /* 2. Define size for a physical "tab" shape */
+        width: 30px;
+        height: 70px;
         
-        font-size: 0.75rem;
-        letter-spacing: 3px;
-        font-weight: 900;
-        color: #000;
+        /* 3. Styling */
         background: #fff;
-        padding: 10px 20px;
         border: 3px solid #000;
-        border-radius: 10px;
-        
-        /* Shadow Depth */
+        border-radius: 0 10px 10px 0; /* Rounded right side */
         box-shadow: 6px 6px 0px #000; 
         
-        pointer-events: auto; /* Makes the tab itself clickable/hoverable */
+        /* Ensure it remains visible */
+        pointer-events: auto;
         transition: all 0.2s ease;
         opacity: 1;
         visibility: visible !important;
+        z-index: 100006;
     }
 
     .side-nav-container:hover::after {
         opacity: 0;
         visibility: hidden;
     }
-}
 /* ======================================================================
    RIGHT-SIDE PROGRESS LINE (Orange DNA)
    ====================================================================== */
@@ -1225,3 +1222,14 @@ main h3 + p::first-letter {
     all: unset !important;
     font-family: var(--font-family) !important;
 }
+/* Force the illuminated look on the About page's first paragraph */
+    .about-text p:first-of-type::first-letter {
+        font-size: 4rem !important;
+        font-weight: 900 !important;
+        float: left !important;
+        margin-right: 12px !important;
+        line-height: 0.85 !important;
+        color: #000 !important;
+        text-transform: uppercase !important;
+        padding-top: 4px; /* Optional adjustment */
+    }
