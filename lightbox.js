@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = lightbox.querySelector('.lightbox-close');
     const prevBtn = lightbox.querySelector('.lightbox-prev');
     const nextBtn = lightbox.querySelector('.lightbox-next');
+    const sideNav = document.querySelector('.side-nav-container');
 
     // 2. State management
     const galleryImages = Array.from(document.querySelectorAll('figure img'));
@@ -44,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
             updateLightbox(index);
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // Hide side nav when lightbox opens
+            if (sideNav) {
+                sideNav.style.display = 'none';
+            }
         });
     });
 
@@ -86,6 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeLightbox = () => {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+        // Show side nav when lightbox closes
+        if (sideNav) {
+            sideNav.style.display = '';
+        }
     };
 
     closeBtn.addEventListener('click', closeLightbox);
