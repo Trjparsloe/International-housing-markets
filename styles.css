@@ -884,13 +884,14 @@ body.sub-page {
         scroll-margin-top: 100px !important;
     }
 }
+
 /* ======================================================================
    LIGHTBOX / GALLERY SYSTEM - UPDATED (Counter + Swipe Support)
    ====================================================================== */
 
 #lightbox-overlay {
     position: fixed;
-    z-index: 9999;
+    z-index: 10000;
     top: 0;
     left: 0;
     width: 100%;
@@ -992,244 +993,107 @@ body.sub-page {
     max-width: 700px;
     pointer-events: auto; /* Re-enable interaction */
 }
+
 /* ======================================================================
-   MOBILE OPTIMIZATIONS
-   ====================================================================== */
-
-@media (max-width: 768px) {
-    .lightbox-nav {
-        display: none; /* Hide arrows on mobile: use swiping instead */
-    }
-    
-    .lightbox-counter {
-        top: 20px;
-        left: 20px;
-    }
-
-    .lightbox-close {
-        top: 15px;
-        right: 25px;
-        font-size: 2.5rem;
-    }
-
-    .lightbox-content {
-        max-width: 95%;
-    }
-
-    .lightbox-caption {
-        font-size: 1rem;
-        padding: 0 10px;
-    }
-} 
-/* ======================================================================
-   SIDEBAR NAVIGATION - ENHANCED & ADAPTIVE VERSION
+   SIDE NAVIGATION PANEL - TIGHTENED
    ====================================================================== */
 
 .side-nav-container {
     position: fixed;
-    left: 50px; 
-    top: 160px; 
-    width: 280px; 
-    z-index: 10002; /* Ensure it floats above images */
-    font-family: var(--font-family);
-    /* Transition handles the slide-out speed and smoothness */
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.3s ease, left 0.4s ease;
-    display: block !important;
+    left: 0;
+    top: 70px;
+    height: calc(100vh - 70px);
+    width: 200px;
+    background-color: #ffffff;
+    border-right: 1px solid #eee;
+    z-index: 500;
+    transform: translateX(-200px);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    pointer-events: auto;
+}
+
+.side-nav-container:hover {
+    transform: translateX(0);
+}
+
+.side-nav {
+    padding: 1rem 0.75rem;
+    width: 100%;
 }
 
 .side-nav-label {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #aaa;
-    margin-bottom: 25px;
-    padding-left: 20px;
+    letter-spacing: 2px;
+    color: #666;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 .side-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-left: 2px solid #f0f0f0;
 }
 
 .side-nav li {
-    margin-bottom: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #888;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    padding-left: 20px;
     display: block;
-    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
     border-left: 3px solid transparent;
-    margin-left: -2px;
-}
-
-.nav-link.active {
-    color: #000;
-    font-weight: 700;
-    border-left: 3px solid #000;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
 }
 
 .nav-link:hover {
-    color: #444;
-    border-left: 3px solid #ccc;
+    background-color: #f5f5f5;
+    color: #f97316;
+    border-left-color: #f97316;
 }
 
-/* ======================================================================
-   LAPTOP ADAPTATION (Protruding Shadow-Depth Handle)
-   ====================================================================== */
+.nav-link.active {
+    background-color: #fff3e0;
+    color: #f97316;
+    border-left-color: #f97316;
+    font-weight: 600;
+}
 
-@media (max-width: 1450px) {
+/* Desktop breakpoint for side nav */
+@media (min-width: 1451px) {
     .side-nav-container {
-        left: 0 !important;
-        /* Tuck it away so the black line is the 'spine' */
-        transform: translateX(-280px); 
-        background: white !important;
-        padding: 20px 10px;
-        border-radius: 0 12px 12px 0;
-        box-shadow: 2px 0 20px rgba(0,0,0,0.1);
-        border-right: 3px solid #000;
-        z-index: 100005 !important;
-        
-        /* CRITICAL: This allows the 'CONTENTS' box to be seen outside the sidebar */
-        overflow: visible !important; 
+        transform: translateX(0);
     }
-
-    .side-nav-container:hover {
-        transform: translateX(0) !important;
-        border-right: 3px solid transparent;
-        box-shadow: 10px 0 50px rgba(0,0,0,0.2);
-    }
-
-    /* THE HANDLE: Simple Decorative Tab (No text) */
-    .side-nav-container::after {
-        content: ''; 
-        display: block !important;
-        position: absolute;
-        
-        /* 1. Reset positioning to be relative to the viewport/screen edge */
-        /* Since the container is at left: 0, we push the tab to the right edge of the hidden container */
-        left: 280px; 
-        top: 100px;
-        
-        /* 2. Define size for a physical "tab" shape */
-        width: 30px;
-        height: 70px;
-        
-        /* 3. Styling */
-        background: #fff;
-        border: 3px solid #000;
-        border-radius: 0 10px 10px 0; /* Rounded right side */
-        box-shadow: 6px 6px 0px #000; 
-        
-        /* Ensure it remains visible */
-        pointer-events: auto;
-        transition: all 0.2s ease;
-        opacity: 1;
-        visibility: visible !important;
-        z-index: 100006;
-    }
-
-    .side-nav-container:hover::after {
-        opacity: 0;
-        visibility: hidden;
-    }
-/* ======================================================================
-   RIGHT-SIDE PROGRESS LINE (Orange DNA)
-   ====================================================================== */
-
-.right-progress-rail {
-    position: fixed;
-    z-index: 10001; 
-    pointer-events: none;
-    background: rgba(0, 0, 0, 0.05);
-    /* Default desktop positions */
-    right: 40px;
-    top: 20%;
-    height: 60%;
-    width: 2px;
-    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease;
-}
-
-.progress-fill {
-    background: #f97316;
-    box-shadow: 0 0 5px rgba(249, 115, 22, 0.4); 
-    width: 100%;
-    height: 0%;
-    transition: height 0.1s linear, width 0.1s linear;
-}
-/* ======================================================================
-   LIGHTBOX OVERRIDE: Hide Sidebar & Handle when gallery is open
-   ====================================================================== */
-
-/* This hides the sidebar container when the overlay is active */
-#lightbox-overlay.active ~ .side-nav-container,
-#lightbox-overlay.active ~ .side-nav-handle {
-    display: none !important;
-}
-
-/* Fallback: If they aren't direct siblings in your HTML, this covers it */
-body:has(#lightbox-overlay.active) .side-nav-container,
-body:has(#lightbox-overlay.active) .side-nav-handle {
-    display: none !important;
-}
-/* ======================================================================
-   GALLERY MODE: Hide UI Elements when Lightbox is open
-   ====================================================================== */
-
-/* Hides Sidebar, Sidebar Handle, and the Orange Progress Rail */
-body:has(#lightbox-overlay.active) .side-nav-container,
-body:has(#lightbox-overlay.active) .side-nav-handle,
-body:has(#lightbox-overlay.active) .right-progress-rail {
-    display: none !important;
-}
-
-/* Fallback for older browsers (Sibling Selector) */
-#lightbox-overlay.active ~ .side-nav-container,
-#lightbox-overlay.active ~ .side-nav-handle,
-#lightbox-overlay.active ~ .right-progress-rail {
-    display: none !important;
 }
 
 /* ======================================================================
-   MODERNIST ILLUMINATED DROP CAP (Strict Intro Only)
+   MOBILE OPTIMIZATIONS
    ====================================================================== */
 
-/* This targets ONLY the very first paragraph inside the #intro div */
-#intro p:first-of-type::first-letter {
-    font-size: 3.2rem;
-    font-weight: 900;
-    float: left;
-    margin-right: 20px;
-    margin-top: 8px;
-    padding: 12px 18px;
-    background-color: #f97316;
-    color: #fff;
-    line-height: 1;
-    border-radius: 2px;
-    box-shadow: 6px 6px 0px #000;
-    text-transform: uppercase;
-}
-
-/* Explicitly disable it for any other paragraphs that might be trying to sneak in */
-.editorial-subheading + p::first-letter,
-main h3 + p::first-letter {
-    all: unset !important;
-    font-family: var(--font-family) !important;
-}
-/* Force the illuminated look on the About page's first paragraph */
-    .about-text p:first-of-type::first-letter {
-        font-size: 4rem !important;
-        font-weight: 900 !important;
-        float: left !important;
-        margin-right: 12px !important;
-        line-height: 0.85 !important;
-        color: #000 !important;
-        text-transform: uppercase !important;
-        padding-top: 4px; /* Optional adjustment */
+@media (max-width: 768px) {
+    .lightbox-nav {
+        display: none;
     }
+
+    .side-nav-container {
+        width: 180px;
+    }
+
+    .nav-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
