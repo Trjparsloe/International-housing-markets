@@ -1,5 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- PART 0: MOBILE CONTENTS TAB TOGGLE ---
+    const sideNavContainer = document.querySelector('.side-nav-container');
+    const toggle = document.querySelector('.side-nav-toggle');
+    
+    // Handle toggle button clicks
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            sideNavContainer.classList.toggle('active');
+            // Update button text based on state
+            toggle.textContent = sideNavContainer.classList.contains('active') ? '✕ Close' : '☰ Contents';
+        });
+    }
+    
+    // Close sidebar when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 1450) {
+                sideNavContainer.classList.remove('active');
+                if (toggle) {
+                    toggle.textContent = '☰ Contents';
+                }
+            }
+        });
+    });
+    
     // --- PART 1: LEFT SIDEBAR INTERSECTION OBSERVER ---
     const observerOptions = {
         root: null,
