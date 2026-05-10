@@ -1,29 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- PART 0: MOBILE CONTENTS TAB TOGGLE ---
+// --- PART 0: RIDING TAB & CLICK-AWAY ---
     const sideNavContainer = document.querySelector('.side-nav-container');
     const toggle = document.querySelector('.side-nav-toggle');
-    
-    // Handle toggle button clicks
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            sideNavContainer.classList.toggle('active');
-            // Update button text based on state
-            toggle.textContent = sideNavContainer.classList.contains('active') ? '✕ Close' : '☰ Contents';
-        });
-    }
-    
-    // Close sidebar when a link is clicked
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 1450) {
-                sideNavContainer.classList.remove('active');
-                if (toggle) {
-                    toggle.textContent = '☰ Contents';
-                }
-            }
-        });
-    });
+    const overlay = document.querySelector('.side-nav-overlay');
+    const closeX = document.querySelector('.side-nav-close-x');
+
+    const openMenu = () => {
+        sideNavContainer.classList.add('active');
+        toggle.classList.add('active'); // Moves the tab to the right
+        overlay.classList.add('active');
+    };
+
+    const closeMenu = () => {
+        sideNavContainer.classList.remove('active');
+        toggle.classList.remove('active'); // Moves the tab back to the left
+        overlay.classList.remove('active');
+    };
+
+    if (toggle) toggle.addEventListener('click', openMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
+    if (closeX) closeX.addEventListener('click', closeMenu);
     
     // --- PART 1: LEFT SIDEBAR INTERSECTION OBSERVER ---
     const observerOptions = {
@@ -55,24 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('#intro, h3[id]');
     sections.forEach(section => observer.observe(section));
 
-    // --- PART 2: CLICK OVERRIDE & AUTO-HIDE ---
+// --- PART 2: CLICK OVERRIDE (Highlight only) ---
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', () => {
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-
-            // Force Sidebar to slide back on laptop after clicking
-            if (window.innerWidth <= 1450) {
-                const container = document.querySelector('.side-nav-container');
-                
-                // We briefly set a very small negative margin to 'nudge' it shut
-                // but then we clear the inline style so the CSS hover takes back control
-                container.style.transform = 'translateX(-270px)';
-                
-                setTimeout(() => { 
-                    container.style.transform = ''; 
-                }, 500);
-            }
+            
+            // Sidebar remains open for manual closure via X or clicking outside
         });
     });
 
