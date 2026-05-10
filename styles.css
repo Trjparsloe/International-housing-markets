@@ -995,7 +995,7 @@ body.sub-page {
 }
 
 /* ======================================================================
-   SIDE NAVIGATION PANEL - TIGHTENED
+   SIDE NAVIGATION PANEL - "RIDING TAB" STYLE
    ====================================================================== */
 
 .side-nav-container {
@@ -1003,25 +1003,86 @@ body.sub-page {
     left: 0;
     top: 70px;
     height: calc(100vh - 70px);
-    width: 200px;
+    width: 260px; /* Slightly wider to give the X room */
     background-color: #ffffff;
-    border-right: 1px solid #eee;
-    z-index: 500;
-    transform: translateX(-200px);
-    transition: transform 0.3s ease;
+    border-right: 2px solid #000;
+    z-index: 1100;
+    transform: translateX(-100%); 
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* We use overflow-x: visible so the X doesn't get clipped */
     overflow-y: auto;
-    padding: 0;
-    margin: 0;
-    pointer-events: auto;
+    overflow-x: visible; 
+    box-shadow: 10px 0 30px rgba(0,0,0,0.05);
 }
 
-.side-nav-container:hover {
+.side-nav-container.active {
     transform: translateX(0);
 }
 
+/* The Pull-Out Tab Handle - RIDES THE EDGE */
+.side-nav-toggle {
+    position: fixed;
+    left: 0;
+    top: 100px;
+    z-index: 1101; /* Sits in front of the drawer to ride the edge */
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 8px;
+    cursor: pointer;
+    writing-mode: vertical-lr;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    border-radius: 0 4px 4px 0;
+    /* Transition must match the container exactly for the 'riding' effect */
+    transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.2s;
+}
+
+/* Moves the tab handle along with the sidebar when open */
+.side-nav-toggle.active {
+    left: 260px; 
+    background: #f97316; /* Changes to your orange when open */
+}
+
+/* THE INTERIOR X - PINNED TO TOP RIGHT */
+.side-nav-close-x {
+    position: absolute;
+    top: 20px;
+    right: 20px; 
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #000;
+    transition: color 0.2s;
+    line-height: 1;
+    z-index: 1200;
+}
+
+.side-nav-close-x:hover {
+    color: #f97316;
+}
+
+/* THE CLICK-AWAY OVERLAY - CLEANED (No blur, no background) */
+.side-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent; /* Removed dimming */
+    z-index: 1050; 
+    display: none; /* JS toggles this */
+}
+
+.side-nav-overlay.active {
+    display: block;
+}
+
+/* --- STYLING DNA --- */
+
 .side-nav {
-    padding: 1rem 0.75rem;
-    width: 100%;
+    padding: 3rem 1rem 1rem 1rem; /* Clear the X and labels */
 }
 
 .side-nav-label {
@@ -1029,40 +1090,19 @@ body.sub-page {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #666;
-    padding: 0.5rem 0.75rem;
-    margin-bottom: 0.5rem;
+    color: #999;
+    margin-bottom: 1.5rem;
     display: block;
-}
-
-.side-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.side-nav li {
-    margin: 0;
-    padding: 0;
 }
 
 .nav-link {
     display: block;
-    padding: 0.5rem 0.75rem;
+    padding: 0.7rem 0.75rem;
     font-size: 0.85rem;
     color: #333;
     text-decoration: none;
-    transition: all 0.2s ease;
     border-left: 3px solid transparent;
-    word-wrap: break-word;
-    word-break: break-word;
-    white-space: normal;
-}
-
-.nav-link:hover {
-    background-color: #f5f5f5;
-    color: #f97316;
-    border-left-color: #f97316;
+    transition: all 0.2s ease;
 }
 
 .nav-link.active {
@@ -1072,11 +1112,9 @@ body.sub-page {
     font-weight: 600;
 }
 
-/* Desktop breakpoint for side nav */
 @media (min-width: 1451px) {
-    .side-nav-container {
-        transform: translateX(0);
-    }
+    .side-nav-container { transform: translateX(0); border-right: 1px solid #eee; }
+    .side-nav-toggle, .side-nav-close-x, .side-nav-overlay { display: none !important; }
 }
 
 /* ======================================================================
@@ -1096,4 +1134,21 @@ body.sub-page {
         padding: 0.4rem 0.6rem;
         font-size: 0.8rem;
     }
+}
+/* ======================================================================
+   ADAPTIVE PROGRESS BAR (Required for side-nav.js)
+   ====================================================================== */
+.right-progress-rail {
+    position: fixed;
+    z-index: 2000; /* Higher than header (1000) and sidebar (500) */
+    pointer-events: none; /* Crucial: ensures you can still click the header/menu */
+    background: rgba(0, 0, 0, 0.05); /* Faint track so you can see it's there */
+}
+
+#verticalBar {
+    background-color: #f97316; /* Your theme's orange */
+    width: 0;
+    height: 0;
+    /* Transition ensures the bar 'grows' smoothly rather than jumping */
+    transition: width 0.1s ease-out, height 0.1s ease-out;
 }
