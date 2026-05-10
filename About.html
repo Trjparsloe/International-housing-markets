@@ -6,15 +6,21 @@
     <title>About - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Force the illuminated look on the About page's first paragraph */
-        .about-text p:first-of-type::first-letter {
-            font-size: 4rem !important;
-            font-weight: 900 !important;
-            float: left !important;
-            margin-right: 12px !important;
-            line-height: 0.85 !important;
-            color: #000 !important;
-            text-transform: uppercase !important;
+        /* UPDATED: Bauhaus Illuminated Look for the About Page */
+        .article-start::first-letter {
+            float: left;
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-right: 20px;
+            margin-top: 5px;
+            padding: 12px 18px;
+            background-color: #f97316; /* Bauhaus Orange */
+            color: #fff;               /* White cutout */
+            border: 4px solid #000;    /* Heavy black outline */
+            box-shadow: 6px 6px 0px #000; /* Geometric offset */
+            text-transform: uppercase;
+            display: inline-block;
         }
 
         /* Separate logic to align the Registry-style header to the left */
@@ -74,7 +80,7 @@
         <div class="about-content-wrapper" style="display: flex; gap: 80px; align-items: flex-start;">
             
             <div class="about-text" style="flex: 2; line-height: 1.8; color: #333;">
-                <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem; color: #000; font-weight: 400;">
+                <p class="article-start" style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem; color: #000; font-weight: 400;">
                     If money were no object, I would happily spend most of my time travelling the world looking at cool buildings. While sadly I am not there yet, I can at least make a start and follow this curiosity as much as possible…
                 </p>
                 
