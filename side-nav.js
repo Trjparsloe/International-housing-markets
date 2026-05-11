@@ -8,17 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openMenu = () => {
         sideNavContainer.classList.add('active');
-        toggle.classList.add('active'); // Moves the tab to the right
+        toggle.classList.add('active'); 
         overlay.classList.add('active');
     };
 
     const closeMenu = () => {
         sideNavContainer.classList.remove('active');
-        toggle.classList.remove('active'); // Moves the tab back to the left
+        toggle.classList.remove('active'); 
         overlay.classList.remove('active');
     };
 
-    if (toggle) toggle.addEventListener('click', openMenu);
+    // This is the new "Toggle" function
+    const toggleMenu = () => {
+        if (sideNavContainer.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    };
+
+    // Update the Event Listener from 'openMenu' to 'toggleMenu'
+    if (toggle) toggle.addEventListener('click', toggleMenu);
+    
+    // Keep these as 'closeMenu' because they should only ever close it
     if (overlay) overlay.addEventListener('click', closeMenu);
     if (closeX) closeX.addEventListener('click', closeMenu);
     
