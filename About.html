@@ -6,29 +6,33 @@
     <title>About - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* MODERN BAUHAUS DROPCAP - Conflict-Free Logic */
+        /* 1. THE DROPCAP FIX */
         .article-start {
-            /* Flex ensures the letter and text sit side-by-side without using 'float' */
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
+            display: block; /* MUST be block for first-letter to work */
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #000;
+            font-weight: 400;
             margin-bottom: 2rem;
         }
 
         .article-start::first-letter {
+            display: block; 
+            float: left;
             font-size: 3.2rem;
             font-weight: 900;
             line-height: 1;
+            margin-right: 20px;
+            margin-top: 5px;
             padding: 12px 18px;
             background-color: #f97316; 
             color: #fff;               
             border: 4px solid #000;    
             box-shadow: 6px 6px 0px #000; 
             text-transform: uppercase;
-            /* float and display:inline-block are removed to fix the editor error */
         }
 
-        /* Separate logic to align the Registry-style header to the left */
+        /* 2. HEADER ALIGNMENT */
         .about-header-container {
             padding-top: 1rem; 
             margin-bottom: 1.5rem; 
@@ -45,7 +49,7 @@
             position: relative;
         }
 
-        /* Responsive stack adjustment for the content columns */
+        /* 3. MOBILE STACKING */
         @media (max-width: 900px) {
             .about-content-wrapper { 
                 flex-direction: column !important; 
@@ -85,7 +89,7 @@
         <div class="about-content-wrapper" style="display: flex; gap: 80px; align-items: flex-start;">
             
             <div class="about-text" style="flex: 2; line-height: 1.8; color: #333;">
-                <p class="article-start" style="font-size: 1.2rem; line-height: 1.6; color: #000; font-weight: 400;">
+                <p class="article-start">
                     If money were no object, I would happily spend most of my time travelling the world looking at cool buildings. While sadly I am not there yet, I can at least make a start and follow this curiosity as much as possible…
                 </p>
                 
@@ -95,7 +99,7 @@
 
                 <p>I was fortunate enough to pursue this interest further, studying for an MPhil in Architecture and Urban Studies followed by a PhD in Architecture. As cliché as it sounds, being in an architecture department felt like coming home, surrounded by people who put similar value on a certain way of seeing things. I fell into a research topic of the architecture of refugee camps, shelter, and housing in Berlin in response to the 2015 refugee crisis and quickly discovered that so many problems were rooted in issues of housing. It didn’t matter if I was chatting to a friend in a Berlin bar or a resident in one of the city’s refugee shelters: affordable and adequate housing would inevitably feature as a key concern. It became clear I needed to enter into the world of real estate and housing policy.</p>
 
-                <p>Following my PhD I secured a place on the Savills affordable housing graduate scheme to become a surveyor but found myself quickly switching over to the residential research team and discovering the wonderful world of real estate research. The benefits of an international organisation like Savills meant that whenever I found myself abroad I could drop by local offices to understand a bit about the country’s market and how it differed from the UK. This morphed into LinkedIn posts and the title <em>Around the World in 80 Housing Markets</em>.</p>
+                <p>Following my PhD I secured a place on the Savills affordable housing graduate scheme to become a surveyor but found myself quickly switching over to the residential research team and discovering the wonderful world of real estate research. The benefits of an international organisation like Savills meant that whenever I found myself abroad I could drop by local offices to understand a bit about the country’s market and how it differed from the UK. This morphed into LinkedIn posts and the title Around the World in 80 Housing Markets.</p>
 
                 <p>After a couple of years I moved to Hometrack and into the world of proptech, where the new tech lead who started on the same day as me said he could teach me to build a basic website for this blog in about 30 minutes. To be fair to him he was correct, although countless more hours were needed to wrangle it into something remotely readable and palatable on the senses. But here we are!</p>
 
