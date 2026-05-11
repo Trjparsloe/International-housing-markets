@@ -1123,7 +1123,7 @@ body.sub-page {
     font-weight: 600;
 }
 
-@media (min-width: 1451px) {
+@media (min-width: 1600px) {
     .side-nav-container { transform: translateX(0); border-right: 1px solid #eee; }
     .side-nav-toggle, .side-nav-close-x, .side-nav-overlay { display: none !important; }
 }
@@ -1133,17 +1133,42 @@ body.sub-page {
    ====================================================================== */
 
 @media (max-width: 768px) {
+    /* Hide desktop-only elements */
     .lightbox-nav {
         display: none;
     }
 
+    /* Sidebar Width adjustment */
     .side-nav-container {
         width: 180px;
     }
 
+    /* FIX: Align orange tab flush to the 180px sidebar edge when open */
+    .side-nav-toggle.active {
+        left: 180px !important;
+        right: auto !important;
+        /* Ensure it doesn't shift vertically on mobile */
+        top: 20% !important; 
+    }
+
+    /* FIX: Keep the Close 'X' inside the sidebar gutter */
+    .side-nav-close-x {
+        right: 15px !important;
+        top: 15px !important;
+        font-size: 1.5rem !important;
+    }
+
+    /* Navigation link spacing for smaller screens */
     .nav-link {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem; /* Slightly larger hit area for fingers */
+        font-size: 0.85rem;
+        margin-left: 10px;
+    }
+
+    /* Optional: Ensure the 'Contents' text inside the tab is legible */
+    .side-nav-toggle span {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
     }
 }
 /* ======================================================================
