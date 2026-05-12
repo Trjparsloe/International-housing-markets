@@ -1188,3 +1188,89 @@ body.sub-page {
     /* Transition ensures the bar 'grows' smoothly rather than jumping */
     transition: width 0.1s ease-out, height 0.1s ease-out;
 }
+/* ======================================================================
+   CONTACT & ABOUT PAGE GRID LAYOUT
+   ====================================================================== */
+
+/* The main flex container */
+.contact-content-wrapper {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+/* Resetting the global auto-centering from your 'main p' rules */
+.contact-info p, 
+.contact-info .contact-method {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100%;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.carousel-area {
+    flex: 1.2;
+    position: sticky;
+    top: 90px; /* Accounts for your 60px header + buffer */
+}
+
+/* Specific styling for the Contact Page carousel */
+.carousel-area .index-banner {
+    width: 100%;
+    margin: 0;
+    height: 500px;
+    box-shadow: 6px 6px 0px #000; /* Bauhaus offset to match your dropcaps */
+    border: 2px solid #000;
+}
+
+/* Contact Links Styling */
+.contact-method {
+    margin-bottom: 3rem;
+}
+
+.contact-label {
+    display: block;
+    color: #f97316;
+    font-weight: 700;
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.contact-link {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 4px solid #f97316;
+    transition: background-color 0.2s;
+    font-family: var(--font-family);
+}
+
+.contact-link:hover {
+    background-color: #fff7ed;
+}
+
+/* Responsive stack for mobile */
+@media (max-width: 900px) {
+    .contact-content-wrapper { 
+        flex-direction: column; 
+    }
+    .carousel-area {
+        order: 2;
+        width: 100%;
+        position: static;
+    }
+    .carousel-area .index-banner {
+        height: 350px;
+    }
+    .contact-info {
+        order: 1;
+    }
+}
