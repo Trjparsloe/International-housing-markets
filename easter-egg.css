@@ -1,0 +1,85 @@
+/* ======================================================================
+   INDEX-ONLY VAPORWAVE THEME
+   ====================================================================== */
+
+:root {
+    --vp-pink: #ff71ce;
+    --vp-blue: #01cdfe;
+    --vp-teal: #05ffa1;
+    --vp-purple: #b967ff;
+    --vp-dark: #241734;
+}
+
+body.home-page {
+    background-color: var(--vp-dark);
+    color: var(--vp-teal);
+    font-family: "Courier New", Courier, monospace !important;
+    background-image: 
+        linear-gradient(rgba(36, 23, 52, 0.9), rgba(36, 23, 52, 0.9)),
+        linear-gradient(var(--vp-purple) 1px, transparent 1px),
+        linear-gradient(90deg, var(--vp-purple) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Header Adjustments */
+#global-header {
+    background-color: rgba(36, 23, 52, 0.95);
+    border-bottom: 2px solid var(--vp-pink);
+    box-shadow: 0 0 15px var(--vp-pink);
+}
+
+/* The D3 Map Logic */
+#map-wrapper {
+    background-color: transparent !important;
+}
+
+#map-container path {
+    fill: var(--vp-purple) !important;
+    stroke: var(--vp-blue) !important;
+    stroke-width: 0.5px;
+}
+
+#map-container path:hover {
+    fill: var(--vp-pink) !important;
+    filter: drop-shadow(0 0 5px var(--vp-pink));
+}
+
+/* Registry Cards */
+.registry-card {
+    background-color: rgba(185, 103, 255, 0.1) !important;
+    border: 2px solid var(--vp-blue) !important;
+    box-shadow: 6px 6px 0px var(--vp-pink) !important;
+}
+
+.registry-card h3 {
+    color: var(--vp-pink) !important;
+    text-shadow: 1px 1px var(--vp-blue);
+}
+
+.registry-card .card-number {
+    color: var(--vp-teal) !important;
+}
+
+/* Banner Title */
+.banner-title {
+    color: var(--vp-pink) !important;
+    text-shadow: 4px 4px var(--vp-blue);
+    font-style: italic;
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+/* Typography */
+.intro-lead {
+    border-left-color: var(--vp-pink) !important;
+    color: var(--vp-yellow) !important;
+}
+
+p {
+    color: var(--vp-teal) !important;
+}
+
+.editorial-subheading {
+    color: var(--vp-blue) !important;
+    text-shadow: 2px 2px var(--vp-purple);
+}

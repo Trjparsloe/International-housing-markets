@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Housing Markets</title>
     
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" id="theme-link">
 
     <link rel="preload" as="image" href="images/index/Berlin.jpg" fetchpriority="high">
 
@@ -195,5 +195,20 @@
 
     <script src="banner-carousel.js"></script>
     <script src="map-logic.js"></script> 
+
+<script>
+    (function() {
+        const themeLink = document.getElementById('theme-link');
+        const now = new Date();
+        
+        // Month is 0-indexed (4 = May), Date is the day
+        const isEasterEggDay = (now.getMonth() === 4 && now.getDate() === 13);
+
+        if (isEasterEggDay) {
+            themeLink.href = 'easter-egg.css';
+            console.log("ＡＥＳＴＨＥＴＩＣ mode active.");
+        }
+    })();
+</script>
 </body>
 </html>
