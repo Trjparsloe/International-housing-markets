@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - International Housing Markets</title>
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* 1. HEADER & NAV ALIGNMENT */
+        .contact-header-container {
+            padding-top: 3rem; 
+            margin-bottom: 2rem; 
+            text-align: left; 
+        }
+
+        .registry-main-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* 2. CONTACT INFO STYLING (Now on the Left) */
+        .contact-info {
+            flex: 1; 
+            line-height: 1.8; 
+            color: #333;
+        }
+
+        .contact-method {
+            margin-bottom: 3rem;
+        }
+
+        .contact-label {
+            display: block;
+            color: #f97316;
+            font-weight: 700;
+            font-family: monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-link {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 4px solid #f97316;
+            transition: background-color 0.2s;
+        }
+
+        .contact-link:hover {
+            background-color: #fff7ed;
+        }
+
+        /* 3. CAROUSEL STYLING (Now on the Right) */
+        .carousel-area {
+            flex: 1.2; 
+            width: 100%;
+        }
+
+        .index-banner {
+            width: 100%;
+            margin: 0; 
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: #000;
+            height: 500px; /* Matched to contact page layout */
+        }
+
+        .index-banner .carousel__track-container {
+            height: 100%;
+            width: 100%;
+            display: block;
+        }
+
+        .index-banner .carousel__image {
+            width: 100%;
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
+        }
+
+        /* 4. MOBILE STACKING */
+        @media (max-width: 900px) {
+            .contact-content-wrapper { 
+                flex-direction: column !important; 
+            }
+            /* Carousel stack order on mobile */
+            .carousel-area {
+                order: 2; /* Carousel goes below text */
+            }
+            .index-banner {
+                height: 300px;
+            }
+            .contact-info {
+                order: 1; /* Text goes on top */
+            }
+            .registry-main-title {
+                font-size: 2.2rem !important;
+            }
+            .contact-link {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body class="sub-page">
+
+    <header id="global-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo">Home</a>
+            <nav class="header-nav">
+                <a href="index.html#map-wrapper">Map</a>
+                <a href="index.html#registry">Registry</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+        
+        <div class="contact-header-container">
+            <h1 class="registry-main-title">Get in Touch</h1>
+        </div>
+
+        <div class="contact-content-wrapper" style="display: flex; gap: 80px; align-items: flex-start;">
+            
+            <div class="contact-info">
+                <p style="font-size: 1.1rem; margin-bottom: 3rem;">
+                    Whether you have a question about a specific housing market, a suggestion for a new location to explore, or want to discuss anything else to do with the built environment, please do get in touch.
+                </p>
+
+                <div class="contact-method">
+                    <span class="contact-label">Email →</span>
+                    <a href="mailto:hello@internationalhousingmarkets.com" class="contact-link">
+                        hello@internationalhousingmarkets.com
+                    </a>
+                </div>
+
+                <div class="contact-method">
+                    <span class="contact-label">LinkedIn →</span>
+                    <a href="https://www.linkedin.com/in/tobyparsloe" target="_blank" class="contact-link">
+                        Toby Parsloe
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-area">
+                <div class="banner-container index-banner">
+                    <div class="carousel__track-container">
+                        <ul class="carousel__track">
+                            <li class="carousel__slide current-slide"><img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong.jpg" alt="Hong Kong"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/house for investment.jpg" alt="House for investment"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Italy first.jpg" alt="Italian house"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea.jpg" alt="Korean apartments"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman.jpg" alt="Oman housing"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_karl_marx_allee.jpg" alt="Berlin Karl Marx Allee"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_kreuzberg.jpg" alt="Berlin Kreuzberg Apartments"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_2.jpg" alt="Hong Kong High Density Housing 2"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_3.jpg" alt="Hong Kong High Density Housing 3"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea_2.jpg" alt="Korean apartments 2"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman_muscat.jpg" alt="Oman Muscat Building"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Paris_chinatown.jpg" alt="Paris Chinatown Housing"></li>
+                            <li class="carousel__slide"><img class="carousel__image" src="images/index/Taiwan_1.jpg" alt="Taiwan Apartments"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer-nav" style="margin-top: 6rem;">
+            <hr style="border: 0; border-top: 1px solid #eee;">
+            <a href="index.html" class="back-link" style="display: inline-block; margin: 1.5rem 0; text-decoration: none; color: #000; font-weight: 700; font-size: 0.8rem;">
+                <span class="arrow">←</span> BACK TO WORLD MAP
+            </a>
+        </footer>
+    </main>
+
+    <script src="banner-carousel.js"></script>
+</body>
+</html>
