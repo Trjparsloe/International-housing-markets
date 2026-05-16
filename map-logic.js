@@ -11,6 +11,13 @@ const countryNameLookup = {
     '010': 'Antarctica'
 };
 
+// Maps 3-digit numeric ISOs to 2-letter codes for FlagCDN
+const flagCodesLookup = { 
+    '392': 'jp', // Japan
+    '512': 'om', // Oman
+    '276': 'de'  // Germany
+};
+
 const interactiveCountries = Object.keys(countryNameLookup);
 
 const cityMarkets = [
@@ -19,7 +26,7 @@ const cityMarkets = [
 
 const interactiveColor = '#f97316'; 
 const cityDefaultColor = '#f97316'; 
-const defaultColor = '#d1d5db';     
+const defaultColor = '#d1d5db';    
 const hoverColor = '#facc15';      
 
 const svg = d3.select("#map-container");
@@ -33,7 +40,7 @@ const projection = d3.geoNaturalEarth1()
 const path = d3.geoPath().projection(projection);
 
 /* ======================================================================
-   2. DRAWING THE MAP (UPDATED FOR MULTI-HIGHLIGHT)
+   2. DRAWING THE MAP (UPDATED FOR ORIGINAL MODERNIST SHADOW BOX + FLAGS)
    ====================================================================== */
 if (svg.node()) {
     d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(topoData) {
@@ -91,7 +98,20 @@ if (svg.node()) {
                 d3.select(this).style("cursor", "pointer");
 
                 if (id !== '010') {
-                    tag.style("display", "block").text(countryNameLookup[id]);
+                    const countryName = countryNameLookup[id];
+                    const countryCode = flagCodesLookup[id];
+
+                    // Maintains original modernist shadow box structure by wrapping elements safely inside
+                    let tooltipHtml = `<div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;">`;
+                    tooltipHtml += `<div>${countryName}</div>`;
+                    
+                    if (countryCode) {
+                        tooltipHtml += `<img src="https://flagcdn.com/w40/${countryCode}.png" style="display: block; width: 30px; height: auto; border-radius: 1px; border: 1px solid rgba(255,255,255,0.15);" alt="${countryName} flag">`;
+                    }
+                    tooltipHtml += `</div>`;
+
+                    // Keep your original CSS display properties by resetting to block if flex broke it
+                    tag.style("display", "block").html(tooltipHtml);
                     
                     // HIGHLIGHT ALL PIECES OF THIS COUNTRY
                     svg.selectAll("path")
@@ -102,7 +122,8 @@ if (svg.node()) {
                 }
             })
             .on("mousemove", event => {
-                tag.style("top", (event.pageY - 45) + "px").style("left", (event.pageX + 15) + "px");
+                // Adjust vertical offset (-65) slightly to account for the flag height so it doesn't clip the cursor
+                tag.style("top", (event.pageY - 65) + "px").style("left", (event.pageX + 15) + "px");
             })
             .on("mouseout", function(event, d) {
                 const id = String(d.id).padStart(3, '0');
@@ -140,7 +161,9 @@ if (svg.node()) {
             .attr("stroke-width", 3)   
             .style("cursor", "pointer")
             .on("mouseover", function(event, d) {
-                tag.style("display", "block").text(d.name.replace('_', ' '));
+                const cityName = d.name.replace('_', ' ');
+                tag.style("display", "block").html(`<div>${cityName}</div>`);
+
                 d3.select(this).transition().duration(200)
                     .attr("r", 9)
                     .attr("fill", hoverColor)

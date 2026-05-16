@@ -266,7 +266,10 @@ main em {
     z-index: 9999;
     box-shadow: 6px 6px 0px 0px rgba(0,0,0,1); 
     display: none; 
-    white-space: nowrap;
+    
+    /* ADD THESE TWO LINES */
+    flex-direction: column;
+    align-items: center;
 }
 
 /* ======================================================================
