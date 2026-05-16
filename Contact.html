@@ -13,6 +13,7 @@
             padding-top: 3rem; 
             margin-bottom: 2rem; 
             text-align: left; 
+            width: 100%;
         }
 
         .registry-main-title {
@@ -22,7 +23,24 @@
             margin: 0;
         }
 
-        /* 2. CONTACT INFO STYLING (Now on the Left) */
+        /* 2. LAYOUT STRUCTURAL FIX */
+        .contact-main-container {
+            width: 90%;          /* Forces body content container to match header container size */
+            max-width: 1100px;   /* Cap limit matching header */
+            margin: 0 auto; 
+            padding: 0;          /* Removes extra left padding that pushes text away from alignment */
+            box-sizing: border-box;
+        }
+
+        .contact-content-wrapper {
+            display: flex; 
+            gap: 60px;          /* Clean gap to comfortably separate text and image columns */
+            align-items: flex-start;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* 3. CONTACT INFO STYLING (Left) */
         .contact-info {
             flex: 1; 
             line-height: 1.8; 
@@ -57,10 +75,12 @@
             background-color: #fff7ed;
         }
 
-        /* 3. CAROUSEL STYLING (Now on the Right) */
+        /* 4. CAROUSEL STYLING (Right - Forced Hard Stop) */
         .carousel-area {
             flex: 1.2; 
             width: 100%;
+            min-width: 0;        /* Explicitly tells browser it is allowed to shrink below image size */
+            max-width: 500px;    /* HARD BOUNDARY: Caps the maximum width so it lines up with elements on the right */
         }
 
         .index-banner {
@@ -71,7 +91,7 @@
             position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             background-color: #000;
-            height: 500px; /* Matched to contact page layout */
+            height: 500px; 
         }
 
         .index-banner .carousel__track-container {
@@ -87,20 +107,21 @@
             display: block;
         }
 
-        /* 4. MOBILE STACKING */
+        /* 5. MOBILE STACKING */
         @media (max-width: 900px) {
             .contact-content-wrapper { 
                 flex-direction: column !important; 
+                gap: 40px;
             }
-            /* Carousel stack order on mobile */
             .carousel-area {
-                order: 2; /* Carousel goes below text */
+                order: 2; 
+                max-width: 100%; /* Allows it to expand safely to full width on mobile screens */
             }
             .index-banner {
                 height: 300px;
             }
             .contact-info {
-                order: 1; /* Text goes on top */
+                order: 1; 
             }
             .registry-main-title {
                 font-size: 2.2rem !important;
@@ -125,13 +146,13 @@
         </div>
     </header>
 
-    <main style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+    <main class="contact-main-container">
         
         <div class="contact-header-container">
             <h1 class="registry-main-title">Get in Touch</h1>
         </div>
 
-        <div class="contact-content-wrapper" style="display: flex; gap: 80px; align-items: flex-start;">
+        <div class="contact-content-wrapper">
             
             <div class="contact-info">
                 <p style="font-size: 1.1rem; margin-bottom: 3rem;">
