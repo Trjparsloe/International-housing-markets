@@ -1274,3 +1274,181 @@ body.sub-page {
         order: 1;
     }
 }
+
+ /* Anchor Jump Fix - Prevents the header from covering section titles */
+#map-wrapper, 
+#registry, 
+.registry-section,
+[id] { 
+    scroll-margin-top: 90px; 
+}
+
+/* Map Peekaboo Gap */
+#map-wrapper {
+    width: 100vw;
+    max-width: none;
+    margin: 2rem 0 3rem 0; 
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fcfcfc;
+}
+
+/* Tight Header Buffer */
+body {
+    padding-top: 55px; 
+    overflow-x: hidden;
+}
+
+/* Banner styling */
+.index-banner {
+    width: 60vw; 
+    max-width: 900px; 
+    margin: 0.2rem auto 0 auto; 
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background-color: #000;
+}
+
+/* Force track container to fill the height to remove black bars */
+.index-banner .carousel__track-container {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.index-banner .carousel__image {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+}
+
+/* --- FLUID ABSOLUTE MARGIN DESIGN --- */
+.editorial-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px; /* Locks down the total layout zone width */
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Position the illustration column cleanly on the left edge */
+.left-texture-margin {
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 140px; /* Matches your exact SVG ViewBox canvas width constraint */
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+.sticky-blueprint-container {
+    position: sticky;
+    top: 100px; 
+    width: 100%;
+    max-width: 140px; 
+    height: calc(100vh - 140px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* --- FIX: Shift the text column explicitly to the right to prevent any overlaps --- */
+.editorial-text-flow {
+    margin-left: 170px; /* 140px (SVG width) + 30px comfortable whitespace gap */
+    padding: 0 1rem;
+    max-width: 65ch; 
+}
+
+/* Target all normal paragraphs inside the text flow */
+.editorial-text-flow p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    margin-left: 45px !important;   /* Indents your paragraph body text inward */
+    margin-right: 0 !important;
+}
+
+/* Forces your subheadings AND the intro-lead to line up flush left */
+.editorial-text-flow .editorial-subheading,
+.editorial-text-flow .intro-lead {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    margin-left: 0 !important;      /* Keeps titles and intro headlines sticking further left */
+    margin-right: 0 !important;
+    display: block;
+}
+
+.blueprint-vector {
+    width: 100%;
+    height: auto;
+    max-height: 660px; 
+    opacity: 0.55;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center top;
+}
+
+.blueprint-vector:hover {
+    opacity: 0.95;
+}
+
+.typology-group {
+    stroke: #90a4ae; 
+    cursor: default; 
+    pointer-events: all; 
+    transition: stroke 0.2s ease, transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: 70px center; 
+}
+
+.typology-group.js-hovered {
+    stroke: #37474f; 
+}
+
+/* --- RESPONSIVE MEDIA CONTROLS & SCREEN SCALING --- */
+@media (min-width: 1400px) {
+    .sticky-blueprint-container {
+        max-width: 160px; 
+    }
+    .blueprint-vector {
+        max-height: 780px;
+        transform: scale(1.1); 
+    }
+}
+
+@media (max-width: 1150px) {
+    .blueprint-vector {
+        transform: scale(0.95);
+    }
+}
+
+@media (max-width: 980px) {
+    /* Safely turns off the sidebar when browser column drops too narrow */
+    .left-texture-margin {
+        display: none; 
+    }
+
+    /* Clear out the rightward shift completely on mobile since sidebar is hidden */
+    .editorial-text-flow {
+        margin-left: 0;
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 800px) {
+    body { padding-top: 52px; }
+    #map-wrapper, #registry, .registry-section {
+        scroll-margin-top: 100px;
+    }
+    .index-banner {
+        width: 95vw; 
+        margin-top: 0.5rem;
+    }
+    #map-wrapper { margin: 1.5rem 0 2rem 0; }
+}
