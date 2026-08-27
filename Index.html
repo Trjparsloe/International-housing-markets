@@ -1,252 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>International Housing Markets</title>
-    
+
     <link rel="stylesheet" href="styles.css" id="theme-link">
 
     <link rel="preload" as="image" href="images/index/Berlin.jpg" fetchpriority="high">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9R4L6FNGH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-S9R4L6FNGH');
+    </script>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
 </head>
+
 <body class="home-page">
 
-<header id="global-header">
-    <div class="header-container">
-        <a href="index.html" class="header-logo">Home</a>
-        <nav class="header-nav">
-            <a href="index.html#map-wrapper">Map</a>
-            <a href="index.html#registry">Registry</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </div>
-</header>
+    <header id="global-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo">Home</a>
+            <nav class="header-nav">
+                <a href="index.html#map-wrapper">Map</a>
+                <a href="index.html#registry">Registry</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
 
     <div class="banner-container index-banner">
         <div class="carousel__track-container">
             <ul class="carousel__track">
                 <li class="carousel__slide current-slide">
-                    <img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin" fetchpriority="high" loading="eager">
+                    <img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin" fetchpriority="high"
+                        loading="eager">
                 </li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong.jpg" alt="Hong Kong" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/house for investment.jpg" alt="House for investment" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Italy first.jpg" alt="Italian house" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea.webp" alt="Korean apartments" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman.jpg" alt="Oman housing" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_karl_marx_allee.jpg" alt="Berlin Karl Marx Allee" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin.jpg" alt="Berlin Kreuzberg Apartments" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_2.jpg" alt="Hong Kong High Density Housing 2" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_3.jpg" alt="Hong Kong High Density Housing 3" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea 2.webp" alt="Korean apartments 2" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman_muscat.jpg" alt="Oman Muscat Building" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Paris_chinatown.jpg" alt="Paris Chinatown Housing" loading="lazy"></li>
-                <li class="carousel__slide"><img class="carousel__image" src="images/index/Taiwan_1.jpg" alt="Taiwan Apartments" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong.jpg"
+                        alt="Hong Kong" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/house for investment.jpg"
+                        alt="House for investment" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Italy first.jpg"
+                        alt="Italian house" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea.webp"
+                        alt="Korean apartments" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman.jpg" alt="Oman housing"
+                        loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin_karl_marx_allee.jpg"
+                        alt="Berlin Karl Marx Allee" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Berlin.jpg"
+                        alt="Berlin Kreuzberg Apartments" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_2.jpg"
+                        alt="Hong Kong High Density Housing 2" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Hong_kong_3.jpg"
+                        alt="Hong Kong High Density Housing 3" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Korea 2.webp"
+                        alt="Korean apartments 2" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Oman_muscat.jpg"
+                        alt="Oman Muscat Building" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Paris_chinatown.jpg"
+                        alt="Paris Chinatown Housing" loading="lazy"></li>
+                <li class="carousel__slide"><img class="carousel__image" src="images/index/Taiwan_1.jpg"
+                        alt="Taiwan Apartments" loading="lazy"></li>
             </ul>
         </div>
-        <h1 class="banner-title">Around the World in 80 Housing Markets</h1> 
+        <h1 class="banner-title">Around the World in 80 Housing Markets</h1>
     </div>
 
-    <div id="map-wrapper"> 
+    <div id="map-wrapper">
         <svg id="map-container" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
 
-<main>
-    <div class="editorial-container">
-        
-        <aside class="left-texture-margin">
-            <div class="sticky-blueprint-container">
-                <svg class="blueprint-vector" id="interactive-blueprint" viewBox="0 0 140 860" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    
-                    <g class="typology-group" id="group-1">
-                        <rect x="15" y="20" width="115" height="85" fill="transparent" stroke="none" pointer-events="all"/>
-                        <path d="M 30,55 L 70,25 L 110,55 Z" />
-                        <path d="M 35,55 L 35,100 L 105,100 L 105,55" />
-                        <rect x="48" y="65" width="14" height="14" rx="1" />
-                        <rect x="78" y="65" width="14" height="14" rx="1" />
-                        <rect x="63" y="85" width="14" height="15" rx="1" />
-                        <g stroke-width="1.3">
-                            <line x1="117" y1="75" x2="117" y2="100" />
-                            <rect x="110" y="62" width="24" height="13" rx="1" fill="#fcfcfc" />
-                            <path d="M 113,68 L 117,68 M 113,71 L 121,71" stroke-width="0.8" />
+    <main>
+        <div class="editorial-container">
+
+            <aside class="left-texture-margin">
+                <div class="sticky-blueprint-container">
+                    <svg class="blueprint-vector" id="interactive-blueprint" viewBox="0 0 140 860" fill="none"
+                        stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+
+                        <g class="typology-group" id="group-1">
+                            <rect x="15" y="20" width="115" height="85" fill="transparent" stroke="none"
+                                pointer-events="all" />
+                            <path d="M 30,55 L 70,25 L 110,55 Z" />
+                            <path d="M 35,55 L 35,100 L 105,100 L 105,55" />
+                            <rect x="48" y="65" width="14" height="14" rx="1" />
+                            <rect x="78" y="65" width="14" height="14" rx="1" />
+                            <rect x="63" y="85" width="14" height="15" rx="1" />
+                            <g stroke-width="1.3">
+                                <line x1="117" y1="75" x2="117" y2="100" />
+                                <rect x="110" y="62" width="24" height="13" rx="1" fill="#fcfcfc" />
+                                <path d="M 113,68 L 117,68 M 113,71 L 121,71" stroke-width="0.8" />
+                            </g>
                         </g>
-                    </g>
 
-                    <g class="typology-group" id="group-2">
-                        <rect x="15" y="130" width="115" height="140" fill="transparent" stroke="none" pointer-events="all"/>
-                        <path d="M 42,140 L 98,140 L 98,260 L 42,260 Z" />
-                        
-                        <rect x="42" y="152" width="22" height="16" fill="#fcfcfc" />
-                        <line x1="42" y1="164" x2="64" y2="164" stroke-width="1" />
-                        <line x1="48" y1="164" x2="48" y2="168" stroke-width="0.8" />
-                        <line x1="54" y1="164" x2="54" y2="168" stroke-width="0.8" />
-                        <line x1="60" y1="164" x2="60" y2="168" stroke-width="0.8" />
+                        <g class="typology-group" id="group-2">
+                            <rect x="15" y="130" width="115" height="140" fill="transparent" stroke="none"
+                                pointer-events="all" />
+                            <path d="M 42,140 L 98,140 L 98,260 L 42,260 Z" />
 
-                        <rect x="76" y="180" width="22" height="16" fill="#fcfcfc" />
-                        <line x1="76" y1="192" x2="98" y2="192" stroke-width="1" />
-                        <line x1="82" y1="192" x2="82" y2="196" stroke-width="0.8" />
-                        <line x1="88" y1="192" x2="88" y2="196" stroke-width="0.8" />
-                        <line x1="94" y1="192" x2="94" y2="196" stroke-width="0.8" />
+                            <rect x="42" y="152" width="22" height="16" fill="#fcfcfc" />
+                            <line x1="42" y1="164" x2="64" y2="164" stroke-width="1" />
+                            <line x1="48" y1="164" x2="48" y2="168" stroke-width="0.8" />
+                            <line x1="54" y1="164" x2="54" y2="168" stroke-width="0.8" />
+                            <line x1="60" y1="164" x2="60" y2="168" stroke-width="0.8" />
 
-                        <rect x="42" y="208" width="22" height="16" fill="#fcfcfc" />
-                        <line x1="42" y1="220" x2="64" y2="220" stroke-width="1" />
-                        <line x1="48" y1="220" x2="48" y2="224" stroke-width="0.8" />
-                        <line x1="54" y1="220" x2="54" y2="224" stroke-width="0.8" />
-                        <line x1="60" y1="220" x2="60" y2="224" stroke-width="0.8" />
+                            <rect x="76" y="180" width="22" height="16" fill="#fcfcfc" />
+                            <line x1="76" y1="192" x2="98" y2="192" stroke-width="1" />
+                            <line x1="82" y1="192" x2="82" y2="196" stroke-width="0.8" />
+                            <line x1="88" y1="192" x2="88" y2="196" stroke-width="0.8" />
+                            <line x1="94" y1="192" x2="94" y2="196" stroke-width="0.8" />
 
-                        <rect x="76" y="236" width="22" height="16" fill="#fcfcfc" />
-                        <line x1="76" y1="248" x2="98" y2="248" stroke-width="1" />
-                        <line x1="82" y1="248" x2="82" y2="252" stroke-width="0.8" />
-                        <line x1="88" y1="248" x2="88" y2="252" stroke-width="0.8" />
-                        <line x1="94" y1="248" x2="94" y2="252" stroke-width="0.8" />
-                        
-                        <rect x="76" y="154" width="12" height="12" />
-                        <rect x="52" y="182" width="12" height="12" />
-                        <rect x="76" y="210" width="12" height="12" />
-                        <rect x="52" y="238" width="12" height="12" />
-                        
-                        <g stroke-width="1.3">
+                            <rect x="42" y="208" width="22" height="16" fill="#fcfcfc" />
+                            <line x1="42" y1="220" x2="64" y2="220" stroke-width="1" />
+                            <line x1="48" y1="220" x2="48" y2="224" stroke-width="0.8" />
+                            <line x1="54" y1="220" x2="54" y2="224" stroke-width="0.8" />
+                            <line x1="60" y1="220" x2="60" y2="224" stroke-width="0.8" />
+
+                            <rect x="76" y="236" width="22" height="16" fill="#fcfcfc" />
+                            <line x1="76" y1="248" x2="98" y2="248" stroke-width="1" />
+                            <line x1="82" y1="248" x2="82" y2="252" stroke-width="0.8" />
+                            <line x1="88" y1="248" x2="88" y2="252" stroke-width="0.8" />
+                            <line x1="94" y1="248" x2="94" y2="252" stroke-width="0.8" />
+
+                            <rect x="76" y="154" width="12" height="12" />
+                            <rect x="52" y="182" width="12" height="12" />
+                            <rect x="76" y="210" width="12" height="12" />
+                            <rect x="52" y="238" width="12" height="12" />
+
+                            <g stroke-width="1.3">
                                 <rect x="20" y="180" width="22" height="13" rx="1" fill="#fcfcfc" />
                                 <path d="M 42,183 L 36,180 M 42,190 L 36,193" stroke-width="0.8" />
                                 <path d="M 24,186 L 32,186" stroke-width="1.5" />
                             </g>
-                    </g>
+                        </g>
 
-                    <g class="typology-group" id="group-3">
-                        <rect x="15" y="295" width="115" height="85" fill="transparent" stroke="none" pointer-events="all"/>
-                        <path d="M 20,360 L 120,360 M 25,360 L 25,320 L 115,320 L 115,360" /> 
-                        <path d="M 50,320 L 70,295 L 90,320 Z" /> 
-                        <path d="M 50,320 L 50,360 L 90,360 L 90,320" /> 
-                        <line x1="58" y1="328" x2="58" y2="360" stroke-width="2.2" /> 
-                        <line x1="82" y1="328" x2="82" y2="360" stroke-width="2.2" />
-                        <rect x="32" y="328" width="10" height="18" />
-                        <rect x="98" y="328" width="10" height="18" />
-                        <g transform="translate(26, 276)" stroke-width="1.3">
-                            <g transform="rotate(-15, 17, 14)">
-                                <line x1="0" y1="14" x2="13" y2="14" stroke-width="2.2" /> 
-                                <rect x="13" y="8" width="8" height="12" rx="0.5" fill="#fcfcfc" /> 
-                                <rect x="11" y="5" width="12" height="3" rx="0.5" fill="#fcfcfc" /> 
-                                <rect x="11" y="20" width="12" height="3" rx="0.5" fill="#fcfcfc" /> 
+                        <g class="typology-group" id="group-3">
+                            <rect x="15" y="295" width="115" height="85" fill="transparent" stroke="none"
+                                pointer-events="all" />
+                            <path d="M 20,360 L 120,360 M 25,360 L 25,320 L 115,320 L 115,360" />
+                            <path d="M 50,320 L 70,295 L 90,320 Z" />
+                            <path d="M 50,320 L 50,360 L 90,360 L 90,320" />
+                            <line x1="58" y1="328" x2="58" y2="360" stroke-width="2.2" />
+                            <line x1="82" y1="328" x2="82" y2="360" stroke-width="2.2" />
+                            <rect x="32" y="328" width="10" height="18" />
+                            <rect x="98" y="328" width="10" height="18" />
+                            <g transform="translate(26, 276)" stroke-width="1.3">
+                                <g transform="rotate(-15, 17, 14)">
+                                    <line x1="0" y1="14" x2="13" y2="14" stroke-width="2.2" />
+                                    <rect x="13" y="8" width="8" height="12" rx="0.5" fill="#fcfcfc" />
+                                    <rect x="11" y="5" width="12" height="3" rx="0.5" fill="#fcfcfc" />
+                                    <rect x="11" y="20" width="12" height="3" rx="0.5" fill="#fcfcfc" />
+                                </g>
+                                <path d="M 6,27 L 28,27" stroke-width="1.8" />
                             </g>
-                            <path d="M 6,27 L 28,27" stroke-width="1.8" />
                         </g>
-                    </g>
 
-                    <g class="typology-group" id="group-4">
-                        <rect x="15" y="395" width="115" height="80" fill="transparent" stroke="none" pointer-events="all"/>
-                        <line x1="31" y1="460" x2="74" y2="400" stroke-width="1.8" />
-                        <line x1="109" y1="460" x2="66" y2="400" stroke-width="1.8" />
-                        <path d="M 70,405 L 35,460 L 105,460 Z" />
-                        <path d="M 70,412 L 40,460 M 70,412 L 100,460" stroke-width="1" opacity="0.6" />
-                        <path d="M 70,425 L 55,460 M 70,425 L 82,460" stroke-width="1.4" /> 
-                        <line x1="35" y1="460" x2="20" y2="467" stroke-width="1" />
-                        <line x1="105" y1="460" x2="120" y2="467" stroke-width="1" />
-                        <line x1="18" y1="464" x2="22" y2="470" stroke-width="1.4" />
-                        <line x1="118" y1="464" x2="122" y2="470" stroke-width="1.4" />
-                        <line x1="25" y1="460" x2="115" y2="460" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.7" />
-                    </g>
-
-                    <g class="typology-group" id="group-5">
-                        <rect x="15" y="495" width="115" height="160" fill="transparent" stroke="none" pointer-events="all"/>
-                        <rect x="35" y="505" width="70" height="145" rx="1" />
-                        <rect x="45" y="515" width="16" height="14" /> <rect x="79" y="515" width="16" height="14" />
-                        <rect x="45" y="540" width="16" height="14" /> <rect x="79" y="540" width="16" height="14" />
-                        <rect x="45" y="565" width="16" height="14" /> <rect x="79" y="565" width="16" height="14" />
-                        <path d="M 30,600 L 110,600 M 35,600 L 35,650 L 105,650 L 105,600" />
-                        <rect x="42" y="614" width="18" height="36" />
-                        <rect x="80" y="614" width="18" height="36" />
-                        <path d="M 64,614 L 64,650 L 76,650 L 76,614" />
-                        <path d="M 32,600 L 37,612 L 42,600 L 47,612 L 52,600 L 57,612 L 62,600 L 67,612 L 72,600 L 77,612 L 82,600 L 87,612 L 92,600 L 97,612 L 102,600 L 108,600" stroke-width="1.4" />
-                        <g stroke-width="1.5" transform="translate(112, 605)">
-                            <circle cx="3" cy="3" r="2.5" />
-                            <line x1="1" y1="15" x2="13" y2="1" />
-                            <circle cx="13" cy="13" r="2.5" />
+                        <g class="typology-group" id="group-4">
+                            <rect x="15" y="395" width="115" height="80" fill="transparent" stroke="none"
+                                pointer-events="all" />
+                            <line x1="31" y1="460" x2="74" y2="400" stroke-width="1.8" />
+                            <line x1="109" y1="460" x2="66" y2="400" stroke-width="1.8" />
+                            <path d="M 70,405 L 35,460 L 105,460 Z" />
+                            <path d="M 70,412 L 40,460 M 70,412 L 100,460" stroke-width="1" opacity="0.6" />
+                            <path d="M 70,425 L 55,460 M 70,425 L 82,460" stroke-width="1.4" />
+                            <line x1="35" y1="460" x2="20" y2="467" stroke-width="1" />
+                            <line x1="105" y1="460" x2="120" y2="467" stroke-width="1" />
+                            <line x1="18" y1="464" x2="22" y2="470" stroke-width="1.4" />
+                            <line x1="118" y1="464" x2="122" y2="470" stroke-width="1.4" />
+                            <line x1="25" y1="460" x2="115" y2="460" stroke-width="0.8" stroke-dasharray="2,2"
+                                opacity="0.7" />
                         </g>
-                    </g>
 
-                    <line x1="70" y1="0" x2="70" y2="800" stroke="#eceff1" stroke-width="2" stroke-dasharray="30,8,4,8" style="z-index: -1;" />
-                </svg>
+                        <g class="typology-group" id="group-5">
+                            <rect x="15" y="495" width="115" height="160" fill="transparent" stroke="none"
+                                pointer-events="all" />
+                            <rect x="35" y="505" width="70" height="145" rx="1" />
+                            <rect x="45" y="515" width="16" height="14" />
+                            <rect x="79" y="515" width="16" height="14" />
+                            <rect x="45" y="540" width="16" height="14" />
+                            <rect x="79" y="540" width="16" height="14" />
+                            <rect x="45" y="565" width="16" height="14" />
+                            <rect x="79" y="565" width="16" height="14" />
+                            <path d="M 30,600 L 110,600 M 35,600 L 35,650 L 105,650 L 105,600" />
+                            <rect x="42" y="614" width="18" height="36" />
+                            <rect x="80" y="614" width="18" height="36" />
+                            <path d="M 64,614 L 64,650 L 76,650 L 76,614" />
+                            <path
+                                d="M 32,600 L 37,612 L 42,600 L 47,612 L 52,600 L 57,612 L 62,600 L 67,612 L 72,600 L 77,612 L 82,600 L 87,612 L 92,600 L 97,612 L 102,600 L 108,600"
+                                stroke-width="1.4" />
+                            <g stroke-width="1.5" transform="translate(112, 605)">
+                                <circle cx="3" cy="3" r="2.5" />
+                                <line x1="1" y1="15" x2="13" y2="1" />
+                                <circle cx="13" cy="13" r="2.5" />
+                            </g>
+                        </g>
+
+                        <line x1="70" y1="0" x2="70" y2="800" stroke="#eceff1" stroke-width="2"
+                            stroke-dasharray="30,8,4,8" style="z-index: -1;" />
+                    </svg>
+                </div>
+            </aside>
+
+            <div class="editorial-text-flow">
+                <p class="intro-lead">There’s no place like home…</p>
+                <p>…so the saying goes. That feeling of coming through your front door into that most private and
+                    personal of places; a place in which you can fully be yourself, and, according to the architect
+                    Charles Moore, the place in the world which belongs to us and to which we belong.</p>
+                <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the
+                    countryside with charming wooden beams, to grand Georgian townhouses with their sash windows and
+                    high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek
+                    lines of rational modern designs. And even the concrete bastions that sought to manifest utopian and
+                    egalitarian visions of society in urban form. We have an exceptionally rich design culture in our
+                    domestic spaces, augmented today by some of the world’s leading architectural practices and
+                    institutions.</p>
+
+                <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b>
+                    home. We have a record number of people living in temporary accommodation with waiting lists for
+                    social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to
+                    meet our quantifiable need, while those that are actually built struggle against the stigma of
+                    perceived low quality and miserly design. Meanwhile, house price inflation has far outstripped rises
+                    in wages, meaning home ownership has become further out of reach for many more people.</p>
+
+                <h3 class="editorial-subheading">We shape our housing markets; thereafter they shape us</h3>
+
+                <p>This has a profound impact on people’s lives, society as a whole, and the nature of the housing
+                    market itself. We are seeing measurable trends where more adult children are living with their
+                    parents for longer, unable to afford neither rent nor deposit. Those who manage to buy are older
+                    than they have ever been as they must wait longer to save or gain an inheritance for that deposit.
+                    This also leads to many first-time buyers skipping the first step on the ladder altogether, straight
+                    into a family home to save on stamp duty costs or because they need space to start their family.
+                    Many people are also eschewing having a family altogether, unable to afford for their children the
+                    quality of life they deserve. Meanwhile, the average length of mortgages continues to tick up,
+                    increasing the likelihood of payments in retirement, while the number of people per household has
+                    also risen, leading to overcrowding.</p>
+
+                <p>And that is only what is most easily quantifiable. There are the consequences that are unseen or
+                    unmeasured. As the formal market increasingly fails to meet people’s needs, people turn to more
+                    informal methods. They navigate the gaps or quirks of housing in more creative ways, creating
+                    markets in many shades of grey all the way to black. Many of us are reminded daily through those we
+                    see living on the streets, in parks, or makeshift encampments in forests. We read the headlines of
+                    scandalous exposés such as illegally rented sheds in suburban back gardens, providing shelter often
+                    for those with precarious legal statuses.</p>
+
+                <p>But we often miss those more ambiguous signs of adaptations to markets. They are evident in the
+                    erosion of shared living space in rented accommodation, questionable subletting practices, and the
+                    rise of hidden homelessness or sofa surfing. They are also evident in the changing way we relate to
+                    one another. They can shape our network of connections as we bond more with, say, a
+                    friend-turned-flatmate who has been able to buy and provide their spare bedroom at mates rates. They
+                    are also becoming more important in the world of romance, where access to property or family wealth
+                    is seeing the creeping return of a dating market á la Jane Austen.</p>
+
+                <p>Churchill’s famous quote <i>"We shape our buildings; thereafter they shape us"</i> has ignited many a
+                    reflection on the role of architecture, design, and the built environment as a whole. The exact same
+                    can be said of our housing markets; their influence is arguably getting stronger.</p>
+
+                <h3 class="editorial-subheading">A look elsewhere...</h3>
+
+                <p>All of this does make you wonder: are we alone in this? Is all this a uniquely British phenomenon or
+                    are other countries facing the same challenges? And if so, how are they dealing with them? How do
+                    housing markets work elsewhere, how do people live, and what are their homes like?</p>
+
+                <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses,
+                    then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t
+                    resist having a recce around the place at the first possible chance. They are for those who scroll
+                    through ‘property porn’ daydreaming about the lives they could be living. They are for those who
+                    look up the land registry price paid data for a house that catches their attention as they walk by
+                    (an act which usually leads to one of two forms of astonishment tinged with despair: 1) how much it
+                    costs now, or 2) how little it cost back in the day compared to how much it costs now).</p>
+
+                <p>What I hope they show, above all, is that housing is as much of a product of socio-cultural factors
+                    as it is of political and economic ones, and by looking at different housing cultures we can better
+                    interrogate our own. Pick a country or city on the map above or list below, and have a look.</p>
             </div>
-        </aside>
 
-        <div class="editorial-text-flow">
-            <p class="intro-lead">There’s no place like home…</p>
-            <p>…so the saying goes. That feeling of coming through your front door into that most private and personal of places; a place in which you can fully be yourself, and, according to the architect Charles Moore, the place in the world which belongs to us and to which we belong.</p>
-            <p>And here in the UK, we have some truly remarkable examples of homes. From cosy cottages in the countryside with charming wooden beams, to grand Georgian townhouses with their sash windows and high ceilings. From Victorian terraces with their ornate decorations and bay windows to the sleek lines of rational modern designs. And even the concrete bastions that sought to manifest utopian and egalitarian visions of society in urban form. We have an exceptionally rich design culture in our domestic spaces, augmented today by some of the world’s leading architectural practices and institutions.</p>
-            
-            <p>But while there’s no place like home, there seems increasingly for so many people no place <b>for</b> home. We have a record number of people living in temporary accommodation with waiting lists for social housing that can last beyond a lifetime. The delivery of new homes has consistently failed to meet our quantifiable need, while those that are actually built struggle against the stigma of perceived low quality and miserly design. Meanwhile, house price inflation has far outstripped rises in wages, meaning home ownership has become further out of reach for many more people.</p>
-
-            <h3 class="editorial-subheading">We shape our housing markets; thereafter they shape us</h3>
-
-            <p>This has a profound impact on people’s lives, society as a whole, and the nature of the housing market itself. We are seeing measurable trends where more adult children are living with their parents for longer, unable to afford neither rent nor deposit. Those who manage to buy are older than they have ever been as they must wait longer to save or gain an inheritance for that deposit. This also leads to many first-time buyers skipping the first step on the ladder altogether, straight into a family home to save on stamp duty costs or because they need space to start their family. Many people are also eschewing having a family altogether, unable to afford for their children the quality of life they deserve. Meanwhile, the average length of mortgages continues to tick up, increasing the likelihood of payments in retirement, while the number of people per household has also risen, leading to overcrowding.</p>
-
-            <p>And that is only what is most easily quantifiable. There are the consequences that are unseen or unmeasured. As the formal market increasingly fails to meet people’s needs, people turn to more informal methods. They navigate the gaps or quirks of housing in more creative ways, creating markets in many shades of grey all the way to black. Many of us are reminded daily through those we see living on the streets, in parks, or makeshift encampments in forests. We read the headlines of scandalous exposés such as illegally rented sheds in suburban back gardens, providing shelter often for those with precarious legal statuses.</p>
-
-            <p>But we often miss those more ambiguous signs of adaptations to markets. They are evident in the erosion of shared living space in rented accommodation, questionable subletting practices, and the rise of hidden homelessness or sofa surfing. They are also evident in the changing way we relate to one another. They can shape our network of connections as we bond more with, say, a friend-turned-flatmate who has been able to buy and provide their spare bedroom at mates rates. They are also becoming more important in the world of romance, where access to property or family wealth is seeing the creeping return of a dating market á la Jane Austen.</p>
-
-            <p>Churchill’s famous quote <i>"We shape our buildings; thereafter they shape us"</i> has ignited many a reflection on the role of architecture, design, and the built environment as a whole. The exact same can be said of our housing markets; their influence is arguably getting stronger.</p>
-
-            <h3 class="editorial-subheading">A look elsewhere...</h3>
-
-            <p>All of this does make you wonder: are we alone in this? Is all this a uniquely British phenomenon or are other countries facing the same challenges? And if so, how are they dealing with them? How do housing markets work elsewhere, how do people live, and what are their homes like?</p>
-
-            <p>If, like me, your simple dream is to travel the world and look at cool buildings, especially houses, then I hope you will enjoy these pages. They are for the dinner or house party guests that can’t resist having a recce around the place at the first possible chance. They are for those who scroll through ‘property porn’ daydreaming about the lives they could be living. They are for those who look up the land registry price paid data for a house that catches their attention as they walk by (an act which usually leads to one of two forms of astonishment tinged with despair: 1) how much it costs now, or 2) how little it cost back in the day compared to how much it costs now).</p>
-
-            <p>What I hope they show, above all, is that housing is as much of a product of socio-cultural factors as it is of political and economic ones, and by looking at different housing cultures we can better interrogate our own. Pick a country or city on the map above or list below, and have a look.</p>
         </div>
 
-    </div>
-
-    <section id="registry" class="registry-section">
-        <h2 class="registry-main-title">The Housing Registry</h2>
-        <div class="registry-grid">
-            <a href="Germany.html" class="registry-card">
-                <span class="card-number">01</span>
-                <div class="card-thumb">
-                    <img src="images/index/Berlin.jpg" alt="Germany">
-                </div>
-                <div class="card-info">
-                    <h3>Germany</h3>
-                    <p>Why buy when you can rent</p>
-                </div>
-            </a>
-            <a href="Japan.html" class="registry-card">
-                <span class="card-number">02</span>
-                <div class="card-thumb">
-                    <img src="images/index/machiya in nara 2.jpg" alt="Japan">
-                </div>
-                <div class="card-info">
-                    <h3>Japan</h3>
-                    <p>The 30 Year House</p>
-                </div>
-            </a>
-            <a href="Oman.html" class="registry-card">
-                <span class="card-number">03</span>
-                <div class="card-thumb">
-                    <img src="images/index/Oman.jpg" alt="Oman">
-                </div>
-                <div class="card-info">
-                    <h3>Oman</h3>
-                    <p>Free Land for All</p>
-                </div>
-            </a>
-            <div class="registry-card coming-soon-minimal">
-                <div class="placeholder-content">
-                    <span class="remaining-count">77</span>
-                    <span class="remaining-label">MORE TO GO...</span>
+        <section id="registry" class="registry-section">
+            <h2 class="registry-main-title">The Housing Registry</h2>
+            <div class="registry-grid">
+                <a href="Germany.html" class="registry-card">
+                    <span class="card-number">01</span>
+                    <div class="card-thumb">
+                        <img src="images/index/Berlin.jpg" alt="Germany">
+                    </div>
+                    <div class="card-info">
+                        <h3>Germany</h3>
+                        <p>Why buy when you can rent</p>
+                    </div>
+                </a>
+                <a href="Japan.html" class="registry-card">
+                    <span class="card-number">02</span>
+                    <div class="card-thumb">
+                        <img src="images/index/machiya in nara 2.jpg" alt="Japan">
+                    </div>
+                    <div class="card-info">
+                        <h3>Japan</h3>
+                        <p>The 30 Year House</p>
+                    </div>
+                </a>
+                <a href="Oman.html" class="registry-card">
+                    <span class="card-number">03</span>
+                    <div class="card-thumb">
+                        <img src="images/index/Oman.jpg" alt="Oman">
+                    </div>
+                    <div class="card-info">
+                        <h3>Oman</h3>
+                        <p>Free Land for All</p>
+                    </div>
+                </a>
+                <div class="registry-card coming-soon-minimal">
+                    <div class="placeholder-content">
+                        <span class="remaining-count">77</span>
+                        <span class="remaining-label">MORE TO GO...</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
     <div id="country-tag"></div>
 
     <script src="banner-carousel.js"></script>
     <script src="map-logic.js"></script>
-     <script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>
