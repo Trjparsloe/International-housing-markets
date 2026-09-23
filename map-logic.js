@@ -15,7 +15,7 @@ const countryNameLookup = {
 const flagCodesLookup = { 
     '392': 'jp', // Japan
     '512': 'om', // Oman
-    '276': 'de'  // Germany
+    '276': 'de',  // Germany
 };
 
 const interactiveCountries = Object.keys(countryNameLookup);
