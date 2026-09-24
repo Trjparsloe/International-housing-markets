@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ireland - International Housing Markets</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preload" as="image" href="images/Ireland/Ireland front prt.jpg" fetchpriority="high">
 </head>
 <body class="sub-page">
 
@@ -47,11 +46,10 @@
     </div>
 
     <div class="banner-container">
-        <img src="images/Ireland/Ireland front prt.jpg"
-             alt="IRELAND"
-             class="banner-image"
-             fetchpriority="high"
-             loading="eager">
+        <video class="banner-video" autoplay muted loop playsinline
+               poster="images/Ireland/Ireland front prt.jpg">
+            <source src="images/Ireland/ireland-drone.mp4" type="video/mp4">
+        </video>
         <h1 class="banner-title">IRELAND</h1>
     </div>
 
@@ -338,13 +336,12 @@
             </div>
         </div>
 
-        <p><i>Disclaimer: These posts reflect my best understanding of each market. They are based on conversations with locals and experts, academic articles, and other online publications while trying not to get bogged down in too much detail and keep things understandable and perhaps a little entertaining. If there is anything that is factually wrong or out of date, things that I've misunderstood, or extra nuances you think it important to note, please do get in touch!</i></p>
-
         <footer class="footer-nav">
             <hr>
             <a href="index.html" class="back-link">
-                <span class="arrow">←</span> Back to World Map
+                <span class="arrow">&larr;</span> Back to World Map
             </a>
+            <p class="site-disclaimer">These posts reflect my best understanding of each market. They are based on conversations with locals and experts, academic articles, and other online publications while trying not to get bogged down in too much detail and keep things understandable and perhaps a little entertaining. If there is anything that is factually wrong or out of date, things that I've misunderstood, or extra nuances you think it important to note, please do <a href="contact.html">get in touch</a>!</p>
         </footer>
 
     </main>
