@@ -5,132 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - International Housing Markets</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap">
     <link rel="stylesheet" href="styles.css">
-
-    <style>
-        /* 1. HEADER & NAV ALIGNMENT */
-        .contact-header-container {
-            padding-top: 3rem; 
-            margin-bottom: 2rem; 
-            text-align: left; 
-            width: 100%;
-        }
-
-        .registry-main-title {
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin: 0;
-        }
-
-        /* 2. LAYOUT STRUCTURAL FIX */
-        .contact-main-container {
-            width: 90%;          /* Forces body content container to match header container size */
-            max-width: 1100px;   /* Cap limit matching header */
-            margin: 0 auto; 
-            padding: 0;          /* Removes extra left padding that pushes text away from alignment */
-            box-sizing: border-box;
-        }
-
-        .contact-content-wrapper {
-            display: flex; 
-            gap: 60px;          /* Clean gap to comfortably separate text and image columns */
-            align-items: flex-start;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* 3. CONTACT INFO STYLING (Left) */
-        .contact-info {
-            flex: 1; 
-            line-height: 1.8; 
-            color: #333;
-        }
-
-        .contact-method {
-            margin-bottom: 3rem;
-        }
-
-        .contact-label {
-            display: block;
-            color: #f97316;
-            font-weight: 700;
-            font-family: monospace;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-link {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #000;
-            text-decoration: none;
-            border-bottom: 4px solid #f97316;
-            transition: background-color 0.2s;
-        }
-
-        .contact-link:hover {
-            background-color: #fff7ed;
-        }
-
-        /* 4. CAROUSEL STYLING (Right - Forced Hard Stop) */
-        .carousel-area {
-            flex: 1.2; 
-            width: 100%;
-            min-width: 0;        /* Explicitly tells browser it is allowed to shrink below image size */
-            max-width: 500px;    /* HARD BOUNDARY: Caps the maximum width so it lines up with elements on the right */
-        }
-
-        .index-banner {
-            width: 100%;
-            margin: 0; 
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            background-color: #000;
-            height: 500px; 
-        }
-
-        .index-banner .carousel__track-container {
-            height: 100%;
-            width: 100%;
-            display: block;
-        }
-
-        .index-banner .carousel__image {
-            width: 100%;
-            height: 100%; 
-            object-fit: cover; 
-            display: block;
-        }
-
-        /* 5. MOBILE STACKING */
-        @media (max-width: 900px) {
-            .contact-content-wrapper { 
-                flex-direction: column !important; 
-                gap: 40px;
-            }
-            .carousel-area {
-                order: 2; 
-                max-width: 100%; /* Allows it to expand safely to full width on mobile screens */
-            }
-            .index-banner {
-                height: 300px;
-            }
-            .contact-info {
-                order: 1; 
-            }
-            .registry-main-title {
-                font-size: 2.2rem !important;
-            }
-            .contact-link {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9R4L6FNGH"></script>
     <script>
@@ -164,7 +42,7 @@
         <div class="contact-content-wrapper">
             
             <div class="contact-info">
-                <p style="font-size: 1.1rem; margin-bottom: 3rem;">
+                <p class="contact-intro">
                     Whether you have a question about a specific housing market, a suggestion for a new location to explore, or want to discuss anything else to do with the built environment, please do get in touch.
                 </p>
 
@@ -208,9 +86,9 @@
 
         </div>
 
-        <footer class="footer-nav" style="margin-top: 6rem;">
-            <hr style="border: 0; border-top: 1px solid #eee;">
-            <a href="index.html" class="back-link" style="display: inline-block; margin: 1.5rem 0; text-decoration: none; color: #000; font-weight: 700; font-size: 0.8rem;">
+        <footer class="footer-nav footer-compact">
+            <hr>
+            <a href="index.html" class="back-link">
                 <span class="arrow">←</span> BACK TO WORLD MAP
             </a>
         </footer>

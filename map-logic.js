@@ -24,8 +24,10 @@ const cityMarkets = [
     // { id: 'HKG', name: 'Hong_Kong', coords: [114.1694, 22.3193] }
 ];
 
-const interactiveColor = '#f97316'; 
-const cityDefaultColor = '#f97316'; 
+// Brand orange comes from --brand-orange in styles.css (fallback if unavailable)
+const brandOrange = getComputedStyle(document.documentElement).getPropertyValue('--brand-orange').trim() || '#f97316';
+const interactiveColor = brandOrange; 
+const cityDefaultColor = brandOrange; 
 const defaultColor = '#d1d5db';    
 const hoverColor = '#facc15';      
 

@@ -4,75 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - International Housing Markets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* 1. THE DROPCAP FIX */
-        .article-start {
-            display: block; 
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #333;
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        .article-start::first-letter {
-            display: block; 
-            float: left;
-            font-size: 3.2rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-right: 20px;
-            margin-top: 5px;
-            padding: 12px 18px;
-            background-color: #f97316; 
-            color: #fff;               
-            border: 4px solid #000;    
-            box-shadow: 6px 6px 0px #000; 
-            text-transform: uppercase;
-        }
-
-        /* 2. HEADER ALIGNMENT */
-        .about-header-container {
-            padding-top: 3rem; 
-            margin-bottom: 1.5rem; 
-            text-align: left; 
-        }
-
-        .about-header-container .registry-main-title {
-            margin-left: 0 !important;
-            margin-right: auto !important;
-            text-align: left !important;
-            display: inline-block;
-            transform: none !important;
-            left: 0 !important;
-            position: relative;
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        /* 3. MOBILE STACKING */
-        @media (max-width: 900px) {
-            .about-content-wrapper { 
-                flex-direction: column !important; 
-                gap: 40px !important; 
-            }
-            .about-sidebar { 
-                position: static !important; 
-                order: -1; 
-                max-width: 100% !important; 
-                margin: 0 auto; 
-            }
-            .about-header-container .registry-main-title {
-                font-size: 2.2rem !important;
-            }
-            .about-contact-nav {
-                flex-direction: column;
-                gap: 15px !important;
-            }
-        }
-    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9R4L6FNGH"></script>
     <script>
@@ -97,15 +32,15 @@
     </div>
 </header>
 
-    <main style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+    <main class="about-main">
         
         <div class="about-header-container">
             <h1 class="registry-main-title">About</h1>
         </div>
 
-        <div class="about-content-wrapper" style="display: flex; gap: 80px; align-items: flex-start;">
+        <div class="about-content-wrapper">
             
-            <div class="about-text" style="flex: 2; line-height: 1.8; color: #333;">
+            <div class="about-text">
                 <p class="article-start">
                     If money were no object, I would happily spend most of my time travelling the world looking at cool buildings. While sadly I am not there yet, I can at least make a start and follow this curiosity as much as possible…
                 </p>
@@ -122,52 +57,52 @@
 
                 <p>If you have any questions or would like to suggest interesting markets to explore next, please do get in touch.</p>
 
-                <div class="about-contact" style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
-                    <nav class="about-contact-nav" style="display: flex; gap: 40px; align-items: center;">
+                <div class="about-contact">
+                    <nav class="about-contact-nav">
                         
-                        <a href="https://www.linkedin.com/in/tobyparsloe" target="_blank" style="color: #f97316; text-decoration: none; font-weight: 700; letter-spacing: 1px; font-size: 0.8rem; white-space: nowrap;">LINKEDIN →</a>
+                        <a href="https://www.linkedin.com/in/tobyparsloe" target="_blank" class="about-linkedin">LINKEDIN →</a>
                         
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                             <span style="color: #f97316; font-weight: 700; letter-spacing: 1px; font-size: 0.8rem; text-transform: uppercase;">EMAIL →</span>
-                             <a href="mailto:hello@internationalhousingmarkets.com" style="color: #000; text-decoration: none; font-weight: 700; font-size: 0.9rem; border-bottom: 2px solid #f97316;">hello@internationalhousingmarkets.com</a>
+                        <div class="about-email">
+                             <span class="about-email-label">EMAIL →</span>
+                             <a href="mailto:hello@internationalhousingmarkets.com" class="about-email-link">hello@internationalhousingmarkets.com</a>
                         </div>
 
                     </nav>
                 </div>
             </div>
 
-            <div class="about-sidebar" style="flex: 1; position: sticky; top: 2rem;">
+            <div class="about-sidebar">
                 
-                <div style="position: relative; margin-bottom: 1.5rem;">
-                    <div style="position: absolute; top: 10px; left: 10px; width: 100%; height: 100%; background: #f97316; z-index: -1;"></div>
-                    <img src="images/About page/Toby Parsloe headshot.jpg" alt="Toby Parsloe" style="width: 100%; display: block; border: 1px solid #111; background-color: #fff;">
+                <div class="about-photo">
+                    <div class="about-photo-offset"></div>
+                    <img src="images/About page/Toby Parsloe headshot.jpg" alt="Toby Parsloe">
                 </div>
 
-                <div style="margin-bottom: 2rem;">
-                    <h2 style="font-size: 1.6rem; margin: 0; color: #000; font-weight: 700; line-height: 1.2;">Toby Parsloe</h2>
+                <div class="about-name">
+                    <h2>Toby Parsloe</h2>
                 </div>
                 
-                <h3 class="editorial-subheading" style="margin-bottom: 1rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Background</h3>
+                <h3 class="editorial-subheading">Background</h3>
                 
-                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 1.8;">
-                    <li style="margin-bottom: 1.2rem;">
-                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2024–PRESENT</span><br>
+                <ul class="about-timeline">
+                    <li>
+                        <span>2024–PRESENT</span><br>
                         <strong>Senior Market Analyst</strong><br>Hometrack
                     </li>
-                    <li style="margin-bottom: 1.2rem;">
-                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2022–2024</span><br>
+                    <li>
+                        <span>2022–2024</span><br>
                         <strong>Residential Research Analyst</strong><br>Savills
                     </li>
-                    <li style="margin-bottom: 1.2rem;">
-                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2017–2021</span><br>
+                    <li>
+                        <span>2017–2021</span><br>
                         <strong>PhD Architecture</strong><br>University of Cambridge
                     </li>
-                    <li style="margin-bottom: 1.2rem;">
-                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2015–2016</span><br>
+                    <li>
+                        <span>2015–2016</span><br>
                         <strong>MPhil Architecture and Urban Studies</strong><br>University of Cambridge
                     </li>
-                    <li style="margin-bottom: 1.2rem;">
-                        <span style="color: #f97316; font-weight: 700; font-family: monospace; font-size: 0.75rem;">2012–2015</span><br>
+                    <li>
+                        <span>2012–2015</span><br>
                         <strong>BA History</strong><br>University of Bristol
                     </li>
                 </ul>
@@ -175,9 +110,9 @@
 
         </div>
 
-        <footer class="footer-nav" style="margin-top: 4rem;">
-            <hr style="border: 0; border-top: 1px solid #eee;">
-            <a href="index.html" class="back-link" style="display: inline-block; margin: 1.5rem 0; text-decoration: none; color: #000; font-weight: 700; font-size: 0.8rem;">
+        <footer class="footer-nav footer-compact">
+            <hr>
+            <a href="index.html" class="back-link">
                 <span class="arrow">←</span> BACK TO WORLD MAP
             </a>
         </footer>

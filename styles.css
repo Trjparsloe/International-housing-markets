@@ -1,17 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100..900;1,100..900&display=swap');
 /* ======================================================================
-   CORE THEME DNA - UPDATED
+   CORE THEME DNA
    ====================================================================== */
 :root {
     /* Petrona is the primary, others are fallbacks */
     --font-family: "Petrona", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif;
-}
-
-/* If you want the body text to be Petrona but keep headings clean, 
-   or vice versa, you can create a second variable: */
-:root {
-    --font-heading: "Petrona", serif;
-    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --brand-orange: #f97316;
 }
 
 html {
@@ -20,25 +13,38 @@ html {
     color: #212121;
     scroll-behavior: smooth;
 }
-/* 1. Global fix for all anchor links */
-/* This tells the browser to stop 80px before the element (60px header + 20px breathing room) */
-#map-wrapper, 
-.registry-section,
-[id] { 
-    scroll-margin-top: 80px; 
+
+/* Anchor jumps: stop clear of the fixed header */
+[id],
+.registry-section {
+    scroll-margin-top: 90px;
 }
 
-/* 2. Optional: Ensure the scroll is smooth */
-html {
-    scroll-behavior: smooth;
+@media (max-width: 600px) {
+    #map-wrapper,
+    #registry,
+    .registry-section {
+        scroll-margin-top: 100px;
+    }
 }
 
 /* ======================================================================
    THE MASTER LAYOUT (Centering the Content)
    ====================================================================== */
+/* padding-top clears the fixed header */
 body {
     margin: 0;
     position: relative;
+    padding-top: 55px;
+    overflow-x: hidden;
+}
+
+@media (max-width: 800px) {
+    body { padding-top: 52px; }
+}
+
+body.sub-page {
+    padding-top: 70px;
 }
 
 main {
@@ -59,8 +65,8 @@ main p {
     margin-bottom: 1.5rem;
     color: #333;
     max-width: 70ch;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .article-start::first-letter {
@@ -72,7 +78,7 @@ main p {
     margin-top: 5px;
     padding: 12px 18px;
     
-    background-color: #f97316; /* Bauhaus Orange-Red */
+    background-color: var(--brand-orange);
     color: #fff;               /* White cutout */
     
     /* The Bauhaus Border: Heavy, solid, no rounded corners */
@@ -88,24 +94,9 @@ main p {
 /* ======================================================================
    UNIFIED HEADINGS (SHARED TEXT STYLES)
    ====================================================================== */
-.intro-lead {
-    font-family: var(--font-family);
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    line-height: 1.4;
-    color: #000;
-    margin-top: 4rem;
-    margin-bottom: 2rem;
-    max-width: 70ch;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    display: block;
-    border-left: 3px solid #f97316; 
-    padding-left: 20px;
-}
-
+/* Opening line (.intro-lead) and section subheadings share one look;
+   the intro line adds the orange bar on the left. */
+.intro-lead,
 main h3.editorial-subheading {
     font-family: var(--font-family);
     font-size: 1.1rem;
@@ -117,30 +108,25 @@ main h3.editorial-subheading {
     margin-top: 4rem;
     margin-bottom: 2rem;
     max-width: 70ch;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
-    border-left: none;
-    padding-left: 0;
 }
 
-/* Explicit Resetting of first-letter logic for subheadings */
-.intro-lead::first-letter {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    float: none !important;
-    margin-right: 0 !important;
-    text-transform: uppercase !important;
-    color: inherit !important;
+.intro-lead {
+    border-left: 3px solid var(--brand-orange); 
+    padding-left: 20px;
 }
 
+/* No drop cap on these */
+.intro-lead::first-letter,
 main h3.editorial-subheading::first-letter {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    float: none !important;
-    margin-right: 0 !important;
-    text-transform: uppercase !important;
-    color: inherit !important;
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    margin-right: 0;
+    text-transform: uppercase;
+    color: inherit;
 }
 
 /* ======================================================================
@@ -150,8 +136,8 @@ main blockquote {
     max-width: 70ch;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: auto;
+    margin-right: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 2rem;
@@ -180,13 +166,6 @@ main em {
 /* ======================================================================
    INDEX & GENERAL CAROUSEL STYLES
    ====================================================================== */
-.carousel {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    margin: 0 auto;
-}
-
 .carousel__image {
     width: 100%;
     height: 100%;
@@ -223,8 +202,8 @@ main em {
 
 .carousel__slide.current-slide {
     /* SPEED FIX: Force the first image to show even before JS initializes */
-    opacity: 1 !important; 
-    display: block !important;
+    opacity: 1; 
+    display: block;
     z-index: 5; 
 }
 /* ======================================================================
@@ -266,8 +245,6 @@ main em {
     z-index: 9999;
     box-shadow: 6px 6px 0px 0px rgba(0,0,0,1); 
     display: none; 
-    
-    /* ADD THESE TWO LINES */
     flex-direction: column;
     align-items: center;
 }
@@ -301,6 +278,19 @@ main em {
     filter: brightness(0.7); 
 }
 
+/* Video banner (Ireland) */
+.banner-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
 /* ======================================================================
    BANNER TITLES
    ====================================================================== */
@@ -313,7 +303,7 @@ main em {
     text-align: center; 
     font-weight: 900;
     margin: 0;
-    color: #FFFFFF !important; 
+    color: #FFFFFF; 
     text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
     width: 90%;
     font-size: clamp(2rem, 5vw, 4.5rem);
@@ -338,8 +328,8 @@ main em {
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
+    margin-left: -50vw;
+    margin-right: -50vw;
     margin-top: 4rem;
     margin-bottom: 4rem;
     display: flex;
@@ -354,8 +344,8 @@ main em {
     max-width: 1200px;
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .landscape-shot img {
@@ -403,8 +393,9 @@ main em {
     transform: scale(1.05); 
 }
 
-/* Standard Captions */
-.image-grid figcaption {
+/* Standard captions (also used by the visual appendix) */
+.image-grid figcaption,
+.appendix-item figcaption {
     margin-top: 15px;
     font-size: 0.9rem;
     line-height: 1.5;
@@ -417,8 +408,8 @@ main em {
 /* Hero (Centered) Captions */
 .image-grid figure.full-row figcaption {
     max-width: 70ch;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
 }
 /* ======================================================================
@@ -451,15 +442,7 @@ main em {
     transform: scale(1.02);
 }
 
-/* APPENDIX CAPTION FIX */
 .appendix-item figcaption {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #555;
-    font-style: italic;
-    border-left: 2px solid #ddd;
-    padding-left: 10px;
     text-align: left;
 }
 
@@ -469,10 +452,10 @@ main em {
 .registry-section {
     width: 100%;
     max-width: 70ch; 
-    margin-top: 4rem !important;
-    margin-bottom: 4rem !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0;
 }
 
@@ -488,8 +471,8 @@ main em {
 
 .registry-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 40px 30px !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 30px;
 }
 
 .registry-card {
@@ -507,7 +490,7 @@ main em {
 .card-number {
     font-size: 3.5rem;
     font-weight: 900;
-    color: #f97316; 
+    color: var(--brand-orange); 
     font-family: serif;
     line-height: 1;
     margin-bottom: -18px; 
@@ -548,23 +531,23 @@ main em {
 }
 
 .card-info p {
-    margin-top: 5px !important;
-    margin-bottom: 0 !important;
-    font-size: 0.85rem !important;
-    color: #666 !important;
-    font-style: italic !important;
-    line-height: 1.4 !important;
-    max-width: none !important;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: none;
 }
 
 .card-info p::first-letter {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    float: none !important;
-    margin-right: 0 !important;
-    line-height: inherit !important;
-    color: inherit !important;
-    text-transform: none !important;
+    font-size: inherit;
+    font-weight: inherit;
+    float: none;
+    margin-right: 0;
+    line-height: inherit;
+    color: inherit;
+    text-transform: none;
 }
 
 /* ======================================================================
@@ -609,25 +592,17 @@ main em {
 }
 
 .registry-card.coming-soon-minimal:hover {
-    border-color: #f97316;
+    border-color: var(--brand-orange);
 }
 
 .registry-card.coming-soon-minimal:hover .remaining-count,
 .registry-card.coming-soon-minimal:hover .remaining-label {
-    color: #f97316;
+    color: var(--brand-orange);
 }
 
 /* ======================================================================
    SUB-PAGE NAVIGATION & FOOTER
    ====================================================================== */
-.sub-nav {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    max-width: 70ch;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .footer-nav {
     text-align: center;
     padding-top: 3rem;
@@ -636,10 +611,10 @@ main em {
 
 .back-link {
     font-weight: bold;
-    color: #f97316 !important;
+    color: var(--brand-orange);
     display: inline-flex;
     align-items: center;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 .back-link .arrow {
@@ -655,93 +630,11 @@ hr {
 }
 
 /* ======================================================================
-   THE LIGHTBOX (Full Screen View)
-   ====================================================================== */
-#lightbox-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.98); 
-    backdrop-filter: blur(5px);
-    display: none; 
-    z-index: 10000;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#lightbox-overlay.active {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-.lightbox-content {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    padding: 20px;
-}
-
-.lightbox-content img {
-    max-width: 95vw;
-    max-height: 92vh;
-    width: auto;      
-    height: auto;     
-    object-fit: contain;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.15);
-    transform: scale(0.98);
-    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-#lightbox-overlay.active .lightbox-content img {
-    transform: scale(1);
-}
-
-.lightbox-caption {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #444;
-    font-style: italic;
-    max-width: 80ch;
-    text-align: center;
-    line-height: 1.4;
-    z-index: 10001; 
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 3rem;
-    color: #000;
-    cursor: pointer;
-    line-height: 1;
-    font-weight: 200;
-    transition: transform 0.2s ease;
-}
-
-.lightbox-close:hover {
-    transform: scale(1.1);
-    color: #f97316;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* ======================================================================
    THE EASTER EGG (Pingu logic)
    ====================================================================== */
 .pingu-body {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -749,7 +642,7 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0 !important; 
+    font-size: 0; 
 }
 
 .pingu {
@@ -759,24 +652,36 @@ hr {
     width: auto;
     height: auto;
     object-fit: contain;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-    filter: none !important;
+    transform: none;
+    transition: none;
+    animation: none;
+    filter: none;
 }
 
 /* ======================================================================
-   RESPONSIVE
+   RESPONSIVE: IMAGE GRID, REGISTRY & APPENDIX
    ====================================================================== */
 @media (max-width: 900px) { 
     .visual-appendix { column-count: 2; } 
 }
 
 @media (max-width: 800px) {
-    .registry-grid { grid-template-columns: 1fr !important; }
+    .registry-grid { grid-template-columns: 1fr; }
     .image-grid { grid-template-columns: 1fr; }
-    .banner-container { width: 100%; }
-    .visual-appendix { column-count: 1; }
+    .visual-appendix {
+        column-count: 1;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .appendix-item {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .appendix-item img {
+        width: 100%;
+    }
 }
 
 /* ======================================================================
@@ -830,12 +735,7 @@ hr {
 }
 
 .header-nav a:hover {
-    color: #f97316;
-}
-
-/* Adjust body/main to prevent content from hiding under header */
-body {
-    padding-top: 60px; 
+    color: var(--brand-orange);
 }
 
 @media (max-width: 600px) {
@@ -845,61 +745,14 @@ body {
 }
 
 /* --- Global Sub-page Fixes --- */
-body.sub-page {
-    padding-top: 70px !important;
-}
-
 .sub-page .banner-container {
     margin-top: 2rem;
     margin-bottom: 3rem;
-    overflow: hidden !important;
-}
-
-.sub-page {
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
-}
-
-@media (max-width: 800px) {
-    .visual-appendix {
-        column-count: 1 !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-    .appendix-item {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        width: 100% !important;
-        margin-bottom: 30px;
-    }
-    .appendix-item img {
-        width: 100% !important;
-    }
-}
-
-/* Final fix for Anchor Jumps on all screen sizes */
-#map-wrapper, 
-#registry, 
-.registry-section, 
-[id] {
-    /* We increase this slightly for mobile to account for browser UI bars */
-    scroll-margin-top: 90px !important; 
-}
-
-/* Specific adjustment for very small screens */
-@media (max-width: 600px) {
-    #map-wrapper, 
-    #registry, 
-    .registry-section {
-        scroll-margin-top: 100px !important;
-    }
 }
 
 /* ======================================================================
-   LIGHTBOX / GALLERY SYSTEM - UPDATED (Counter + Swipe Support)
+   THE LIGHTBOX (full-screen gallery: counter, arrows, swipe, zoom)
    ====================================================================== */
-
 #lightbox-overlay {
     position: fixed;
     z-index: 10000;
@@ -907,20 +760,28 @@ body.sub-page {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for better contrast */
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: none;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     transition: opacity 0.3s ease;
 }
 
 #lightbox-overlay.active {
     display: flex;
+    animation: fadeIn 0.3s ease;
 }
 
-/* The Counter (e.g., 1 / 15) */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* The counter (e.g. 1 / 15) */
 .lightbox-counter {
     position: absolute;
     top: 30px;
@@ -932,12 +793,12 @@ body.sub-page {
     z-index: 10001;
 }
 
-/* Close Button */
 .lightbox-close {
     position: absolute;
     top: 25px;
     right: 40px;
     font-size: 3rem;
+    font-weight: 200;
     color: #000;
     cursor: pointer;
     line-height: 1;
@@ -947,9 +808,10 @@ body.sub-page {
 
 .lightbox-close:hover {
     transform: scale(1.1);
+    color: var(--brand-orange);
 }
 
-/* Navigation Arrows (Desktop Only) */
+/* Navigation arrows (desktop only) */
 .lightbox-nav {
     position: absolute;
     top: 50%;
@@ -971,44 +833,62 @@ body.sub-page {
 .lightbox-prev { left: 20px; }
 .lightbox-next { right: 20px; }
 
-/* Content Wrapper */
+@media (max-width: 768px) {
+    .lightbox-nav { display: none; }
+}
+
+/* Content wrapper: pointer-events off so swipes register on the overlay */
 .lightbox-content {
     position: relative;
+    width: 100vw;
+    height: 100vh;
     max-width: 85%;
     max-height: 85vh;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    /* This allows the touch swipe to register on the overlay behind the text/image */
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .lightbox-content img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
     max-width: 100%;
     max-height: 75vh;
     object-fit: contain;
-    display: block;
-    margin: 0 auto;
     box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-    pointer-events: auto; /* Re-enable clicking/zooming for the image */
+    transform: scale(0.98);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
 }
 
-/* Captions using Petrona DNA */
+#lightbox-overlay.active .lightbox-content img {
+    transform: scale(1);
+}
+
 .lightbox-caption {
     margin-top: 25px;
     color: #222;
     font-family: var(--font-family);
     font-size: 1.15rem;
+    font-style: italic;
     line-height: 1.6;
     max-width: 700px;
-    pointer-events: auto; /* Re-enable interaction */
+    text-align: center;
+    z-index: 10001;
+    pointer-events: auto;
+    transition: opacity 0.2s ease;
 }
 
-/* Lightbox zoom (click / scroll / pinch to zoom, drag to pan) */
-#lightbox-overlay { overflow: hidden; }
-.lightbox-content img { will-change: transform; user-select: none; -webkit-user-select: none; }
-.lightbox-caption { transition: opacity 0.2s ease; }
+/* Zoomed: hide caption and counter */
 #lightbox-overlay.zoomed .lightbox-caption,
 #lightbox-overlay.zoomed .lightbox-counter { opacity: 0; pointer-events: none; }
 
@@ -1061,7 +941,7 @@ body.sub-page {
 /* Moves the tab handle along with the sidebar when open */
 .side-nav-toggle.active {
     left: 260px; 
-    background: #f97316; /* Changes to your orange when open */
+    background: var(--brand-orange); /* orange when open */
 }
 
 /* THE INTERIOR X - PINNED TO TOP RIGHT */
@@ -1078,7 +958,7 @@ body.sub-page {
 }
 
 .side-nav-close-x:hover {
-    color: #f97316;
+    color: var(--brand-orange);
 }
 
 /* THE CLICK-AWAY OVERLAY - CLEANED (No blur, no background) */
@@ -1125,26 +1005,22 @@ body.sub-page {
 
 .nav-link.active {
     background-color: #fff3e0;
-    color: #f97316;
-    border-left-color: #f97316;
+    color: var(--brand-orange);
+    border-left-color: var(--brand-orange);
     font-weight: 600;
 }
 
 @media (min-width: 1600px) {
     .side-nav-container { transform: translateX(0); border-right: 1px solid #eee; }
+    /* Must override .side-nav-overlay.active, which would otherwise show the invisible click-away layer */
     .side-nav-toggle, .side-nav-close-x, .side-nav-overlay { display: none !important; }
 }
 
 /* ======================================================================
-   MOBILE OPTIMIZATIONS
+   SIDE NAVIGATION: MOBILE
    ====================================================================== */
 
 @media (max-width: 768px) {
-    /* Hide desktop-only elements */
-    .lightbox-nav {
-        display: none;
-    }
-
     /* Sidebar Width adjustment */
     .side-nav-container {
         width: 180px;
@@ -1152,17 +1028,17 @@ body.sub-page {
 
     /* FIX: Align orange tab flush to the 180px sidebar edge when open */
     .side-nav-toggle.active {
-        left: 180px !important;
-        right: auto !important;
+        left: 180px;
+        right: auto;
         /* Ensure it doesn't shift vertically on mobile */
-        top: 20% !important; 
+        top: 20%; 
     }
 
     /* FIX: Keep the Close 'X' inside the sidebar gutter */
     .side-nav-close-x {
-        right: 15px !important;
-        top: 15px !important;
-        font-size: 1.5rem !important;
+        right: 15px;
+        top: 15px;
+        font-size: 1.5rem;
     }
 
     /* Navigation link spacing for smaller screens */
@@ -1179,71 +1055,274 @@ body.sub-page {
     }
 }
 /* ======================================================================
-   ADAPTIVE PROGRESS BAR (Required for side-nav.js)
+   ADAPTIVE PROGRESS BAR
+   Vertical rail on the right on wide screens, thin bar along the top
+   at <=1450px. side-nav.js sets --progress (0-100%) as you scroll.
    ====================================================================== */
 .right-progress-rail {
     position: fixed;
     z-index: 2000; /* Higher than header (1000) and sidebar (500) */
     pointer-events: none; /* Crucial: ensures you can still click the header/menu */
     background: rgba(0, 0, 0, 0.05); /* Faint track so you can see it's there */
+    width: 2px;
+    height: 60%;
+    top: 20%;
+    right: 40px;
+    left: auto;
 }
 
 #verticalBar {
-    background-color: #f97316; /* Your theme's orange */
-    width: 0;
-    height: 0;
+    background-color: var(--brand-orange);
+    width: 100%;
+    height: var(--progress, 0%);
     /* Transition ensures the bar 'grows' smoothly rather than jumping */
     transition: width 0.1s ease-out, height 0.1s ease-out;
 }
+
+@media (max-width: 1450px) {
+    .right-progress-rail {
+        width: 100%;
+        height: 4px;
+        top: 0;
+        left: 0;
+        right: auto;
+    }
+    #verticalBar {
+        width: var(--progress, 0%);
+        height: 100%;
+    }
+}
 /* ======================================================================
-   CONTACT & ABOUT PAGE GRID LAYOUT
+   ABOUT & CONTACT PAGES
    ====================================================================== */
 
-/* The main flex container */
-.contact-content-wrapper {
+/* Shared page title and simple footer */
+.about-header-container,
+.contact-header-container {
+    padding-top: 3rem;
+    text-align: left;
+}
+
+.about-header-container { margin-bottom: 1.5rem; }
+
+.contact-header-container {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.about-header-container .registry-main-title,
+.contact-header-container .registry-main-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.about-header-container .registry-main-title {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+    transform: none;
+}
+
+.contact-header-container .registry-main-title { margin: 0; }
+
+.footer-compact { margin-top: 4rem; }
+.contact-main-container .footer-compact { margin-top: 6rem; }
+
+.footer-compact hr {
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.footer-compact .back-link {
+    display: inline-block;
+    margin: 1.5rem 0;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* --- About page --- */
+.about-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-content-wrapper {
     display: flex;
     gap: 80px;
     align-items: flex-start;
-    margin-top: 2rem;
 }
 
-/* Resetting the global auto-centering from your 'main p' rules */
-.contact-info p, 
-.contact-info .contact-method {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    max-width: 100%;
+.about-text {
+    flex: 2;
+    line-height: 1.8;
+    color: #333;
+}
+
+.about-text .article-start {
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.about-contact {
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+}
+
+.about-contact-nav {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-linkedin {
+    color: var(--brand-orange);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.about-email {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.about-email-label {
+    color: var(--brand-orange);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.about-email-link {
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-bottom: 2px solid var(--brand-orange);
+}
+
+.about-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 2rem;
+}
+
+/* Headshot with an orange offset block behind it */
+.about-photo {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.about-photo-offset {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100%;
+    height: 100%;
+    background: var(--brand-orange);
+    z-index: -1;
+}
+
+.about-photo img {
+    width: 100%;
+    display: block;
+    border: 1px solid #111;
+    background-color: #fff;
+}
+
+.about-name { margin-bottom: 2rem; }
+
+.about-name h2 {
+    font-size: 1.6rem;
+    margin: 0;
+    color: #000;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.about-sidebar h3.editorial-subheading {
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.about-timeline {
+    list-style: none;
+    padding: 0;
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+.about-timeline li { margin-bottom: 1.2rem; }
+
+.about-timeline span {
+    color: var(--brand-orange);
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 0.75rem;
+}
+
+/* --- Contact page --- */
+.contact-main-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contact-content-wrapper {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    margin-top: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .contact-info {
     flex: 1;
+    line-height: 1.8;
+    color: #333;
 }
 
-.carousel-area {
-    flex: 1.2;
-    position: sticky;
-    top: 90px; /* Accounts for your 60px header + buffer */
+/* Resetting the global auto-centering from the 'main p' rules */
+.contact-info p,
+.contact-info .contact-method {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
 }
 
-/* Specific styling for the Contact Page carousel */
-.carousel-area .index-banner {
-    width: 100%;
-    margin: 0;
-    height: 500px;
-    box-shadow: 6px 6px 0px #000; /* Bauhaus offset to match your dropcaps */
-    border: 2px solid #000;
+.contact-info .contact-intro {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
 }
 
-/* Contact Links Styling */
 .contact-method {
     margin-bottom: 3rem;
 }
 
 .contact-label {
     display: block;
-    color: #f97316;
+    color: var(--brand-orange);
     font-weight: 700;
-    font-family: var(--font-family);
+    font-family: monospace;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -1255,7 +1334,7 @@ body.sub-page {
     font-weight: 800;
     color: #000;
     text-decoration: none;
-    border-bottom: 4px solid #f97316;
+    border-bottom: 4px solid var(--brand-orange);
     transition: background-color 0.2s;
     font-family: var(--font-family);
 }
@@ -1264,32 +1343,68 @@ body.sub-page {
     background-color: #fff7ed;
 }
 
-/* Responsive stack for mobile */
+.carousel-area {
+    flex: 1.2;
+    position: sticky;
+    top: 90px; /* 60px header + buffer */
+    width: 100%;
+    min-width: 0;      /* allowed to shrink below the image size */
+    max-width: 500px;
+}
+
+/* Contact page carousel */
+.carousel-area .index-banner {
+    width: 100%;
+    margin: 0;
+    height: 500px;
+    box-shadow: 6px 6px 0px #000; /* Bauhaus offset to match the dropcaps */
+    border: 2px solid #000;
+}
+
+/* Stack About and Contact on tablet/mobile */
 @media (max-width: 900px) {
-    .contact-content-wrapper { 
-        flex-direction: column; 
+    .about-content-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .about-sidebar {
+        position: static;
+        order: -1;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .about-header-container .registry-main-title,
+    .contact-header-container .registry-main-title {
+        font-size: 2.2rem;
+    }
+    .about-contact-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .contact-content-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .contact-info {
+        order: 1;
+    }
+    .contact-link {
+        font-size: 1.1rem;
     }
     .carousel-area {
         order: 2;
         width: 100%;
+        max-width: 100%;
         position: static;
     }
     .carousel-area .index-banner {
         height: 350px;
     }
-    .contact-info {
-        order: 1;
-    }
 }
 
- /* Anchor Jump Fix - Prevents the header from covering section titles */
-#map-wrapper, 
-#registry, 
-.registry-section,
-[id] { 
-    scroll-margin-top: 90px; 
-}
-
+/* ======================================================================
+   INDEX PAGE: MAP, BANNER & BLUEPRINT MARGIN
+   ====================================================================== */
 /* Map Peekaboo Gap */
 #map-wrapper {
     width: 100vw;
@@ -1302,12 +1417,6 @@ body.sub-page {
     left: 50%;
     transform: translateX(-50%);
     background-color: #fcfcfc;
-}
-
-/* Tight Header Buffer */
-body {
-    padding-top: 55px; 
-    overflow-x: hidden;
 }
 
 /* Banner styling */
@@ -1379,8 +1488,8 @@ body {
 .editorial-text-flow p {
     margin-top: 0;
     margin-bottom: 1.5rem;
-    margin-left: 45px !important;   /* Indents your paragraph body text inward */
-    margin-right: 0 !important;
+    margin-left: 45px;   /* Indents your paragraph body text inward */
+    margin-right: 0;
 }
 
 /* Forces your subheadings AND the intro-lead to line up flush left */
@@ -1388,8 +1497,8 @@ body {
 .editorial-text-flow .intro-lead {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    margin-left: 0 !important;      /* Keeps titles and intro headlines sticking further left */
-    margin-right: 0 !important;
+    margin-left: 0;      /* Keeps titles and intro headlines sticking further left */
+    margin-right: 0;
     display: block;
 }
 
@@ -1451,36 +1560,21 @@ body {
     /* RECTIFIED: Strip the 45px body indentation so text matches your master styling on mobile */
     .editorial-text-flow p,
     .editorial-text-flow .intro-lead {
-        margin-left: 0 !important;   /* Flushes paragraphs back to the left edge */
-        margin-right: 0 !important;
+        margin-left: 0;   /* Flushes paragraphs back to the left edge */
+        margin-right: 0;
     }
 
     /* Keep subheadings flush left on mobile viewports */
     .editorial-text-flow .editorial-subheading {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
 @media (max-width: 800px) {
-    body { padding-top: 52px; }
-    #map-wrapper, #registry, .registry-section {
-        scroll-margin-top: 100px;
-    }
     .index-banner {
         width: 95vw; 
         margin-top: 0.5rem;
     }
     #map-wrapper { margin: 1.5rem 0 2rem 0; }
-}
-.banner-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
 }

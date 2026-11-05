@@ -1,15 +1,3 @@
-
-    // Easter Egg Theme Switcher
-    (function() {
-        const themeLink = document.getElementById('theme-link');
-        const now = new Date();
-        const isEasterEggDay = (now.getMonth() === 4 && now.getDate() === 13);
-        if (isEasterEggDay) {
-            themeLink.href = 'easter-egg.css';
-            console.log("ＡＥＳＴＨＥＴＩＣ mode active.");
-        }
-    })();
-
     // Snappy JavaScript Hover/Interaction Handler for Sidebar Illustrations
     document.addEventListener("DOMContentLoaded", function() {
         const structuralGroups = document.querySelectorAll('.typology-group');

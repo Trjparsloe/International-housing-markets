@@ -74,40 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- PART 3: ADAPTIVE PROGRESS SCROLL (STABILIZED) ---
+    // --- PART 3: ADAPTIVE PROGRESS SCROLL ---
+    // Layout (top bar <=1450px, right rail above) lives in styles.css;
+    // this just reports how far down the page you are.
     const progressBar = document.getElementById("verticalBar");
-    const railContainer = document.querySelector(".right-progress-rail");
 
     function updateProgress() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        
-        if (progressBar && railContainer) {
-            if (window.innerWidth <= 1450) {
-                // Horizontal Top Bar (Laptop)
-                railContainer.style.width = "100%";
-                railContainer.style.height = "4px";
-                railContainer.style.top = "0";
-                railContainer.style.left = "0";
-                railContainer.style.right = "auto";
-                railContainer.style.background = "rgba(0, 0, 0, 0.05)";
-                
-                progressBar.style.width = scrolled + "%";
-                progressBar.style.height = "100%";
-            } else {
-                // Vertical Right Rail (Desktop)
-                railContainer.style.width = "2px";
-                railContainer.style.height = "60%";
-                railContainer.style.top = "20%";
-                railContainer.style.right = "40px";
-                railContainer.style.left = "auto";
-                railContainer.style.background = "rgba(0, 0, 0, 0.05)";
-                
-                progressBar.style.height = scrolled + "%";
-                progressBar.style.width = "100%";
-            }
-        }
+        const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+        if (progressBar) progressBar.style.setProperty('--progress', scrolled + '%');
     }
 
     // Run immediately and on every scroll/resize
