@@ -1005,6 +1005,13 @@ body.sub-page {
     pointer-events: auto; /* Re-enable interaction */
 }
 
+/* Lightbox zoom (click / scroll / pinch to zoom, drag to pan) */
+#lightbox-overlay { overflow: hidden; }
+.lightbox-content img { will-change: transform; user-select: none; -webkit-user-select: none; }
+.lightbox-caption { transition: opacity 0.2s ease; }
+#lightbox-overlay.zoomed .lightbox-caption,
+#lightbox-overlay.zoomed .lightbox-counter { opacity: 0; pointer-events: none; }
+
 /* ======================================================================
    SIDE NAVIGATION PANEL - "RIDING TAB" STYLE
    ====================================================================== */
