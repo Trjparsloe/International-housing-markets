@@ -161,10 +161,24 @@ document.addEventListener('DOMContentLoaded', () => {
         resetZoom(false);
         // Show the web-sized version straight away, then swap in the
         // full-resolution original (data-full) once it has loaded, for zooming.
+        // The web copy (often 1000px) is smaller than the space available, so
+        // without a fixed size the photo would visibly grow when the larger
+        // file arrives. Size the box from the photo's shape up front instead.
+        lightboxImg.style.width = '';
+        lightboxImg.style.maxWidth = '';
+        if (image.dataset.full && image.naturalWidth) {
+            const ratio = image.naturalWidth / image.naturalHeight;
+            lightboxImg.style.width = `min(100%, calc(75vh * ${ratio}))`;
+        }
         lightboxImg.src = image.currentSrc || image.src;
         if (image.dataset.full) {
             const hi = new Image();
-            hi.onload = () => { if (currentIndex === index) lightboxImg.src = hi.src; };
+            hi.onload = () => {
+                if (currentIndex !== index) return;
+                // Never stretch past the large file's real pixels
+                lightboxImg.style.maxWidth = `min(100%, ${hi.naturalWidth}px)`;
+                lightboxImg.src = hi.src;
+            };
             hi.src = image.dataset.full;
         }
         lightboxCap.innerText = captionText;
