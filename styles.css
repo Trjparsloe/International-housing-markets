@@ -1003,6 +1003,24 @@ hr {
     transition: all 0.2s ease;
 }
 
+/* Hover / keyboard focus: grey with a black bar, so it reads differently
+   from the orange "you are here" highlight below. Mouse devices only for
+   hover, so it doesn't stick after a tap on phones. */
+@media (hover: hover) {
+    .nav-link:hover {
+        background-color: #f5f5f5;
+        color: #000;
+        border-left-color: #000;
+    }
+}
+
+.nav-link:focus-visible {
+    background-color: #f5f5f5;
+    color: #000;
+    border-left-color: #000;
+    outline: none;
+}
+
 .nav-link.active {
     background-color: #fff3e0;
     color: var(--brand-orange);
