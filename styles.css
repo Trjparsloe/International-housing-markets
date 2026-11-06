@@ -1596,3 +1596,371 @@ hr {
     }
     #map-wrapper { margin: 1.5rem 0 2rem 0; }
 }
+
+
+/* ======================================================================
+   EXPANDABLE BOX-OUT (Ireland: The Other Horsemen)
+   ====================================================================== */
+main details.boxout-expand {
+    max-width: 70ch;
+    margin: 2.5rem auto;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    background: #fff;
+}
+
+main details.boxout-expand summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+main details.boxout-expand summary::-webkit-details-marker {
+    display: none;
+}
+
+main details.boxout-expand summary:focus-visible {
+    outline: 3px solid var(--brand-orange);
+    outline-offset: 2px;
+}
+
+@media (hover: hover) {
+    main details.boxout-expand summary:hover {
+        background: #f3f3f3;
+    }
+}
+
+main details.boxout-expand[open] summary {
+    border-bottom: 4px solid #000;
+}
+
+.boxout-expand-icon {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    background: var(--brand-orange);
+    color: #fff;
+    border: 2px solid #000;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.boxout-expand-icon span {
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+main details.boxout-expand[open] .boxout-expand-icon span {
+    transform: rotate(45deg);
+}
+
+.boxout-expand-body {
+    padding: 1.4rem 1.4rem 0.4rem;
+}
+
+main .boxout-expand-body p {
+    max-width: none;
+}
+
+/* City names in the aside: orange marker shading */
+main .boxout-expand-body p strong {
+    color: #000;
+    background: linear-gradient(transparent 62%, #fed7aa 62%);
+    padding: 0 0.1em;
+}
+
+.horsemen-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 3px solid #000;
+    border-bottom: 3px solid #000;
+    margin-bottom: 0.8rem;
+}
+
+.horsemen-row {
+    padding: 1rem 0.8rem;
+    border-left: 2px solid #000;
+}
+
+.horsemen-row:first-child {
+    border-left: 0;
+    padding-left: 0;
+}
+
+.horsemen-num {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #000;
+}
+
+.horsemen-num span {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.horsemen-flavour {
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #555;
+}
+
+.horsemen-ref .horsemen-num {
+    color: #999;
+}
+
+main .boxout-expand-body p.horsemen-source {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+    .horsemen-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+    .horsemen-row:nth-child(3) {
+        border-left: 0;
+        padding-left: 0;
+    }
+    .horsemen-row:nth-child(n+3) {
+        border-top: 2px solid #000;
+    }
+    .horsemen-num {
+        font-size: 1.8rem;
+    }
+}
+
+/* Linked box-out: highlighted phrase + connector line (+ margin teaser on wide screens).
+   Line and teaser are drawn/positioned by boxout-connector.js */
+.boxout-group {
+    position: relative;
+}
+
+a.boxout-trigger {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid var(--brand-orange);
+    cursor: pointer;
+}
+
+a.boxout-trigger::after {
+    content: "\2193";
+    margin-left: 0.15em;
+    font-size: 0.8em;
+    font-weight: 800;
+    color: var(--brand-orange);
+}
+
+/* The ↓ is only shown when there's no room for a line (phones) */
+.boxout-group.has-line a.boxout-trigger::after {
+    content: none;
+}
+
+@media (hover: hover) {
+    a.boxout-trigger:hover {
+        border-bottom-color: #000;
+    }
+}
+
+.boxout-connector {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.boxout-connector path {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2;
+}
+
+.boxout-connector circle {
+    fill: var(--brand-orange);
+    stroke: #000;
+    stroke-width: 2;
+}
+
+a.boxout-teaser {
+    display: none;
+    position: absolute;
+    width: 190px;
+    padding: 0.7rem 0.8rem;
+    border: 3px solid #000;
+    box-shadow: 5px 5px 0 #000;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.boxout-group.has-teaser a.boxout-teaser {
+    display: block;
+}
+
+@media (hover: hover) {
+    a.boxout-teaser:hover {
+        background: #f3f3f3;
+    }
+}
+
+a.boxout-teaser:focus-visible,
+a.boxout-trigger:focus-visible {
+    outline: 3px solid var(--brand-orange);
+    outline-offset: 2px;
+}
+
+.boxout-teaser-title {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.boxout-teaser-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-top: 1px solid #000;
+    font-weight: 700;
+}
+
+.boxout-teaser-ref {
+    color: #999;
+    font-weight: 400;
+}
+
+.boxout-teaser-go {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brand-orange);
+}
+
+/* ======================================================================
+   NEXT MARKET (end-of-article link, follows registry order)
+   ====================================================================== */
+.next-market {
+    max-width: 70ch;
+    margin: 4rem auto 0;
+}
+
+.next-market-label {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.next-market-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.next-market-card .card-thumb {
+    height: 220px;
+}
+
+.next-market-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.next-market-body .card-number {
+    margin-bottom: 0;
+}
+
+.next-market-body .card-info h3 {
+    margin-top: 10px;
+}
+
+.next-market-cta {
+    margin-top: 1.25rem;
+    font-weight: bold;
+    color: var(--brand-orange);
+    display: inline-flex;
+    align-items: center;
+}
+
+.next-market-cta .arrow {
+    margin-left: 8px;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+}
+
+.next-market-card:hover .next-market-cta .arrow,
+.next-market-card:focus-visible .next-market-cta .arrow {
+    transform: translateX(4px);
+}
+
+/* The footer's <hr> follows straight after; trim the gap a little */
+.next-market + .footer-nav {
+    padding-top: 1rem;
+}
+
+@media (max-width: 800px) {
+    .next-market-card {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .next-market-card .card-thumb {
+        height: 180px;
+    }
+
+    .next-market-body .card-number {
+        margin-top: -18px;
+        z-index: 2;
+    }
+}
+
+/* ======================================================================
+   POST DISCLAIMER (end of article, before Next market)
+   ====================================================================== */
+main p.post-disclaimer {
+    /* Box stays at body size so 70ch matches the article and Next market;
+       only the inner text is scaled down. */
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e1e1;
+    line-height: 1.45;
+    color: #666;
+}
+
+.post-disclaimer em {
+    font-size: 0.85em;
+}
+
+.post-disclaimer a {
+    color: var(--brand-orange);
+}

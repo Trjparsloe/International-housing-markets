@@ -8,6 +8,7 @@ const countryNameLookup = {
     '392': 'Japan',
     '512': 'Oman',
     '276': 'Germany',
+    '372': 'Ireland',
     '010': 'Antarctica'
 };
 
@@ -16,6 +17,7 @@ const flagCodesLookup = {
     '392': 'jp', // Japan
     '512': 'om', // Oman
     '276': 'de',  // Germany
+    '372': 'ie',  // Ireland
 };
 
 const interactiveCountries = Object.keys(countryNameLookup);
