@@ -1747,8 +1747,8 @@ main .boxout-expand-body p.horsemen-source {
     }
 }
 
-/* Linked box-out: highlighted phrase + connector line (+ margin teaser on wide screens).
-   Line and teaser are drawn/positioned by boxout-connector.js */
+/* Linked box-out: highlighted phrase + connector line down the right gutter to the box.
+   Line is drawn by boxout-connector.js */
 .boxout-group {
     position: relative;
 }
@@ -1799,65 +1799,9 @@ a.boxout-trigger::after {
     stroke-width: 2;
 }
 
-a.boxout-teaser {
-    display: none;
-    position: absolute;
-    width: 190px;
-    padding: 0.7rem 0.8rem;
-    border: 3px solid #000;
-    box-shadow: 5px 5px 0 #000;
-    background: #fff;
-    color: #000;
-    text-decoration: none;
-    font-size: 0.85rem;
-}
-
-.boxout-group.has-teaser a.boxout-teaser {
-    display: block;
-}
-
-@media (hover: hover) {
-    a.boxout-teaser:hover {
-        background: #f3f3f3;
-    }
-}
-
-a.boxout-teaser:focus-visible,
 a.boxout-trigger:focus-visible {
     outline: 3px solid var(--brand-orange);
     outline-offset: 2px;
-}
-
-.boxout-teaser-title {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.boxout-teaser-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.25rem 0;
-    border-top: 1px solid #000;
-    font-weight: 700;
-}
-
-.boxout-teaser-ref {
-    color: #999;
-    font-weight: 400;
-}
-
-.boxout-teaser-go {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--brand-orange);
 }
 
 /* ======================================================================
